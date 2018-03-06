@@ -18,3 +18,13 @@ Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResourc
 Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
 Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.exe
 Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.pdb
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe.config
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.pdb
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.Form1.resources
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.Properties.Resources.resources
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResource.Cache
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.exe
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.pdb
