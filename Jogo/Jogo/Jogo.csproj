@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2375BA70-702C-4487-9550-48DE555715DE}</ProjectGuid>
+    <ProjectGuid>{9F91EBC6-60D8-4726-8310-1FCCC943D35E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Jogo</RootNamespace>
     <AssemblyName>Jogo</AssemblyName>
@@ -80,8 +80,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bitmap1.bmp" />
     <None Include="Resources\fundo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fundo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
