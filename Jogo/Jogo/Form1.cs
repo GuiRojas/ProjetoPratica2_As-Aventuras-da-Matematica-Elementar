@@ -55,7 +55,7 @@ namespace Jogo
 
         private void tmrBackground_Tick(object sender, EventArgs e)
         {
-            heroi.mover();
+            heroi.mover(game);
         }
 
         private void tmrMain_Tick(object sender, EventArgs e)
@@ -76,7 +76,9 @@ namespace Jogo
                 string text1 = "aaaaaaaaaaaaaaaaaaaaa.";
                 using (Font font1 = new Font("Lucida Console", 12, FontStyle.Bold, GraphicsUnit.Point))
                 {
-                    RectangleF rectF1 = new RectangleF((mestre.X * Game.Tam) - text1.Length * 12 + Game.Tam, (mestre.Y * Game.Tam) - Game.Tam, text1.Length * 12, Game.Tam);
+                    Rectangle rectF1 = new Rectangle((mestre.X * Game.Tam) - text1.Length * 12 + Game.Tam, (mestre.Y * Game.Tam) - Game.Tam, text1.Length * 12, Game.Tam);
+                    SolidBrush branco = new SolidBrush(Color.White);
+                    e.Graphics.FillRectangle(branco, rectF1);
                     e.Graphics.DrawString(text1, font1, Brushes.Black, rectF1);
                     e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
 
@@ -90,17 +92,17 @@ namespace Jogo
             {
                 heroi.ActiveUp = true;
             }
-            else
+            
             if (e.KeyCode == Keys.Down)
             {
                 heroi.ActiveDown = true;
             }
-            else
+            
             if (e.KeyCode == Keys.Left)
             {
                 heroi.ActiveLeft = true;
             }
-            else
+            
             if (e.KeyCode == Keys.Right)
             {
                 heroi.ActiveRight = true;
@@ -232,25 +234,25 @@ namespace Jogo
         {
         }
 
-        public void mover()
+        public void mover(Game game)
         {
-            Game game = new Game();
+            Thread.Sleep(120);
 
             if (this.activeUp && game.checkup(this))
             {
                 goup();
             }
-            else
+            
             if (this.activeDown && game.checkdown(this))
             {
                 godown();
             }
-            else 
+            
             if (this.activeLeft && game.checkleft(this))
             {
                 goleft();
             }
-            else
+            
             if (this.activeRight && game.checkright(this))
             {
                 goright();
@@ -334,7 +336,7 @@ namespace Jogo
     public class Game
     {
         private bool[][] grid = new bool[25][];//25x20
-        public const int Tam = 32, Altura = 20, Largura = 25;
+        public const int Tam = 32, Altura = 20, Largura = 25, Speed = 1;
 
         public Game()
         {
@@ -360,7 +362,7 @@ namespace Jogo
             return false;
         }
 
-        public void setOcupado(int xNovo, int yNovo)
+        public void setOcupado (int xNovo, int yNovo)
         {
             if(xNovo < 0 && xNovo > Largura)
             {
