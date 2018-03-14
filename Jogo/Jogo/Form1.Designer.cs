@@ -29,14 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tmrMain = new System.Windows.Forms.Timer(this.components);
+            this.tmrPintar = new System.Windows.Forms.Timer(this.components);
+            this.tmrBackground = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // tmrMain
+            // tmrPintar
             // 
-            this.tmrMain.Enabled = true;
-            this.tmrMain.Interval = 16;
-            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
+            this.tmrPintar.Enabled = true;
+            this.tmrPintar.Interval = 20;
+            this.tmrPintar.Tick += new System.EventHandler(this.tmrMain_Tick);
+            // 
+            // tmrBackground
+            // 
+            this.tmrBackground.Enabled = true;
+            this.tmrBackground.Interval = 20;
+            this.tmrBackground.Tick += new System.EventHandler(this.tmrBackground_Tick);
             // 
             // frmJogo
             // 
@@ -59,7 +66,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer tmrMain;
+        private System.Windows.Forms.Timer tmrPintar;
+        private System.Windows.Forms.Timer tmrBackground;
     }
 }
 

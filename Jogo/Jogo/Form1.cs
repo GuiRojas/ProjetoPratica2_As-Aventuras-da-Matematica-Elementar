@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,7 +51,11 @@ namespace Jogo
             mestreImg = new Bitmap(@"heroi.png");
             mestre = new ObjNpc(16, 4, mestreImg);
             game.setOcupado(mestre.X, mestre.Y);
+        }
 
+        private void tmrBackground_Tick(object sender, EventArgs e)
+        {
+            heroi.mover();
         }
 
         private void tmrMain_Tick(object sender, EventArgs e)
@@ -81,24 +86,24 @@ namespace Jogo
 
         private void frmJogo_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Up && game.checkup(heroi))
+            if(e.KeyCode == Keys.Up)
             {
-                heroi.goup();
+                heroi.ActiveUp = true;
             }
-
-            if (e.KeyCode == Keys.Down && game.checkdown(heroi))
+            else
+            if (e.KeyCode == Keys.Down)
             {
-                heroi.godown();
+                heroi.ActiveDown = true;
             }
-
-            if (e.KeyCode == Keys.Left && game.checkleft(heroi))
+            else
+            if (e.KeyCode == Keys.Left)
             {
-                heroi.goleft();
+                heroi.ActiveLeft = true;
             }
-
-            if (e.KeyCode == Keys.Right && game.checkright(heroi))
+            else
+            if (e.KeyCode == Keys.Right)
             {
-                heroi.goright();
+                heroi.ActiveRight = true;
             }
 
             if (e.KeyCode == Keys.E && game.perto(heroi, mestre))
@@ -109,7 +114,25 @@ namespace Jogo
 
         private void frmJogo_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Up)
+            {
+                heroi.ActiveUp = false;
+            }
 
+            if (e.KeyCode == Keys.Down)
+            {
+                heroi.ActiveDown = false;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                heroi.ActiveLeft = false;
+            }
+
+            if (e.KeyCode == Keys.Right)
+            {
+                heroi.ActiveRight = false;
+            }
         }
     }
 
@@ -157,8 +180,81 @@ namespace Jogo
         private bool activeUp { get; set; }
         private bool activeDown { get; set; }
 
+        public bool ActiveDown
+        {
+            get
+            {
+                return this.activeDown;
+            }
+            set
+            {
+                this.activeDown = value;
+            }
+        }
+
+        public bool ActiveLeft
+        {
+            get
+            {
+                return this.activeLeft;
+            }
+            set
+            {
+                this.activeLeft = value;
+            }
+        }
+
+        public bool ActiveRight
+        {
+            get
+            {
+                return this.activeRight;
+            }
+            set
+            {
+                this.activeRight = value;
+            }
+        }
+
+        public bool ActiveUp
+        {
+            get
+            {
+                return this.activeUp;
+            }
+            set
+            {
+                this.activeUp = value;
+            }
+        }
+
         public ObjHeroi(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
         {
+        }
+
+        public void mover()
+        {
+            Game game = new Game();
+
+            if (this.activeUp && game.checkup(this))
+            {
+                goup();
+            }
+            else
+            if (this.activeDown && game.checkdown(this))
+            {
+                godown();
+            }
+            else 
+            if (this.activeLeft && game.checkleft(this))
+            {
+                goleft();
+            }
+            else
+            if (this.activeRight && game.checkright(this))
+            {
+                goright();
+            }
         }
 
         public void goup()
