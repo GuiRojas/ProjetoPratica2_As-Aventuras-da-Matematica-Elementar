@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace Jogo
 {   //TODO pegar os niveis do bd
@@ -46,10 +47,13 @@ namespace Jogo
             arvore = new ObjEstatico(0, 3, arvoreImg);
             game.setOcupado(arvore.X, arvore.Y);
 
-            //Queue<String> msgs = ["eae","beleza","suave"];
+            Queue<String> msgs = new Queue<string>();
+            msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Chan.");
+            msgs.Enqueue("O clan de Glau Xia destruiu tudo de nossa vida.");
+            msgs.Enqueue("Logo antes, antes de sua chegada, eles queimaram toda a vila...");
 
             mestreImg = new Bitmap(@"heroi.png");
-            mestre = new ObjNpc(16, 4, mestreImg);
+            mestre = new ObjNpc(16, 4, mestreImg, msgs);
             game.setOcupado(mestre.X, mestre.Y);
         }
 
@@ -72,16 +76,34 @@ namespace Jogo
             e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
 
             if (mestre.MostrarTexto)
-            {
-                string text1 = "aaaaaaaaaaaaaaaaaaaaa.";
-                using (Font font1 = new Font("Lucida Console", 12, FontStyle.Bold, GraphicsUnit.Point))
+            {   //TODO transformar texto p/ classe
+                string text = mestre.Msg;
+
+                PrivateFontCollection collection = new PrivateFontCollection();
+                collection.AddFontFile(@"fonte.TTF");
+                FontFamily fontFamily = new FontFamily("8BIT WONDER", collection);
+
+                using (Font font1 = new Font(fontFamily, 10, FontStyle.Bold, GraphicsUnit.Point))
                 {
-                    Rectangle rectF1 = new Rectangle((mestre.X * Game.Tam) - text1.Length * 12 + Game.Tam, (mestre.Y * Game.Tam) - Game.Tam, text1.Length * 12, Game.Tam);
+                    SizeF a = e.Graphics.MeasureString(text, font1);
+                    Size larguraString = a.ToSize();
+
+                    int largura = larguraString.Width;
+                    int altura = larguraString.Height + 4;
+                    int xTxt = (mestre.X * Game.Tam) + Game.Tam - largura;
+                    int yTxt = (mestre.Y * Game.Tam)- altura;
+
+                    if (xTxt < 0 || xTxt > this.Width || largura / 2 < this.Width/2)
+                    {
+                        largura += xTxt - 4;
+                        altura += larguraString.Height;
+                    }
+
+                    Rectangle rectF1 = new Rectangle(xTxt,  yTxt, largura, altura);
                     SolidBrush branco = new SolidBrush(Color.White);
                     e.Graphics.FillRectangle(branco, rectF1);
-                    e.Graphics.DrawString(text1, font1, Brushes.Black, rectF1);
+                    e.Graphics.DrawString(text, font1, Brushes.Black, rectF1);
                     e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
-
                 }
             }
         }
@@ -141,17 +163,27 @@ namespace Jogo
     public class ObjNpc : ObjGame
     {
         private bool mostrarTexto { get; set; }
+        private string msg { get; set; }
 
         private Queue<String> mensagens;
 
-        public ObjNpc(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
+        public ObjNpc(int xN, int yN, Bitmap imgN, Queue<String> mensagensN) : base(xN, yN, imgN)
         {
-            //Queue<String> mensagens = mensagensN;
+            mensagens = mensagensN;
         }
 
         public void dialogo()
         {
             mostrarTexto = true;
+            if (mensagens.Count == 0)
+            {
+                //game.
+            }
+            else
+            {
+                msg = mensagens.Dequeue();
+            }
+            
         }
 
         public bool MostrarTexto
@@ -164,6 +196,19 @@ namespace Jogo
             set
             {
                 this.mostrarTexto = value;
+            }
+        }
+
+        public string Msg
+        {
+            get
+            {
+                return this.msg;
+            }
+
+            set
+            {
+                this.msg = value;
             }
         }
     }

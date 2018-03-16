@@ -80,6 +80,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\fonte.TTF" />
     <None Include="Resources\fundo.png" />
   </ItemGroup>
   <ItemGroup>
