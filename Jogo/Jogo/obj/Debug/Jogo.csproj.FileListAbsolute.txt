@@ -1,30 +1,10 @@
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.Properties.Resources.resources
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResource.Cache
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
-Z:\pratica profissional\Jogo\Jogo\bin\Debug\Jogo.exe.config
-Z:\pratica profissional\Jogo\Jogo\bin\Debug\Jogo.exe
-Z:\pratica profissional\Jogo\Jogo\bin\Debug\Jogo.pdb
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.exe
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.pdb
-Z:\pratica profissional\Jogo\Jogo\obj\Debug\Jogo.Form1.resources
-Z:\pratica profissional\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe.config
-Z:\pratica profissional\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe
-Z:\pratica profissional\pratica2\Jogo\Jogo\bin\Debug\Jogo.pdb
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.Form1.resources
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.Properties.Resources.resources
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResource.Cache
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.exe
-Z:\pratica profissional\pratica2\Jogo\Jogo\obj\Debug\Jogo.pdb
-Z:\ppII\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe.config
-Z:\ppII\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe
-Z:\ppII\pratica2\Jogo\Jogo\bin\Debug\Jogo.pdb
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.Form1.resources
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.Properties.Resources.resources
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResource.Cache
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.exe
-Z:\ppII\pratica2\Jogo\Jogo\obj\Debug\Jogo.pdb
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.Properties.Resources.resources
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.GenerateResource.Cache
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csproj.CoreCompileInputs.cache
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe.config
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.exe
+Z:\pratica2\Jogo\Jogo\bin\Debug\Jogo.pdb
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.frmJogo.resources
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.exe
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.pdb
+Z:\pratica2\Jogo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache

@@ -1,6 +1,6 @@
 ﻿namespace Jogo
 {
-    partial class Form1
+    partial class frmJogo
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -29,36 +29,37 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tmrPintar = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // timer1
+            // tmrPintar
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 17;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.tmrPintar.Enabled = true;
+            this.tmrPintar.Interval = 20;
+            this.tmrPintar.Tick += new System.EventHandler(this.tmrMain_Tick);
             // 
-            // Form1
+            // frmJogo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Jogo.Properties.Resources.fundo;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImage = global::Jogo.Properties.Resources.fundo1;
+            this.ClientSize = new System.Drawing.Size(800, 640);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form1";
+            this.Name = "frmJogo";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyisdown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyisup);
+            this.Load += new System.EventHandler(this.Jogo_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmJogo_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmJogo_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmJogo_KeyUp);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer1;
+
+        private System.Windows.Forms.Timer tmrPintar;
     }
 }
 
