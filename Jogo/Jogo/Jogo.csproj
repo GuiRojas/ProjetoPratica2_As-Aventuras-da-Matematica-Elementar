@@ -80,7 +80,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Bitmap1.bmp" />
+=======
+>>>>>>> parent of 2e8c7da... a
     <None Include="Resources\fundo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

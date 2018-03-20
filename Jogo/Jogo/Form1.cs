@@ -8,7 +8,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+<<<<<<< HEAD
 using System.Reflection;
+=======
+>>>>>>> parent of 2e8c7da... a
 
 namespace Jogo
 {
@@ -37,13 +40,63 @@ namespace Jogo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+=======
+            heroiImg = new Bitmap(@"heroi.png");
+            heroi = new ObjHeroi(0, 0, heroiImg);
+
+            monstroImg = new Bitmap(@"monstro.png");
+            monstro = new ObjGame(5, 5, monstroImg);
+            game.setOcupado(monstro.X, monstro.Y);
+
+            arvoreImg = new Bitmap(@"arvore.png");
+            arvore = new ObjEstatico(0, 3, arvoreImg);
+            game.setOcupado(arvore.X, arvore.Y);
+
+            //Queue<String> msgs = ["eae","beleza","suave"];
+
+            mestreImg = new Bitmap(@"heroi.png");
+            mestre = new ObjNpc(16, 4, mestreImg);
+            game.setOcupado(mestre.X, mestre.Y);
+        }
+>>>>>>> parent of 2e8c7da... a
 
         }
 
         private void checarAreas()
         {
+<<<<<<< HEAD
             //todo checar todos os objs da classe OjbGame
 
+=======
+            //TODO loop por todas os objetos de ObjGame
+            e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(monstro.Img, monstro.X * Game.Tam, monstro.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(arvore.Img, arvore.X * Game.Tam, arvore.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
+
+            if (mestre.MostrarTexto)
+            {
+                string text1 = "aaaaaaaaaaaaaaaaaaaaa.";
+                using (Font font1 = new Font("Lucida Console", 12, FontStyle.Bold, GraphicsUnit.Point))
+                {
+                    Rectangle rectF1 = new Rectangle((mestre.X * Game.Tam) - text1.Length * 12 + Game.Tam, (mestre.Y * Game.Tam) - Game.Tam, text1.Length * 12, Game.Tam);
+                    SolidBrush branco = new SolidBrush(Color.White);
+                    e.Graphics.FillRectangle(branco, rectF1);
+                    e.Graphics.DrawString(text1, font1, Brushes.Black, rectF1);
+                    e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
+
+                }
+            }
+        }
+
+        private void frmJogo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Up)
+            {
+                heroi.ActiveUp = true;
+            }
+>>>>>>> parent of 2e8c7da... a
             
 
 
@@ -64,6 +117,7 @@ namespace Jogo
             {
                 ocupRight = false;
             }
+<<<<<<< HEAD
 
             if (heroi.Y == 0)
             {
@@ -73,6 +127,26 @@ namespace Jogo
             {
                 ocupUp = false;
             }
+=======
+        }
+    }
+
+    public class ObjNpc : ObjGame
+    {
+        private bool mostrarTexto { get; set; }
+
+        private Queue<String> mensagens;
+
+        public ObjNpc(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
+        {
+            //Queue<String> mensagens = mensagensN;
+        }
+
+        public void dialogo()
+        {
+            mostrarTexto = true;
+        }
+>>>>>>> parent of 2e8c7da... a
 
             if (heroi.Y == this.Height - heroi.Height)
             {
@@ -83,6 +157,7 @@ namespace Jogo
                 ocupDown = false;
             }
         }
+<<<<<<< HEAD
 
         private void keyisdown(object sender, KeyEventArgs e)
         {
@@ -95,6 +170,27 @@ namespace Jogo
                 goright = true;
             }
             if (e.KeyCode == Keys.Up)
+=======
+    }
+
+    public class ObjEstatico : ObjGame
+    {
+        public ObjEstatico(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
+        {
+        }
+    }
+
+    public class ObjHeroi : ObjGame
+    {
+        private bool activeLeft { get; set; }
+        private bool activeRight { get; set; }
+        private bool activeUp { get; set; }
+        private bool activeDown { get; set; }
+
+        public bool ActiveDown
+        {
+            get
+>>>>>>> parent of 2e8c7da... a
             {
                 goup = true;
             }
