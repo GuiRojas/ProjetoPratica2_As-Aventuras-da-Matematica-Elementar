@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9F91EBC6-60D8-4726-8310-1FCCC943D35E}</ProjectGuid>
+    <ProjectGuid>{2375BA70-702C-4487-9550-48DE555715DE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Jogo</RootNamespace>
     <AssemblyName>Jogo</AssemblyName>
@@ -51,7 +51,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -81,11 +80,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\fonte.TTF" />
+    <Content Include="Bitmap1.bmp" />
     <None Include="Resources\fundo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\fundo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

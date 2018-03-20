@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jogo", "Jogo\Jogo.csproj", "{9F91EBC6-60D8-4726-8310-1FCCC943D35E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jogo", "Jogo\Jogo.csproj", "{2375BA70-702C-4487-9550-48DE555715DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9F91EBC6-60D8-4726-8310-1FCCC943D35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F91EBC6-60D8-4726-8310-1FCCC943D35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F91EBC6-60D8-4726-8310-1FCCC943D35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F91EBC6-60D8-4726-8310-1FCCC943D35E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2375BA70-702C-4487-9550-48DE555715DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2375BA70-702C-4487-9550-48DE555715DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2375BA70-702C-4487-9550-48DE555715DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2375BA70-702C-4487-9550-48DE555715DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7986AF25-5320-4F4D-9D6B-4298439CDD5D}
+		SolutionGuid = {CE396324-86DA-42FD-A6A7-9682277F4E3A}
 	EndGlobalSection
 EndGlobal
