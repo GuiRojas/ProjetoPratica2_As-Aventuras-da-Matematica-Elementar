@@ -1,0 +1,23 @@
+
+--geral
+rpg estilo pokemon sem pokemon
+ataque baseado em resolução de expressões
+calculo do dano baseado em tempo + acerto
+campo de treinanto 4 n00b pra aprender a fazer as contas ou treina-las
+as operações como habilidades (skills)
+
+--historia
+cara perdeu a princesa e tem q salva-la da glaucia >:(
+o senpaio te treina
+vc comeca com a habilidade de soma e vai treinando por estagio
+6 fases(+,-,*,/,^,raiz)
+
+--gameplay
+vc anda pelo cenario e pode treinar ou fazer a historia ou o modo vitalidade (ganhar vidas) ou relogio
+comeca com 3 vidas
+perde força vital se errar a conta (se chegar a 0 perde uma vida)
+dano depende do tempo da resposta do jogador
+a batalha é tipo pokemon
+
+--graficos
+estilo 8 bits
