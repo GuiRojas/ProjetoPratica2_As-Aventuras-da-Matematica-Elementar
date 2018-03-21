@@ -46,10 +46,20 @@ namespace Jogo
             arvore = new ObjEstatico(0, 3, arvoreImg);
             game.setOcupado(arvore.X, arvore.Y);
 
+<<<<<<< HEAD
             //Queue<String> msgs = ["eae","beleza","suave"];
 
             mestreImg = new Bitmap(@"heroi.png");
             mestre = new ObjNpc(16, 4, mestreImg);
+=======
+            Queue<String> msgs = new Queue<string>();
+            msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Chan.");
+            msgs.Enqueue("O clan de Glau Xia destruiu tudo de nossa vida.");
+            msgs.Enqueue("Logo antes, antes de sua chegada, eles queimaram toda a vila...");
+
+            mestreImg = new Bitmap(@"heroi.png");
+            mestre = new ObjNpc(16, 4, mestreImg, msgs);
+>>>>>>> parent of 8f1e880... a
             game.setOcupado(mestre.X, mestre.Y);
         }
 
@@ -72,6 +82,7 @@ namespace Jogo
             e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
 
             if (mestre.MostrarTexto)
+<<<<<<< HEAD
             {
                 string text1 = "aaaaaaaaaaaaaaaaaaaaa.";
                 using (Font font1 = new Font("Lucida Console", 12, FontStyle.Bold, GraphicsUnit.Point))
@@ -82,6 +93,36 @@ namespace Jogo
                     e.Graphics.DrawString(text1, font1, Brushes.Black, rectF1);
                     e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
 
+=======
+            {   //TODO transformar texto p/ classe
+                string text = mestre.Msg;
+
+                PrivateFontCollection collection = new PrivateFontCollection();
+                collection.AddFontFile(@"fonte.TTF");
+                FontFamily fontFamily = new FontFamily("8BIT WONDER", collection);
+
+                using (Font font1 = new Font(fontFamily, 10, FontStyle.Bold, GraphicsUnit.Point))
+                {
+                    SizeF a = e.Graphics.MeasureString(text, font1);
+                    Size larguraString = a.ToSize();
+
+                    int largura = larguraString.Width;
+                    int altura = larguraString.Height + 4;
+                    int xTxt = (mestre.X * Game.Tam) + Game.Tam - largura;
+                    int yTxt = (mestre.Y * Game.Tam)- altura;
+
+                    if (xTxt < 0 || xTxt > this.Width || largura / 2 < this.Width/2)
+                    {
+                        largura += xTxt - 4;
+                        altura += larguraString.Height;
+                    }
+
+                    Rectangle rectF1 = new Rectangle(xTxt,  yTxt, largura, altura);
+                    SolidBrush branco = new SolidBrush(Color.White);
+                    e.Graphics.FillRectangle(branco, rectF1);
+                    e.Graphics.DrawString(text, font1, Brushes.Black, rectF1);
+                    e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
+>>>>>>> parent of 8f1e880... a
                 }
             }
         }
@@ -141,17 +182,39 @@ namespace Jogo
     public class ObjNpc : ObjGame
     {
         private bool mostrarTexto { get; set; }
+<<<<<<< HEAD
 
         private Queue<String> mensagens;
 
         public ObjNpc(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
         {
             //Queue<String> mensagens = mensagensN;
+=======
+        private string msg { get; set; }
+
+        private Queue<String> mensagens;
+
+        public ObjNpc(int xN, int yN, Bitmap imgN, Queue<String> mensagensN) : base(xN, yN, imgN)
+        {
+            mensagens = mensagensN;
+>>>>>>> parent of 8f1e880... a
         }
 
         public void dialogo()
         {
             mostrarTexto = true;
+<<<<<<< HEAD
+=======
+            if (mensagens.Count == 0)
+            {
+                //game.
+            }
+            else
+            {
+                msg = mensagens.Dequeue();
+            }
+            
+>>>>>>> parent of 8f1e880... a
         }
 
         public bool MostrarTexto
@@ -165,7 +228,282 @@ namespace Jogo
             {
                 this.mostrarTexto = value;
             }
+<<<<<<< HEAD
+=======
         }
+
+        public string Msg
+        {
+            get
+            {
+                return this.msg;
+            }
+
+            set
+            {
+                this.msg = value;
+            }
+        }
+    }
+
+    public class ObjEstatico : ObjGame
+    {
+        public ObjEstatico(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
+        {
+        }
+    }
+
+    public class ObjHeroi : ObjGame
+    {
+        private bool activeLeft { get; set; }
+        private bool activeRight { get; set; }
+        private bool activeUp { get; set; }
+        private bool activeDown { get; set; }
+
+        public bool ActiveDown
+        {
+            get
+            {
+                return this.activeDown;
+            }
+            set
+            {
+                this.activeDown = value;
+            }
+        }
+
+        public bool ActiveLeft
+        {
+            get
+            {
+                return this.activeLeft;
+            }
+            set
+            {
+                this.activeLeft = value;
+            }
+        }
+
+        public bool ActiveRight
+        {
+            get
+            {
+                return this.activeRight;
+            }
+            set
+            {
+                this.activeRight = value;
+            }
+        }
+
+        public bool ActiveUp
+        {
+            get
+            {
+                return this.activeUp;
+            }
+            set
+            {
+                this.activeUp = value;
+            }
+        }
+
+        public ObjHeroi(int xN, int yN, Bitmap imgN) : base(xN, yN, imgN)
+        {
+        }
+
+        public void mover(Game game)
+        {
+            Thread.Sleep(120);
+
+            if (this.activeUp && game.checkup(this))
+            {
+                goup();
+            }
+            
+            if (this.activeDown && game.checkdown(this))
+            {
+                godown();
+            }
+            
+            if (this.activeLeft && game.checkleft(this))
+            {
+                goleft();
+            }
+            
+            if (this.activeRight && game.checkright(this))
+            {
+                goright();
+            }
+>>>>>>> parent of 8f1e880... a
+        }
+
+        public void goup()
+        {
+            this.Y -= 1;
+        }
+
+        public void godown()
+        {
+            this.Y += 1;
+        }
+
+        public void goleft()
+        {
+            this.X -= 1;
+        }
+
+        public void goright()
+        {
+            this.X += 1;
+        }
+    }
+
+    public class ObjGame
+    {
+        private int x {get; set;}
+        private int y { get; set; }
+        private Bitmap img { get; set; }
+
+        public ObjGame(int xN, int yN, Bitmap imgN)
+        {
+            this.x = xN;
+            this.y = yN;
+            this.img = imgN;
+        }
+
+        public int X
+        {
+            get
+            {
+                return this.x;
+            }
+
+            set
+            {
+                this.x = value;
+            }
+        }
+
+        public int Y
+        {
+            get
+            {
+                return this.y;
+            }
+
+            set
+            {
+                this.y = value;
+            }
+        }
+
+        public Bitmap Img
+        {
+            get
+            {
+                return this.img;
+            }
+
+            set
+            {
+                this.img = value;
+            }
+        }
+    }
+
+    public class Game
+    {
+        private bool[][] grid = new bool[25][];//25x20
+        public const int Tam = 32, Altura = 20, Largura = 25, Speed = 1;
+
+        public Game()
+        {
+            for (int i = 0; i < Largura; i++) {
+                grid[i] = new bool[20];
+                for (int j = 0; j < Altura; j++)
+                {
+                    grid[i][j] = true;
+                }
+            }
+        }
+
+        public bool perto (ObjGame obj1, ObjGame obj2)
+        {
+            if ((obj1.X == (obj2.X - 1) && obj1.Y == obj2.Y) ||//y igual a esquerda
+                (obj1.X == (obj2.X + 1) && obj1.Y == obj2.Y) ||//y igual a direita
+                (obj1.Y == (obj2.Y - 1) && obj1.X == obj2.X) ||//x igual a abaixo
+                (obj1.Y == (obj2.Y + 1) && obj1.X == obj2.X))   //x igual acima
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void setOcupado (int xNovo, int yNovo)
+        {
+            if(xNovo < 0 && xNovo > Largura)
+            {
+                //throw exception
+            }
+
+            if (yNovo < 0 && yNovo > Altura)
+            {
+                //throw exception
+            }
+
+            grid[xNovo][yNovo] = false;
+        }
+        
+        public void setLivre(int xNovo, int yNovo)
+        {
+            if (xNovo < 0 && xNovo > Largura)
+            {
+                //throw exception
+            }
+            
+            if (yNovo < 0 && yNovo > Altura)
+            {
+                //throw exception
+            }
+                    
+            grid[xNovo][yNovo] = true;
+        }
+
+        public bool checkup(ObjGame obj)
+        {
+            if (obj.Y == 0)
+                return false;
+
+            return grid[obj.X][obj.Y - 1];
+        }
+
+        public bool checkdown(ObjGame obj)
+        {
+            if (obj.Y == Altura-1)
+                return false;
+
+            return grid[obj.X][obj.Y + 1];
+        }
+
+        public bool checkleft(ObjGame obj)
+        {
+            if (obj.X == 0)
+                return false;
+
+            return grid[obj.X - 1][obj.Y];
+        }
+
+        public bool checkright(ObjGame obj)
+        {
+            if (obj.X == Largura-1)
+                return false;
+
+            return grid[obj.X + 1][obj.Y];
+        }
+
+
     }
 
     public class ObjEstatico : ObjGame
