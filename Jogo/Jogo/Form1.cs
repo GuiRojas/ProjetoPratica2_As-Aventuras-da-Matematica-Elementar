@@ -41,7 +41,7 @@ namespace Jogo
 
         private void frmJogo_KeyDown(object sender, KeyEventArgs e)
         {
-            background.keyDown(sender, e);
+            background.keyDown(sender, e, label1);
         }
 
         private void frmJogo_KeyUp(object sender, KeyEventArgs e)

@@ -9,19 +9,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
-
+using System.IO;
 
 namespace Jogo
 {
     public class Background
     {
         private int fase;
-        private int estado;
-        private Form frm { get; set; }
+        private int estado { get; set; }
 
         public Background(int fase)
         {
             this.fase = fase;
+            this.estado = 0;
         }
 
         ObjHeroi heroi;
@@ -30,24 +30,29 @@ namespace Jogo
         ObjGame monstro;
         Bitmap monstroImg;
 
+        Bitmap fundo;
+
         ObjEstatico arvore;
         Bitmap arvoreImg;
 
         ObjNpc mestre;
         Bitmap mestreImg;
 
+        ObjNpc easterEgg;
+        Bitmap easterEggImg;
+
         Game game = new Game();
         ObjGame[] objsDoGame;
 
-        public Form Frm
+        public int Estado
         {
             get
             {
-                return this.frm;
+                return this.estado;
             }
             set
             {
-                this.frm = frm;
+                this.estado = value;
             }
         }
 
@@ -63,19 +68,23 @@ namespace Jogo
             {
                 case 1:
                     {
-                        heroiImg = new Bitmap(@"heroi.png");
-                        heroi = new ObjHeroi(0, 0, heroiImg);
+                        //texto
+                        //vc se chama shingetsu kun, um samurai muito respeitado
+                        //sua vida inteira vc usou a força sobre tudo, até agora.
+                        //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
+                        //18,13
+                        game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(5, 4); game.setOcupado(6, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(14, 11); game.setOcupado(14, 10); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
 
-                        monstroImg = new Bitmap(@"monstro.png");
-                        monstro = new ObjGame(5, 5, monstroImg);
-                        game.setOcupado(monstro.X, monstro.Y);
+
+                        heroiImg = new Bitmap(@"heroi.png");
+                        heroi = new ObjHeroi(2, 17, heroiImg);
+
+                        fundo = new Bitmap(@"vila.png");
 
                         arvoreImg = new Bitmap(@"arvore.png");
                         arvore = new ObjEstatico(0, 3, arvoreImg);
                         game.setOcupado(arvore.X, arvore.Y);
-                        //vc se chama shingetsu kun, um samurai muito respeitado
-                        //sua vida inteira vc usou a força sobre tudo, até agora.
-                        //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
+
                         Queue<String> msgs = new Queue<string>();
                         msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Kun.");
                         msgs.Enqueue("O clan de Glau Xia destruiu tudo nosso.");
@@ -86,9 +95,14 @@ namespace Jogo
                         msgs.Enqueue("Mas a sabedoria de um matemático.");
                         msgs.Enqueue("...");
                         msgs.Enqueue("Entre no dojo, vamos conseguir sua vingança.");
+                        mestreImg = new Bitmap(Path.Combine(Environment.CurrentDirectory, @"heroi.png"));
+                        mestre = new ObjNpc(5, 5, mestreImg, msgs);
+                        game.setOcupado(mestre.X, mestre.Y);
 
-                        mestreImg = new Bitmap(@"heroi.png");
-                        mestre = new ObjNpc(16, 4, mestreImg, msgs);
+                        Queue<String> msgsEasterEgg = new Queue<string>();
+                        msgsEasterEgg.Enqueue("Easter egg!!!11");
+                        easterEggImg = new Bitmap(Path.Combine(Environment.CurrentDirectory, @"heroi.png"));
+                        easterEgg = new ObjNpc(5, 5, easterEggImg, msgsEasterEgg);
                         game.setOcupado(mestre.X, mestre.Y);
                     }
                     break;
@@ -114,8 +128,9 @@ namespace Jogo
                 case 1:
                     {
                         //TODO loop por todas os objetos de ObjGame
+                        e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
+
                         e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-                        e.Graphics.DrawImage(monstro.Img, monstro.X * Game.Tam, monstro.Y * Game.Tam, Game.Tam, Game.Tam);
                         e.Graphics.DrawImage(arvore.Img, arvore.X * Game.Tam, arvore.Y * Game.Tam, Game.Tam, Game.Tam);
                         e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
 
@@ -162,7 +177,7 @@ namespace Jogo
             }
         }
 
-        public void keyDown(object sender, KeyEventArgs e)
+        public void keyDown(object sender, KeyEventArgs e, Label lb)
         {
             switch (fase)
             {
@@ -192,7 +207,18 @@ namespace Jogo
                         {
                             mestre.dialogo(this);
                         }
-                    }break;
+
+                        if (e.KeyCode == Keys.Escape)
+                        {
+                            
+                        }
+
+                        if (e.KeyCode == Keys.Space)
+                        {
+                            lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
+                        }
+                    }
+                    break;
             }
         }
 
