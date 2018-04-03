@@ -14,6 +14,7 @@ namespace Jogo
 {   //TODO pegar os niveis do bd
     public partial class frmJogo : Form
     {
+        private Label label1;
         Background background;
 
         
@@ -25,6 +26,7 @@ namespace Jogo
         private void Jogo_Load(object sender, EventArgs e)
         {
             background = new Background(1);// TODO pegar do bd a fase do usuario
+            background.Estado = 1;
             background.carregarGame();
         }
 
@@ -47,6 +49,11 @@ namespace Jogo
         private void frmJogo_KeyUp(object sender, KeyEventArgs e)
         {
             background.keyUp(sender, e);
+        }
+
+        private void frmJogo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

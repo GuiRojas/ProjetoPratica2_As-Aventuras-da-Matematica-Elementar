@@ -59,7 +59,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmJogo";
-            this.Text = "Form1";
+            this.Text = "Aventuras Da Matematica Elementar";
             this.Load += new System.EventHandler(this.Jogo_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmJogo_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmJogo_KeyDown);
@@ -72,7 +72,7 @@
         #endregion
 
         private System.Windows.Forms.Timer tmrPintar;
-        private System.Windows.Forms.Label label1;
+     //   private System.Windows.Forms.Label label1;
     }
 }
 
