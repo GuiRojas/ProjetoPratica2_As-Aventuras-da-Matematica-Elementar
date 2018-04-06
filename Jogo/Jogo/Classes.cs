@@ -17,11 +17,13 @@ namespace Jogo
     {
         private int fase;
         private int estado { get; set; }
+        private Form frm { get; set; }
 
-        public Background(int fase)
+        public Background(int fase, Form frm)
         {
             this.fase = fase;
             this.estado = 0;
+            this.frm = frm;
         }
 
         ObjHeroi heroi;
@@ -43,6 +45,11 @@ namespace Jogo
 
         SolidBrush brush_transicao = new SolidBrush(Color.Black);
         Rectangle rect_transicao = new Rectangle(0, 0, Game.Tam * Game.Largura, Game.Tam * Game.Altura);
+
+        ProgressBar pbVidaVilao = new ProgressBar();
+        ProgressBar pbVidaHeroi = new ProgressBar();
+        Label lblContinha = new Label();
+        TextBox tbResultado = new TextBox();
 
         public int Estado
         {
@@ -132,6 +139,43 @@ namespace Jogo
                         {
                             case 1:
                                 {
+                                    frm.Controls.Add(pbVidaHeroi);
+                                    pbVidaHeroi.Maximum = 100;
+                                    pbVidaHeroi.Minimum = 0;
+                                    pbVidaHeroi.Enabled = true;
+                                    pbVidaHeroi.Location = new Point(75, 72);
+                                    pbVidaHeroi.Width = 320;
+                                    pbVidaHeroi.Height = 40;
+                                    pbVidaHeroi.Value = 100;
+
+                                    frm.Controls.Add(pbVidaVilao);
+                                    pbVidaVilao.Maximum = 100;
+                                    pbVidaVilao.Minimum = 0;
+                                    pbVidaVilao.Enabled = true;
+                                    pbVidaVilao.Location = new Point(410, 360);
+                                    pbVidaVilao.Width = 320;
+                                    pbVidaVilao.Height = 40;
+                                    pbVidaVilao.Value = 100;
+
+                                    frm.Controls.Add(lblContinha);
+                                    lblContinha.Text = "2x2";
+                                    lblContinha.Location = new Point((frm.Width - lblContinha.Width) / 2, 470);
+                                    lblContinha.ForeColor = Color.Black;
+                                    lblContinha.BackColor = Color.White;
+                                    lblContinha.AutoSize = false;
+                                    lblContinha.TextAlign = ContentAlignment.MiddleCenter;
+                                    lblContinha.Dock = DockStyle.None;
+                                    lblContinha.Font = new Font("Segoe UI", 30);
+                                    lblContinha.Height = 50;
+                                    
+                                    /*frm.Controls.Add(tbResultado);
+                                    tbResultado.Location = new Point((frm.Width - tbResultado.Width) / 2, 530);
+                                    tbResultado.Text = "a";
+                                    tbResultado.AutoSize = false;
+                                    tbResultado.TextAlign = HorizontalAlignment.Center;
+                                    tbResultado.Dock = DockStyle.None;*/
+
+
                                     batalhaImg = new Bitmap(@"batalha.png");
                                     batalha = new Batalha(batalhaImg);
                                 }
@@ -168,7 +212,7 @@ namespace Jogo
                         {
                             case 1:
                                 {
-                                    batalha.aguardaKey();
+                                    //batalha.aguardaKey();
                                 }break;
                         }
 
@@ -397,8 +441,6 @@ namespace Jogo
             this.img = img;
             heroiBatalha = new HeroiBatalha();
             vilaoBatalha = new VilaoBatalha();
-            ProgressBar pbVidaVilao = new ProgressBar();
-            ProgressBar pbVidaHeroi = new ProgressBar();
 
         }
 
