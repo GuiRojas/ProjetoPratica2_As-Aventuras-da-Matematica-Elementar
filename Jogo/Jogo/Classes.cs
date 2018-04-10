@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Jogo
 {
@@ -18,12 +19,14 @@ namespace Jogo
         private int fase;
         private int estado { get; set; }
         private Form frm { get; set; }
+        private int dificuldade;
 
         public Background(int fase, Form frm)
         {
             this.fase = fase;
             this.estado = 0;
             this.frm = frm;
+            this.dificuldade = 2;//pegar do bd os bagulho
         }
 
         ObjHeroi heroi;
@@ -46,8 +49,9 @@ namespace Jogo
         SolidBrush brush_transicao = new SolidBrush(Color.Black);
         Rectangle rect_transicao = new Rectangle(0, 0, Game.Tam * Game.Largura, Game.Tam * Game.Altura);
 
-        ProgressBar pbVidaVilao = new ProgressBar();
         ProgressBar pbVidaHeroi = new ProgressBar();
+        ProgressBar pbVidaVilao = new ProgressBar();
+        ProgressBar pbTempo = new ProgressBar();
         Label lblContinha = new Label();
         Label lblResultado = new Label();
 
@@ -127,11 +131,9 @@ namespace Jogo
                                     msgsEasterEgg.Enqueue("... Mas é um jogo infantil.");
                                     easterEggImg = new Bitmap(@"heroi.png");
                                     easterEgg = new ObjNpc(18, 13, easterEggImg, msgsEasterEgg);
-                                }
-                                break;
+                                }break;
                         }
-                    }
-                    break;
+                    }break;
 
                 case 2:
                     {
@@ -139,26 +141,27 @@ namespace Jogo
                         {
                             case 1:
                                 {
-                                    frm.Controls.Add(pbVidaHeroi);
-                                    pbVidaHeroi.Maximum = 100;
-                                    pbVidaHeroi.Minimum = 0;
-                                    pbVidaHeroi.Enabled = true;
-                                    pbVidaHeroi.Location = new Point(75, 72);
-                                    pbVidaHeroi.Width = 320;
-                                    pbVidaHeroi.Height = 40;
-                                    pbVidaHeroi.Value = 100;
-
                                     frm.Controls.Add(pbVidaVilao);
                                     pbVidaVilao.Maximum = 100;
                                     pbVidaVilao.Minimum = 0;
                                     pbVidaVilao.Enabled = true;
-                                    pbVidaVilao.Location = new Point(410, 360);
+                                    pbVidaVilao.Location = new Point(75, 72);
                                     pbVidaVilao.Width = 320;
                                     pbVidaVilao.Height = 40;
                                     pbVidaVilao.Value = 100;
 
+                                    frm.Controls.Add(pbVidaHeroi);
+                                    pbVidaHeroi.Maximum = 100;
+                                    pbVidaHeroi.Minimum = 0;
+                                    pbVidaHeroi.Enabled = true;
+                                    pbVidaHeroi.Location = new Point(410, 360);
+                                    pbVidaHeroi.Width = 320;
+                                    pbVidaHeroi.Height = 40;
+                                    pbVidaHeroi.Value = 100;
+
                                     frm.Controls.Add(lblContinha);
-                                    lblContinha.Text = "2x2";
+                                    lblContinha.Width = 500;
+                                    lblContinha.Text = Conta.gerarSoma(this.dificuldade);
                                     lblContinha.Location = new Point((frm.Width - lblContinha.Width) / 2, 470);
                                     lblContinha.ForeColor = Color.Black;
                                     lblContinha.BackColor = Color.White;
@@ -179,6 +182,18 @@ namespace Jogo
                                     lblResultado.BackColor = Color.White;
                                     lblResultado.ForeColor = Color.Black;
                                     lblResultado.Font = new Font("Segoe UI", 30);
+
+                                    frm.Controls.Add(pbTempo);
+                                    pbTempo.Width = 730;
+                                    pbTempo.Height = 25;
+                                    pbTempo.Location = new Point((frm.Width - pbTempo.Width) / 2, 10);
+                                    pbTempo.Maximum = 100;
+                                    pbTempo.Minimum = 0;
+                                    pbTempo.Value = 100;
+                                    pbTempo.Enabled = true;
+                                    ModifyProgressBarColor.SetState(pbTempo, 3);
+
+                                    VilaoBatalha vilao = new VilaoBatalha();
 
                                     batalhaImg = new Bitmap(@"batalha.png");
                                     batalha = new Batalha(batalhaImg);
@@ -453,7 +468,7 @@ namespace Jogo
                         }
 
                         lblResultado.Text += n;
-
+                        
                         if (e.KeyCode == Keys.Back)
                         {
                             if (lblResultado.Text != "")
@@ -463,8 +478,30 @@ namespace Jogo
                                 lblResultado.Text = str;
                             }
                         }
+
+                        if (e.KeyCode == Keys.Enter)
+                        {
+                            causarDano();
+                        }
                     }
                     break;
+            }
+
+            if (e.KeyCode == Keys.P)
+            {
+                frm.Close();
+            }
+        }
+
+        public void causarDano ()
+        {
+            if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
+            {
+                //pbVidaVilao.Value -= Math.Floor((pbVidaVilao.Maximum / pbTempo.Value));
+            }
+            else
+            {
+                pbVidaHeroi.Value -= (int)Math.Pow( this.fase, this.dificuldade);
             }
         }
 
@@ -853,5 +890,15 @@ namespace Jogo
         }
 
 
+    }
+}
+
+public static class ModifyProgressBarColor
+{
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+    static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+    public static void SetState(this ProgressBar pBar, int state)
+    {
+        SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
     }
 }

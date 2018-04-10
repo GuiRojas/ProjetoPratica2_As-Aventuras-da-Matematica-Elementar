@@ -17,7 +17,10 @@ public class Conta
     //diff = 1 a 10, dificuldade dos números
     public static String gerarSoma(int diff)
     {
-        return RandomNumber(1 * diff, 20 * diff).ToString() + "+" + RandomNumber(1 * diff, 20 * diff).ToString();
+        int i = RandomNumber(1 * diff, 20 * diff);
+        int j = RandomNumber(1 * diff, 20 * diff);
+
+        return i.ToString() + "+" + j.ToString();
     }
 
     public static String gerarSubtracao(int diff)
@@ -74,12 +77,12 @@ public class Conta
     //resolvedor universal hyper mega blaster
     public static int resolver(string str)
     {
-        string[] spl = str.Split("+-/*^√");
+        string[] spl = str.Split(new Char[] { '√', '+', '-', '*', '/' });
 
-        int pr = Convert.ToInt64(spl[0]);
-        int sc = Convert.ToInt64(spl[1]);
+        int pr = Convert.ToInt32(spl[0]);
+        int sc = Convert.ToInt32(spl[1]);
 
-        int res;
+        int res = 0;
         if (str.Contains("+"))
         {
             res = pr + sc;
@@ -102,10 +105,6 @@ public class Conta
         else if (str.Contains("√"))
         {
             res = (int)Math.Pow(pr, 1.0 / sc);
-        }
-        else
-        {
-            return;
         }
 
         return res;
