@@ -411,8 +411,9 @@ namespace Jogo
                     {
                         int[] inteiros = Enumerable.Range(0, 10).ToArray();
                         int n;
-                        int.TryParse(e.ToString(), out n);
+                        int.TryParse(e.KeyCode.ToString(), out n);
                         
+
                         if (inteiros.Contains(n))
                         {
                             lblResultado.Text += n.ToString();
