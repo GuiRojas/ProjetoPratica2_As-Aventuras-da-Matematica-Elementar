@@ -49,7 +49,7 @@ namespace Jogo
         ProgressBar pbVidaVilao = new ProgressBar();
         ProgressBar pbVidaHeroi = new ProgressBar();
         Label lblContinha = new Label();
-        TextBox tbResultado = new TextBox();
+        Label lblResultado = new Label();
 
         public int Estado
         {
@@ -75,7 +75,7 @@ namespace Jogo
 
             for (int i = 255; i >= 0; i--)
             {
-                pen_transicao = new Pen(Color.FromArgb(i, 0, 0, 0));
+                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
                 Thread.Sleep(8);
             }*/
             this.estado = est;
@@ -162,19 +162,22 @@ namespace Jogo
                                     lblContinha.Location = new Point((frm.Width - lblContinha.Width) / 2, 470);
                                     lblContinha.ForeColor = Color.Black;
                                     lblContinha.BackColor = Color.White;
-                                    lblContinha.AutoSize = false;
                                     lblContinha.TextAlign = ContentAlignment.MiddleCenter;
                                     lblContinha.Dock = DockStyle.None;
                                     lblContinha.Font = new Font("Segoe UI", 30);
                                     lblContinha.Height = 50;
-                                    
-                                    /*frm.Controls.Add(tbResultado);
-                                    tbResultado.Location = new Point((frm.Width - tbResultado.Width) / 2, 530);
-                                    tbResultado.Text = "a";
-                                    tbResultado.AutoSize = false;
-                                    tbResultado.TextAlign = HorizontalAlignment.Center;
-                                    tbResultado.Dock = DockStyle.None;*/
 
+                                    frm.Controls.Add(lblResultado);
+                                    lblResultado.Height = 70;
+                                    lblResultado.Width = 350;
+                                    lblResultado.Location = new Point((frm.Width - lblResultado.Width) / 2, 530);
+                                    lblResultado.Text = "";
+                                    lblResultado.AutoSize = false;
+                                    lblResultado.TextAlign = ContentAlignment.MiddleCenter;
+                                    lblResultado.Dock = DockStyle.None;
+                                    lblResultado.BorderStyle = BorderStyle.FixedSingle;
+                                    lblResultado.BackColor = Color.White;
+                                    lblResultado.ForeColor = Color.Black;
 
                                     batalhaImg = new Bitmap(@"batalha.png");
                                     batalha = new Batalha(batalhaImg);
@@ -344,55 +347,82 @@ namespace Jogo
 
         public void keyDown(object sender, KeyEventArgs e, Label lb)
         {
-            switch (fase)
+            switch (estado)
             {
                 case 1:
                     {
-                        if (e.KeyCode == Keys.Up)
+                        switch (fase)
                         {
-                            heroi.ActiveUp = true;
+                            case 1:
+                                {
+                                    if (e.KeyCode == Keys.Up)
+                                    {
+                                        heroi.ActiveUp = true;
+                                    }
+
+                                    if (e.KeyCode == Keys.Down)
+                                    {
+                                        heroi.ActiveDown = true;
+                                    }
+
+                                    if (e.KeyCode == Keys.Left)
+                                    {
+                                        heroi.ActiveLeft = true;
+                                    }
+
+                                    if (e.KeyCode == Keys.Right)
+                                    {
+                                        heroi.ActiveRight = true;
+                                    }
+
+                                    easterEgg.MostrarTexto = false;
+                                    mestre.MostrarTexto = false;
+
+                                    if (e.KeyCode == Keys.E)
+                                    {
+                                        //TODO loop pelos npc
+                                        if (game.perto(heroi, mestre))
+                                        {
+                                            mestre.dialogoAsync(this, true);
+                                        }
+
+                                        if (game.perto(heroi, easterEgg))
+                                        {
+                                            easterEgg.dialogoAsync(this, false);
+                                        }
+                                    }
+
+                                    if (e.KeyCode == Keys.Escape)
+                                    {
+
+                                    }
+
+                                    if (e.KeyCode == Keys.Space)
+                                    {
+                                        lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    {
+                        int[] inteiros = Enumerable.Range(0, 10).ToArray();
+                        int n;
+                        int.TryParse(e.ToString(), out n);
+                        
+                        if (inteiros.Contains(n))
+                        {
+                            lblResultado.Text += n.ToString();
                         }
 
-                        if (e.KeyCode == Keys.Down)
+                        if (e.KeyCode == Keys.Back)
                         {
-                            heroi.ActiveDown = true;
-                        }
-
-                        if (e.KeyCode == Keys.Left)
-                        {
-                            heroi.ActiveLeft = true;
-                        }
-
-                        if (e.KeyCode == Keys.Right)
-                        {
-                            heroi.ActiveRight = true;
-                        }
-
-                        easterEgg.MostrarTexto = false;
-                        mestre.MostrarTexto = false;
-
-                        if (e.KeyCode == Keys.E)
-                        {
-                            //TODO loop pelos npc
-                            if ( game.perto(heroi, mestre))
-                            {
-                                mestre.dialogoAsync(this, true);
-                            }
-
-                            if (game.perto(heroi, easterEgg))
-                            {
-                                easterEgg.dialogoAsync(this, false);
-                            }
-                        }
-
-                        if (e.KeyCode == Keys.Escape)
-                        {
-                            
-                        }
-
-                        if (e.KeyCode == Keys.Space)
-                        {
-                            lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
+                            String str = lblResultado.Text;
+                            str = str.Remove(str.Length - 1);
+                            lblResultado.Text = str;
                         }
                     }
                     break;
