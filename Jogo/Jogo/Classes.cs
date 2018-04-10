@@ -178,6 +178,7 @@ namespace Jogo
                                     lblResultado.BorderStyle = BorderStyle.FixedSingle;
                                     lblResultado.BackColor = Color.White;
                                     lblResultado.ForeColor = Color.Black;
+                                    lblResultado.Font = new Font("Segoe UI", 30);
 
                                     batalhaImg = new Bitmap(@"batalha.png");
                                     batalha = new Batalha(batalhaImg);
@@ -409,21 +410,58 @@ namespace Jogo
 
                 case 2:
                     {
-                        int[] inteiros = Enumerable.Range(0, 10).ToArray();
-                        int n;
-                        int.TryParse(e.KeyCode.ToString(), out n);
-                        
-
-                        if (inteiros.Contains(n))
+                        Char n = '\0';
+                        if (e.KeyCode == Keys.D1)
                         {
-                            lblResultado.Text += n.ToString();
+                            n = '1';
                         }
+                        if (e.KeyCode == Keys.D2)
+                        {
+                            n = '2';
+                        }
+                        if (e.KeyCode == Keys.D3)
+                        {
+                            n = '3';
+                        }
+                        if (e.KeyCode == Keys.D4)
+                        {
+                            n = '4';
+                        }
+                        if (e.KeyCode == Keys.D5)
+                        {
+                            n = '5';
+                        }
+                        if (e.KeyCode == Keys.D6)
+                        {
+                            n = '6';
+                        }
+                        if (e.KeyCode == Keys.D7)
+                        {
+                            n = '7';
+                        }
+                        if (e.KeyCode == Keys.D8)
+                        {
+                            n = '8';
+                        }
+                        if (e.KeyCode == Keys.D9)
+                        {
+                            n = '9';
+                        }
+                        if (e.KeyCode == Keys.D0)
+                        {
+                            n = '0';
+                        }
+
+                        lblResultado.Text += n;
 
                         if (e.KeyCode == Keys.Back)
                         {
-                            String str = lblResultado.Text;
-                            str = str.Remove(str.Length - 1);
-                            lblResultado.Text = str;
+                            if (lblResultado.Text != "")
+                            {
+                                String str = lblResultado.Text;
+                                str = str.Remove(str.Length - 1);
+                                lblResultado.Text = str;
+                            }
                         }
                     }
                     break;
