@@ -55,6 +55,8 @@ namespace Jogo
         Label lblContinha = new Label();
         Label lblResultado = new Label();
 
+        System.Windows.Forms.Timer tmrBatalha;
+
         public int Estado
         {
             get
@@ -105,7 +107,7 @@ namespace Jogo
                                     //vc se chama shingetsu kun, um samurai muito respeitado
                                     //sua vida inteira vc usou a força sobre tudo, até agora.
                                     //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
-                                    game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(5, 4); game.setOcupado(6, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(14, 11); game.setOcupado(14, 10); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
+                                    game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(5, 4); game.setOcupado(6, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(14, 11); game.setOcupado(14, 10); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
                                     
                                     heroiImg = new Bitmap(@"heroi.png");
                                     heroi = new ObjHeroi(2, 17, heroiImg);
@@ -161,7 +163,7 @@ namespace Jogo
 
                                     frm.Controls.Add(lblContinha);
                                     lblContinha.Width = 500;
-                                    lblContinha.Text = Conta.gerarSoma(this.dificuldade);
+                                    lblContinha.Text = "[Enter] para comecar!";
                                     lblContinha.Location = new Point((frm.Width - lblContinha.Width) / 2, 470);
                                     lblContinha.ForeColor = Color.Black;
                                     lblContinha.BackColor = Color.White;
@@ -174,7 +176,7 @@ namespace Jogo
                                     lblResultado.Height = 70;
                                     lblResultado.Width = 350;
                                     lblResultado.Location = new Point((frm.Width - lblResultado.Width) / 2, 530);
-                                    lblResultado.Text = "";
+                                    lblResultado.Text = "inicio";
                                     lblResultado.AutoSize = false;
                                     lblResultado.TextAlign = ContentAlignment.MiddleCenter;
                                     lblResultado.Dock = DockStyle.None;
@@ -182,6 +184,7 @@ namespace Jogo
                                     lblResultado.BackColor = Color.White;
                                     lblResultado.ForeColor = Color.Black;
                                     lblResultado.Font = new Font("Segoe UI", 30);
+                                    lblResultado.Visible = false;
 
                                     frm.Controls.Add(pbTempo);
                                     pbTempo.Width = 730;
@@ -193,8 +196,10 @@ namespace Jogo
                                     pbTempo.Enabled = true;
                                     ModifyProgressBarColor.SetState(pbTempo, 3);
 
-                                    VilaoBatalha vilao = new VilaoBatalha();
-
+                                    tmrBatalha = new System.Windows.Forms.Timer();
+                                    tmrBatalha.Interval = 140 / this.dificuldade;
+                                    tmrBatalha.Tick += new EventHandler(batalha_tick);
+                                    
                                     batalhaImg = new Bitmap(@"batalha.png");
                                     batalha = new Batalha(batalhaImg);
                                 }
@@ -207,6 +212,19 @@ namespace Jogo
 
                     }
                     break;
+            }
+        }
+
+        public void batalha_tick (Object sender, EventArgs e)
+        {
+            if (pbTempo.Value == 0)
+            {
+                receberDano(pbVidaHeroi, dificuldade * fase);
+                pbTempo.Value = pbTempo.Maximum;
+            }
+            else
+            {
+                pbTempo.Value --;
             }
         }
 
@@ -426,43 +444,44 @@ namespace Jogo
                 case 2:
                     {
                         Char n = '\0';
-                        if (e.KeyCode == Keys.D1)
+
+                        if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
                         {
                             n = '1';
                         }
-                        if (e.KeyCode == Keys.D2)
+                        if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
                         {
                             n = '2';
                         }
-                        if (e.KeyCode == Keys.D3)
+                        if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
                         {
                             n = '3';
                         }
-                        if (e.KeyCode == Keys.D4)
+                        if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
                         {
                             n = '4';
                         }
-                        if (e.KeyCode == Keys.D5)
+                        if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
                         {
                             n = '5';
                         }
-                        if (e.KeyCode == Keys.D6)
+                        if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
                         {
                             n = '6';
                         }
-                        if (e.KeyCode == Keys.D7)
+                        if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
                         {
                             n = '7';
                         }
-                        if (e.KeyCode == Keys.D8)
+                        if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
                         {
                             n = '8';
                         }
-                        if (e.KeyCode == Keys.D9)
+                        if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
                         {
                             n = '9';
                         }
-                        if (e.KeyCode == Keys.D0)
+                        if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
                         {
                             n = '0';
                         }
@@ -481,7 +500,17 @@ namespace Jogo
 
                         if (e.KeyCode == Keys.Enter)
                         {
-                            causarDano();
+                            if (lblResultado.Text == "inicio")
+                            {
+                                tmrBatalha.Enabled = true;
+                                tmrBatalha.Start();
+                                lblResultado.Visible = true;
+                                lblResultado.Text = "";
+                                lblContinha.Text = Conta.gerarSoma(dificuldade);
+                            } else if (lblResultado.Text != "")
+                            {
+                                causarDano();
+                            }
                         }
                     }
                     break;
@@ -493,15 +522,74 @@ namespace Jogo
             }
         }
 
-        public void causarDano ()
+        public void receberDano (ProgressBar pb, int dano)
         {
-            if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
+            ModifyProgressBarColor.SetState(pb, 2);
+            Label lblDaninho = new Label();
+            lblDaninho.Text = "-" + dano.ToString();
+            lblDaninho.ForeColor = Color.Red;
+            lblDaninho.BackColor = Color.White;
+            lblDaninho.Font = new Font("Segoe UI", 20);
+            lblDaninho.Height = pb.Height;
+            frm.Controls.Add(lblDaninho);
+
+            if (pb.Location.X > Convert.ToInt32(frm.Width / 2))
             {
-                //pbVidaVilao.Value -= Math.Floor((pbVidaVilao.Maximum / pbTempo.Value));
+                lblDaninho.Location = new Point(pb.Location.X - lblDaninho.Width, pb.Location.Y);
             }
             else
             {
-                pbVidaHeroi.Value -= (int)Math.Pow( this.fase, this.dificuldade);
+                lblDaninho.Location = new Point(pb.Location.X + pb.Width, pb.Location.Y);
+            }
+            
+            int i = 0;
+            while (i <= dano)
+            {
+                pb.Value--;
+                Application.DoEvents();
+                Thread.Sleep(20);
+                i++;
+            }
+            ModifyProgressBarColor.SetState(pb, 1);
+            frm.Controls.Remove(lblDaninho);
+
+            switch (fase)
+            {
+                case 1:
+                    {
+                        lblContinha.Text = Conta.gerarSoma(dificuldade);
+                        lblResultado.Text = "";
+                    }
+                    break;
+
+                case 2:
+                    {
+                        lblContinha.Text = Conta.gerarSubtracao(dificuldade);
+                    }
+                    break;
+
+                case 3:
+                    {
+                        //lblContinha.Text = Conta.gerarSoma(dificuldade);
+                    }
+                    break;
+            }
+        }
+
+        public void causarDano ()
+        {
+            pbTempo.Value = pbTempo.Maximum;
+
+            if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
+            {
+                int dano = Convert.ToInt32((10 / (fase)));
+                receberDano(pbVidaVilao, dano);
+                //todo tremer tela
+            }
+            else
+            {
+                int dano = 5 * this.dificuldade + 5 * this.fase;
+                receberDano(pbVidaHeroi, dano);
             }
         }
 
@@ -700,7 +788,7 @@ namespace Jogo
 
         public void mover(Game game)
         {
-            Thread.Sleep(110);
+            Thread.Sleep(100);
 
             if (this.activeUp && game.checkup(this))
             {
@@ -816,9 +904,9 @@ namespace Jogo
 
         public bool perto(ObjGame obj1, ObjGame obj2)
         {
-            if ((obj1.X == (obj2.X - 1) && obj1.Y == obj2.Y) ||//y igual a esquerda
-                (obj1.X == (obj2.X + 1) && obj1.Y == obj2.Y) ||//y igual a direita
-                (obj1.Y == (obj2.Y - 1) && obj1.X == obj2.X) ||//x igual a abaixo
+            if ((obj1.X == (obj2.X - 1) && obj1.Y == obj2.Y) || //y igual a esquerda
+                (obj1.X == (obj2.X + 1) && obj1.Y == obj2.Y) || //y igual a direita
+                (obj1.Y == (obj2.Y - 1) && obj1.X == obj2.X) || //x igual a abaixo
                 (obj1.Y == (obj2.Y + 1) && obj1.X == obj2.X))   //x igual acima
             {
                 return true;
@@ -888,8 +976,6 @@ namespace Jogo
 
             return grid[obj.X + 1][obj.Y];
         }
-
-
     }
 }
 

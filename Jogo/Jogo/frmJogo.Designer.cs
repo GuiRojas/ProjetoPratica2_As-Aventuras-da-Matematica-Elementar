@@ -61,7 +61,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmJogo";
             this.Text = "Aventuras Da Matematica Elementar";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Jogo_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmJogo_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmJogo_KeyDown);
