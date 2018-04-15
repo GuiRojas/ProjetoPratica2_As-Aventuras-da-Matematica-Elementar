@@ -26,7 +26,6 @@ namespace Jogo
         private void Jogo_Load(object sender, EventArgs e)
         {
             background = new Background(1, this);// TODO pegar do bd a fase do usuario
-            background.Estado = 1;
             background.carregarGame();
         }
 

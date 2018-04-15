@@ -16,19 +16,188 @@ namespace Jogo
 {
     public class Background
     {
-        private int fase;
-        private int estado { get; set; }
-        private Form frm { get; set; }
-        private int dificuldade;
-
         public Background(int fase, Form frm)
         {
             this.fase = fase;
-            this.estado = 0;
+            this.estado = 1;
             this.frm = frm;
             this.dificuldade = 2;//pegar do bd os bagulho
+
+            carregarEstadoEFase();
         }
 
+        private int fase;
+        private int estado { get; set; }
+        private Form frm { get; set; }
+        private int dificuldade { get; set; }
+        private bool heroiGanhou;
+
+        GameClass gameClass;
+
+
+        SolidBrush brush_transicao = new SolidBrush(Color.Black);
+        Rectangle rect_transicao = new Rectangle(0, 0, Game.Tam * Game.Largura, Game.Tam * Game.Altura);
+        
+        public int Estado
+        {
+            get
+            {
+                return this.estado;
+            }
+            set
+            {
+                this.estado = value;
+            }
+        }
+
+        public Form Frm
+        {
+            get
+            {
+                return this.frm;
+            }
+            set
+            {
+                this.frm = value;
+            }
+        }
+
+        public int Dificuldade
+        {
+            get
+            {
+                return this.dificuldade;
+            }
+            set
+            {
+                this.dificuldade = value;
+            }
+        }
+
+        public void carregarEstadoEFase()
+        {
+            switch (estado)
+            {
+                case 1:
+                    {
+                        switch (fase)
+                        {
+                            case 1:
+                                {
+                                    this.gameClass = new Mapa1(this);
+                                }
+                                break;
+                        }
+
+                    }
+                    break;
+
+
+                case 2:
+                    {
+                        switch (fase)
+                        {
+                            case 1:
+                                {
+                                    this.gameClass = new Batalha1(this);
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+
+                case 3:
+                    {
+
+                    }
+                    break;
+
+            }
+        }
+
+        public async Task transicao (int est)
+        {
+            this.estado = 0;
+
+            for (int i = 20; i < 50; i++)
+            {
+                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
+                Application.DoEvents();
+                Thread.Sleep(5);
+            }
+
+
+            for (int i = 20; i > 0; i--)
+            {
+                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
+                Application.DoEvents();
+                Thread.Sleep(5);
+            }
+
+            this.estado = est;
+            carregarEstadoEFase();
+        }
+
+        public void iniciarBatalha()
+        {
+            transicao(2);
+        }
+        
+        public void carregarGame ()
+        {
+            gameClass.carregarGame();
+        }
+        
+        public void tick (object sender, EventArgs e)
+        {
+            gameClass.tick(sender, e);
+        }
+
+        public void paint (object sender, PaintEventArgs e)
+        {
+            if (estado == 0)
+            {
+                e.Graphics.FillRectangle(brush_transicao, rect_transicao);
+                e.Graphics.DrawRectangle(new Pen(Color.Black), rect_transicao);
+            }//todo colocar no paint duma classe
+
+            gameClass.paint(sender, e);
+        }
+        
+        public void keyDown(object sender, KeyEventArgs e, Label lb)
+        {
+            gameClass.keyDown(sender, e);
+
+            if (e.KeyCode == Keys.P)
+            {
+                frm.Close();
+            }
+        }
+
+        
+
+        public void keyUp (object sender, KeyEventArgs e)
+        {
+            gameClass.keyUp(sender, e);
+        }
+    }
+
+    public interface GameClass
+    {
+        void keyUp(object sender, KeyEventArgs e);
+
+        void keyDown(object sender, KeyEventArgs e);
+
+        void paint(object sender, PaintEventArgs e);
+
+        void tick(object sender, EventArgs e);
+
+        void carregarGame();
+    }
+
+    public class Mapa1 : GameClass
+    {
         ObjHeroi heroi;
         Bitmap heroiImg;
 
@@ -43,273 +212,146 @@ namespace Jogo
         Game game = new Game();
         ObjGame[] objsDoGame;
 
-        Batalha batalha;
-        Bitmap batalhaImg;
+        Background background;
 
-        SolidBrush brush_transicao = new SolidBrush(Color.Black);
-        Rectangle rect_transicao = new Rectangle(0, 0, Game.Tam * Game.Largura, Game.Tam * Game.Altura);
-
-        ProgressBar pbVidaHeroi = new ProgressBar();
-        ProgressBar pbVidaVilao = new ProgressBar();
-        ProgressBar pbTempo = new ProgressBar();
-        Label lblContinha = new Label();
-        Label lblResultado = new Label();
-
-        System.Windows.Forms.Timer tmrBatalha;
-
-        public int Estado
+        public Mapa1(Background background)
         {
-            get
+            this.background = background;
+        }
+
+        public void keyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
             {
-                return this.estado;
+                heroi.ActiveUp = false;
             }
-            set
+
+            if (e.KeyCode == Keys.Down)
             {
-                this.estado = value;
+                heroi.ActiveDown = false;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                heroi.ActiveLeft = false;
+            }
+
+            if (e.KeyCode == Keys.Right)
+            {
+                heroi.ActiveRight = false;
             }
         }
 
-        public async Task transicao (int est)
+        public void keyDown(object sender, KeyEventArgs e)
         {
-            /*this.estado = 0;
-
-            for (int i = 1; i < 256; i++)
+            if (e.KeyCode == Keys.Up)
             {
-                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
-                Thread.Sleep(8);
+                heroi.ActiveUp = true;
             }
 
-            for (int i = 255; i >= 0; i--)
+            if (e.KeyCode == Keys.Down)
             {
-                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
-                Thread.Sleep(8);
-            }*/
-            this.estado = est;
+                heroi.ActiveDown = true;
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                heroi.ActiveLeft = true;
+            }
+
+            if (e.KeyCode == Keys.Right)
+            {
+                heroi.ActiveRight = true;
+            }
+
+            easterEgg.MostrarTexto = false;
+            mestre.MostrarTexto = false;
+
+            if (e.KeyCode == Keys.E)
+            {
+                //TODO loop pelos npc
+                if (game.perto(heroi, mestre))
+                {
+                    mestre.dialogoAsync(background, true);
+                }
+
+                if (game.perto(heroi, easterEgg))
+                {
+                    easterEgg.dialogoAsync(background, false);
+                }
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+
+            }
+
+            if (e.KeyCode == Keys.Space)
+            {
+                //lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
+            }
+
         }
 
-        public void iniciarBatalha()
+        public void paint(object sender, PaintEventArgs e)
         {
-            transicao(2);
-            carregarGame();
-        }
-        
-        public void carregarGame ()
-        {
-            switch (estado)
-            {
-                case 1:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    //texto
-                                    //vc se chama shingetsu kun, um samurai muito respeitado
-                                    //sua vida inteira vc usou a força sobre tudo, até agora.
-                                    //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
-                                    game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(5, 4); game.setOcupado(6, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(14, 11); game.setOcupado(14, 10); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
-                                    
-                                    heroiImg = new Bitmap(@"heroi.png");
-                                    heroi = new ObjHeroi(2, 17, heroiImg);
+            //TODO loop por todas os objetos de ObjGame
+            e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
 
-                                    fundo = new Bitmap(@"vila.png");
+            e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(easterEgg.Img, easterEgg.X * Game.Tam, easterEgg.Y * Game.Tam, 0, 0);
 
-                                    Queue<String> msgs = new Queue<string>();
-                                    msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Kun.");
-                                    msgs.Enqueue("O clan de Glau Xia destruiu tudo nosso.");
-                                    msgs.Enqueue("Logo antes, antes de sua chegada, eles queimaram toda a vila...");
-                                    msgs.Enqueue("e... roubaram a sua namorada, a Minna Chan.");
-                                    msgs.Enqueue("A Glau Xia adora física, logo, só pode ser derrotada por um meio.");
-                                    msgs.Enqueue("Sei que você quer vingança, mas para recuperar tudo isso, não será necessária a força de um samurai.");
-                                    msgs.Enqueue("Mas a sabedoria de um matemático.");
-                                    msgs.Enqueue("...");
-                                    msgs.Enqueue("Entre no dojo, vamos conseguir sua vingança.");
-                                    mestreImg = new Bitmap(@"heroi.png");
-                                    mestre = new ObjNpc(5, 5, mestreImg, msgs);
-                                    game.setOcupado(mestre.X, mestre.Y);
-
-                                    Queue<String> msgsEasterEgg = new Queue<string>();
-                                    msgsEasterEgg.Enqueue("É perigoso ir sozinho, eu até te daria uma espada...");
-                                    msgsEasterEgg.Enqueue("... Mas é um jogo infantil.");
-                                    easterEggImg = new Bitmap(@"heroi.png");
-                                    easterEgg = new ObjNpc(18, 13, easterEggImg, msgsEasterEgg);
-                                }break;
-                        }
-                    }break;
-
-                case 2:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    frm.Controls.Add(pbVidaVilao);
-                                    pbVidaVilao.Maximum = 100;
-                                    pbVidaVilao.Minimum = 0;
-                                    pbVidaVilao.Enabled = true;
-                                    pbVidaVilao.Location = new Point(75, 72);
-                                    pbVidaVilao.Width = 320;
-                                    pbVidaVilao.Height = 40;
-                                    pbVidaVilao.Value = 100;
-
-                                    frm.Controls.Add(pbVidaHeroi);
-                                    pbVidaHeroi.Maximum = 100;
-                                    pbVidaHeroi.Minimum = 0;
-                                    pbVidaHeroi.Enabled = true;
-                                    pbVidaHeroi.Location = new Point(410, 360);
-                                    pbVidaHeroi.Width = 320;
-                                    pbVidaHeroi.Height = 40;
-                                    pbVidaHeroi.Value = 100;
-
-                                    frm.Controls.Add(lblContinha);
-                                    lblContinha.Width = 500;
-                                    lblContinha.Text = "[Enter] para comecar!";
-                                    lblContinha.Location = new Point((frm.Width - lblContinha.Width) / 2, 470);
-                                    lblContinha.ForeColor = Color.Black;
-                                    lblContinha.BackColor = Color.White;
-                                    lblContinha.TextAlign = ContentAlignment.MiddleCenter;
-                                    lblContinha.Dock = DockStyle.None;
-                                    lblContinha.Font = new Font("Segoe UI", 30);
-                                    lblContinha.Height = 50;
-
-                                    frm.Controls.Add(lblResultado);
-                                    lblResultado.Height = 70;
-                                    lblResultado.Width = 350;
-                                    lblResultado.Location = new Point((frm.Width - lblResultado.Width) / 2, 530);
-                                    lblResultado.Text = "inicio";
-                                    lblResultado.AutoSize = false;
-                                    lblResultado.TextAlign = ContentAlignment.MiddleCenter;
-                                    lblResultado.Dock = DockStyle.None;
-                                    lblResultado.BorderStyle = BorderStyle.FixedSingle;
-                                    lblResultado.BackColor = Color.White;
-                                    lblResultado.ForeColor = Color.Black;
-                                    lblResultado.Font = new Font("Segoe UI", 30);
-                                    lblResultado.Visible = false;
-
-                                    frm.Controls.Add(pbTempo);
-                                    pbTempo.Width = 730;
-                                    pbTempo.Height = 25;
-                                    pbTempo.Location = new Point((frm.Width - pbTempo.Width) / 2, 10);
-                                    pbTempo.Maximum = 100;
-                                    pbTempo.Minimum = 0;
-                                    pbTempo.Value = 100;
-                                    pbTempo.Enabled = true;
-                                    ModifyProgressBarColor.SetState(pbTempo, 3);
-
-                                    tmrBatalha = new System.Windows.Forms.Timer();
-                                    tmrBatalha.Interval = 140 / this.dificuldade;
-                                    tmrBatalha.Tick += new EventHandler(batalha_tick);
-                                    
-                                    batalhaImg = new Bitmap(@"batalha.png");
-                                    batalha = new Batalha(batalhaImg);
-                                }
-                                break;
-                        }
-                    }break;
-
-                case 3:
-                    {
-
-                    }
-                    break;
+            if (mestre.MostrarTexto)
+            {   //TODO transformar texto p/ classe
+                texto(sender, e, mestre);
             }
+
+            if (easterEgg.MostrarTexto)
+            {   //TODO transformar texto p/ classe
+                texto(sender, e, easterEgg);
+            }
+
         }
 
-        public void batalha_tick (Object sender, EventArgs e)
+        public void tick(object sender, EventArgs e)
         {
-            if (pbTempo.Value == 0)
-            {
-                receberDano(pbVidaHeroi, dificuldade * fase);
-                pbTempo.Value = pbTempo.Maximum;
-            }
-            else
-            {
-                pbTempo.Value --;
-            }
+            heroi.mover(game);
         }
 
-        public void tick (object sender, EventArgs e)
+
+        public void carregarGame()
         {
-            switch (estado)
-            {
-                case 1:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    heroi.mover(game);
-                                }break;
-                        }
-                    }break;
+            //texto
+            //vc se chama shingetsu kun, um samurai muito respeitado
+            //sua vida inteira vc usou a força sobre tudo, até agora.
+            //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
+            game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(5, 4); game.setOcupado(6, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(14, 11); game.setOcupado(14, 10); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
 
-                case 2:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    //batalha.aguardaKey();
-                                }break;
-                        }
+            heroiImg = new Bitmap(@"heroi.png");
+            heroi = new ObjHeroi(2, 17, heroiImg);
 
-                    }break;
-            }
-        }
+            fundo = new Bitmap(@"vila.png");
 
-        public void paint (object sender, PaintEventArgs e)
-        {
-            switch (estado)
-            {
-                case 0:
-                    {
-                        e.Graphics.FillRectangle(brush_transicao, rect_transicao);
-                        e.Graphics.DrawRectangle(new Pen(Color.Black), rect_transicao);
-                    }
-                    break;
+            Queue<String> msgs = new Queue<string>();
+            msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Kun.");
+            msgs.Enqueue("O clan de Glau Xia destruiu tudo nosso.");
+            msgs.Enqueue("Logo antes, antes de sua chegada, eles queimaram toda a vila...");
+            msgs.Enqueue("e... roubaram a sua namorada, a Minna Chan.");
+            msgs.Enqueue("A Glau Xia adora física, logo, só pode ser derrotada por um meio.");
+            msgs.Enqueue("Sei que você quer vingança, mas para recuperar tudo isso, não será necessária a força de um samurai.");
+            msgs.Enqueue("Mas a sabedoria de um matemático.");
+            msgs.Enqueue("...");
+            msgs.Enqueue("Entre no dojo, vamos conseguir sua vingança.");
+            mestreImg = new Bitmap(@"heroi.png");
+            mestre = new ObjNpc(5, 5, mestreImg, msgs);
+            game.setOcupado(mestre.X, mestre.Y);
 
-                case 1:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    //TODO loop por todas os objetos de ObjGame
-                                    e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
-
-                                    e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-                                    e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
-                                    e.Graphics.DrawImage(easterEgg.Img, easterEgg.X * Game.Tam, easterEgg.Y * Game.Tam, 0, 0);
-
-                                    if (mestre.MostrarTexto)
-                                    {   //TODO transformar texto p/ classe
-                                        texto(sender, e, mestre);
-                                    }
-
-                                    if (easterEgg.MostrarTexto)
-                                    {   //TODO transformar texto p/ classe
-                                        texto(sender, e, easterEgg);
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    break;
-
-                case 2:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    //TODO loop por todas os objetos de ObjGame
-                                    e.Graphics.DrawImage(batalhaImg, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
-                                }
-                                break;
-                        }
-                    }
-                    break;
-            }
+            Queue<String> msgsEasterEgg = new Queue<string>();
+            msgsEasterEgg.Enqueue("É perigoso ir sozinho, eu até te daria uma espada...");
+            msgsEasterEgg.Enqueue("... Mas é um jogo infantil.");
+            easterEggImg = new Bitmap(@"heroi.png");
+            easterEgg = new ObjNpc(18, 13, easterEggImg, msgsEasterEgg);
         }
 
         public void texto(object sender, PaintEventArgs e, ObjNpc obj)
@@ -326,7 +368,7 @@ namespace Jogo
             {
                 //TODO
             }
-            
+
 
             using (Font font1 = new Font(fontFamily, 12, FontStyle.Bold, GraphicsUnit.Point))
             {
@@ -360,7 +402,7 @@ namespace Jogo
                 {
                     xTxt = Game.Tam * Game.Largura - largura;
                 }
-                
+
                 /*if (yTxt < 0)
                 {
                     yTxt = 0;
@@ -378,151 +420,179 @@ namespace Jogo
                 e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectF1));
             }
         }
+    }
 
-        public void keyDown(object sender, KeyEventArgs e, Label lb)
+    public class Batalha1 : GameClass
+    {
+        Batalha batalha;
+        Bitmap batalhaImg;
+        ProgressBar pbVidaHeroi = new ProgressBar();
+        ProgressBar pbVidaVilao = new ProgressBar();
+        ProgressBar pbTempo = new ProgressBar();
+        Label lblContinha = new Label();
+        Label lblResultado = new Label();
+        System.Windows.Forms.Timer tmrBatalha;
+        Background background;
+
+        public Batalha1 (Background background)
         {
-            switch (estado)
-            {
-                case 1:
-                    {
-                        switch (fase)
-                        {
-                            case 1:
-                                {
-                                    if (e.KeyCode == Keys.Up)
-                                    {
-                                        heroi.ActiveUp = true;
-                                    }
-
-                                    if (e.KeyCode == Keys.Down)
-                                    {
-                                        heroi.ActiveDown = true;
-                                    }
-
-                                    if (e.KeyCode == Keys.Left)
-                                    {
-                                        heroi.ActiveLeft = true;
-                                    }
-
-                                    if (e.KeyCode == Keys.Right)
-                                    {
-                                        heroi.ActiveRight = true;
-                                    }
-
-                                    easterEgg.MostrarTexto = false;
-                                    mestre.MostrarTexto = false;
-
-                                    if (e.KeyCode == Keys.E)
-                                    {
-                                        //TODO loop pelos npc
-                                        if (game.perto(heroi, mestre))
-                                        {
-                                            mestre.dialogoAsync(this, true);
-                                        }
-
-                                        if (game.perto(heroi, easterEgg))
-                                        {
-                                            easterEgg.dialogoAsync(this, false);
-                                        }
-                                    }
-
-                                    if (e.KeyCode == Keys.Escape)
-                                    {
-
-                                    }
-
-                                    if (e.KeyCode == Keys.Space)
-                                    {
-                                        lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    break;
-
-                case 2:
-                    {
-                        Char n = '\0';
-
-                        if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-                        {
-                            n = '1';
-                        }
-                        if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-                        {
-                            n = '2';
-                        }
-                        if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-                        {
-                            n = '3';
-                        }
-                        if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-                        {
-                            n = '4';
-                        }
-                        if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-                        {
-                            n = '5';
-                        }
-                        if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-                        {
-                            n = '6';
-                        }
-                        if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-                        {
-                            n = '7';
-                        }
-                        if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-                        {
-                            n = '8';
-                        }
-                        if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-                        {
-                            n = '9';
-                        }
-                        if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-                        {
-                            n = '0';
-                        }
-
-                        lblResultado.Text += n;
-                        
-                        if (e.KeyCode == Keys.Back)
-                        {
-                            if (lblResultado.Text != "")
-                            {
-                                String str = lblResultado.Text;
-                                str = str.Remove(str.Length - 1);
-                                lblResultado.Text = str;
-                            }
-                        }
-
-                        if (e.KeyCode == Keys.Enter)
-                        {
-                            if (lblResultado.Text == "inicio")
-                            {
-                                tmrBatalha.Enabled = true;
-                                tmrBatalha.Start();
-                                lblResultado.Visible = true;
-                                lblResultado.Text = "";
-                                lblContinha.Text = Conta.gerarSoma(dificuldade);
-                            } else if (lblResultado.Text != "")
-                            {
-                                causarDano();
-                            }
-                        }
-                    }
-                    break;
-            }
-
-            if (e.KeyCode == Keys.P)
-            {
-                frm.Close();
-            }
+            this.background = background;
         }
 
-        public void receberDano (ProgressBar pb, int dano)
+        public void keyUp()
+        {
+
+        }
+
+        public void keyDown(Object sender, KeyEventArgs e)
+        {
+            Char n = '\0';
+
+            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            {
+                n = '1';
+            }
+            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            {
+                n = '2';
+            }
+            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            {
+                n = '3';
+            }
+            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            {
+                n = '4';
+            }
+            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            {
+                n = '5';
+            }
+            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            {
+                n = '6';
+            }
+            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            {
+                n = '7';
+            }
+            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            {
+                n = '8';
+            }
+            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            {
+                n = '9';
+            }
+            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+            {
+                n = '0';
+            }
+
+            lblResultado.Text += n;
+
+            if (e.KeyCode == Keys.Back)
+            {
+                if (lblResultado.Text != "")
+                {
+                    String str = lblResultado.Text;
+                    str = str.Remove(str.Length - 1);
+                    lblResultado.Text = str;
+                }
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (lblResultado.Text == "inicio")
+                {
+                    tmrBatalha.Enabled = true;
+                    tmrBatalha.Start();
+                    lblResultado.Visible = true;
+                    lblResultado.Text = "";
+                    lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
+                }
+                else if (lblResultado.Text != "")
+                {
+                    causarDano();
+                }
+            }
+
+        }
+
+        public void paint(Object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(batalhaImg, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
+        }
+
+        public void tick(object sender, EventArgs e)
+        {
+
+        }
+
+        public void carregarGame()
+        {
+            background.Frm.Controls.Add(pbVidaVilao);
+            pbVidaVilao.Maximum = 100;
+            pbVidaVilao.Minimum = 0;
+            pbVidaVilao.Enabled = true;
+            pbVidaVilao.Location = new Point(75, 72);
+            pbVidaVilao.Width = 320;
+            pbVidaVilao.Height = 40;
+            pbVidaVilao.Value = 100;
+
+            background.Frm.Controls.Add(pbVidaHeroi);
+            pbVidaHeroi.Maximum = 100;
+            pbVidaHeroi.Minimum = 0;
+            pbVidaHeroi.Enabled = true;
+            pbVidaHeroi.Location = new Point(410, 360);
+            pbVidaHeroi.Width = 320;
+            pbVidaHeroi.Height = 40;
+            pbVidaHeroi.Value = 100;
+
+            background.Frm.Controls.Add(lblContinha);
+            lblContinha.Width = 500;
+            lblContinha.Text = "[Enter] para comecar!";
+            lblContinha.Location = new Point((background.Frm.Width - lblContinha.Width) / 2, 470);
+            lblContinha.ForeColor = Color.Black;
+            lblContinha.BackColor = Color.White;
+            lblContinha.TextAlign = ContentAlignment.MiddleCenter;
+            lblContinha.Dock = DockStyle.None;
+            lblContinha.Font = new Font("Segoe UI", 30);
+            lblContinha.Height = 50;
+
+            background.Frm.Controls.Add(lblResultado);
+            lblResultado.Height = 70;
+            lblResultado.Width = 350;
+            lblResultado.Location = new Point((background.Frm.Width - lblResultado.Width) / 2, 530);
+            lblResultado.Text = "inicio";
+            lblResultado.AutoSize = false;
+            lblResultado.TextAlign = ContentAlignment.MiddleCenter;
+            lblResultado.Dock = DockStyle.None;
+            lblResultado.BorderStyle = BorderStyle.FixedSingle;
+            lblResultado.BackColor = Color.White;
+            lblResultado.ForeColor = Color.Black;
+            lblResultado.Font = new Font("Segoe UI", 30);
+            lblResultado.Visible = false;
+
+            background.Frm.Controls.Add(pbTempo);
+            pbTempo.Width = 730;
+            pbTempo.Height = 25;
+            pbTempo.Location = new Point((background.Frm.Width - pbTempo.Width) / 2, 10);
+            pbTempo.Maximum = 100;
+            pbTempo.Minimum = 0;
+            pbTempo.Value = 100;
+            pbTempo.Enabled = true;
+            ModifyProgressBarColor.SetState(pbTempo, 3);
+
+            tmrBatalha = new System.Windows.Forms.Timer();
+            tmrBatalha.Interval = 140 / this.background.Dificuldade;
+            tmrBatalha.Tick += new EventHandler(batalha_tick);
+
+            batalhaImg = new Bitmap(@"batalha.png");
+            batalha = new Batalha(batalhaImg);
+        }
+
+        public void receberDano(ProgressBar pb, int dano)
         {
             ModifyProgressBarColor.SetState(pb, 2);
             Label lblDaninho = new Label();
@@ -531,9 +601,9 @@ namespace Jogo
             lblDaninho.BackColor = Color.White;
             lblDaninho.Font = new Font("Segoe UI", 20);
             lblDaninho.Height = pb.Height;
-            frm.Controls.Add(lblDaninho);
+            background.Frm.Controls.Add(lblDaninho);
 
-            if (pb.Location.X > Convert.ToInt32(frm.Width / 2))
+            if (pb.Location.X > Convert.ToInt32(background.Frm.Width / 2))
             {
                 lblDaninho.Location = new Point(pb.Location.X - lblDaninho.Width, pb.Location.Y);
             }
@@ -541,85 +611,71 @@ namespace Jogo
             {
                 lblDaninho.Location = new Point(pb.Location.X + pb.Width, pb.Location.Y);
             }
-            
+
             int i = 0;
             while (i <= dano)
             {
                 pb.Value--;
-                Application.DoEvents();
-                Thread.Sleep(20);
-                i++;
+
+                if (pb.Value == 0)
+                {
+                    terminarBatalha();
+                    return;
+                }
+                else
+                {
+                    Application.DoEvents();
+                    Thread.Sleep(20);
+                    i++;
+                }
+
             }
             ModifyProgressBarColor.SetState(pb, 1);
-            frm.Controls.Remove(lblDaninho);
+            background.Frm.Controls.Remove(lblDaninho);
 
-            switch (fase)
-            {
-                case 1:
-                    {
-                        lblContinha.Text = Conta.gerarSoma(dificuldade);
-                        lblResultado.Text = "";
-                    }
-                    break;
-
-                case 2:
-                    {
-                        lblContinha.Text = Conta.gerarSubtracao(dificuldade);
-                    }
-                    break;
-
-                case 3:
-                    {
-                        //lblContinha.Text = Conta.gerarSoma(dificuldade);
-                    }
-                    break;
-            }
+            lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
+            
+            lblResultado.Text = "";
         }
 
-        public void causarDano ()
+        public void causarDano()
         {
             pbTempo.Value = pbTempo.Maximum;
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
-                int dano = Convert.ToInt32((10 / (fase)));
+                int dano = Convert.ToInt32((10));
                 receberDano(pbVidaVilao, dano);
                 //todo tremer tela
             }
             else
             {
-                int dano = 5 * this.dificuldade + 5 * this.fase;
+                int dano = 5 * background.Dificuldade + 5;
                 receberDano(pbVidaHeroi, dano);
             }
         }
 
-        public void keyUp (object sender, KeyEventArgs e)
+        public void terminarBatalha()
         {
-            switch (fase)
+            //todo
+        }
+
+        public void batalha_tick(Object sender, EventArgs e)
+        {
+            if (pbTempo.Value == 0)
             {
-                case 1:
-                    {
-                        if (e.KeyCode == Keys.Up)
-                        {
-                            heroi.ActiveUp = false;
-                        }
-
-                        if (e.KeyCode == Keys.Down)
-                        {
-                            heroi.ActiveDown = false;
-                        }
-
-                        if (e.KeyCode == Keys.Left)
-                        {
-                            heroi.ActiveLeft = false;
-                        }
-
-                        if (e.KeyCode == Keys.Right)
-                        {
-                            heroi.ActiveRight = false;
-                        }
-                    }break;
+                receberDano(pbVidaHeroi, background.Dificuldade);
+                pbTempo.Value = pbTempo.Maximum;
             }
+            else
+            {
+                pbTempo.Value--;
+            }
+        }
+
+        public void keyUp(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 
