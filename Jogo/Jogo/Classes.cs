@@ -76,6 +76,7 @@ namespace Jogo
 
         public void carregarEstadoEFase()
         {
+            
             switch (estado)
             {
                 case 1:
@@ -114,25 +115,19 @@ namespace Jogo
                     break;
 
             }
+
+            gameClass.carregarGame();
         }
 
         public async Task transicao (int est)
         {
             this.estado = 0;
 
-            for (int i = 20; i < 50; i++)
+            for (int i = 0; i <= 255; i += 7)
             {
                 brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
-                Application.DoEvents();
-                Thread.Sleep(5);
-            }
-
-
-            for (int i = 20; i > 0; i--)
-            {
-                brush_transicao = new SolidBrush(Color.FromArgb(i, 0, 0, 0));
-                Application.DoEvents();
-                Thread.Sleep(5);
+                frm.Refresh();
+                Thread.Sleep(1);
             }
 
             this.estado = est;
@@ -156,13 +151,13 @@ namespace Jogo
 
         public void paint (object sender, PaintEventArgs e)
         {
+            gameClass.paint(sender, e);
+
             if (estado == 0)
             {
                 e.Graphics.FillRectangle(brush_transicao, rect_transicao);
                 e.Graphics.DrawRectangle(new Pen(Color.Black), rect_transicao);
             }//todo colocar no paint duma classe
-
-            gameClass.paint(sender, e);
         }
         
         public void keyDown(object sender, KeyEventArgs e, Label lb)
@@ -539,6 +534,7 @@ namespace Jogo
             pbVidaVilao.Width = 320;
             pbVidaVilao.Height = 40;
             pbVidaVilao.Value = 100;
+            
 
             background.Frm.Controls.Add(pbVidaHeroi);
             pbVidaHeroi.Maximum = 100;
@@ -548,6 +544,7 @@ namespace Jogo
             pbVidaHeroi.Width = 320;
             pbVidaHeroi.Height = 40;
             pbVidaHeroi.Value = 100;
+            
 
             background.Frm.Controls.Add(lblContinha);
             lblContinha.Width = 500;
@@ -630,6 +627,7 @@ namespace Jogo
                 }
 
             }
+
             ModifyProgressBarColor.SetState(pb, 1);
             background.Frm.Controls.Remove(lblDaninho);
 
@@ -675,7 +673,7 @@ namespace Jogo
 
         public void keyUp(object sender, KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            //
         }
     }
 
