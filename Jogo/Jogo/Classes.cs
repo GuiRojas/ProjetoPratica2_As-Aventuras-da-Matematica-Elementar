@@ -338,7 +338,7 @@ namespace Jogo
             msgs.Enqueue("Mas a sabedoria de um matemático.");
             msgs.Enqueue("...");
             msgs.Enqueue("Entre no dojo, vamos conseguir sua vingança.");
-            mestreImg = new Bitmap(@"heroi.png");
+            mestreImg = new Bitmap(@"npc.png");
             mestre = new ObjNpc(5, 5, mestreImg, msgs);
             game.setOcupado(mestre.X, mestre.Y);
 
