@@ -14,7 +14,6 @@ namespace Jogo
 {   //TODO pegar os niveis do bd
     public partial class frmJogo : Form
     {
-        private Label label1;
         Background background;
 
         
