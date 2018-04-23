@@ -26,15 +26,14 @@ namespace Jogo
             carregarEstadoEFase();
         }
 
-        protected int fase;
+        protected int fase { get; set; }
         protected int estado { get; set; }
         protected Form frm { get; set; }
         protected int dificuldade { get; set; }
         protected bool heroiGanhou;
 
         GameClass gameClass;
-
-
+        
         SolidBrush brush_transicao = new SolidBrush(Color.Black);
         Rectangle rect_transicao = new Rectangle(0, 0, Game.Tam * Game.Largura, Game.Tam * Game.Altura);
         
@@ -47,6 +46,18 @@ namespace Jogo
             set
             {
                 this.estado = value;
+            }
+        }
+
+        public int Fase
+        {
+            get
+            {
+                return this.fase;
+            }
+            set
+            {
+                this.fase = value;
             }
         }
 
@@ -122,7 +133,7 @@ namespace Jogo
                         {
                             case 1:
                                 {
-                                    //this.gameClass = new Mapa1_pos(this);
+                                    this.gameClass = new Mapa1_pos(this);
                                 }
                                 break;
                         }
@@ -174,7 +185,7 @@ namespace Jogo
             }//todo colocar no paint duma classe
         }
         
-        public void keyDown(object sender, KeyEventArgs e, Label lb)
+        public void keyDown(object sender, KeyEventArgs e)
         {
             gameClass.keyDown(sender, e);
 
@@ -207,25 +218,28 @@ namespace Jogo
 
     public class Mapa1 : GameClass
     {
-        ObjHeroi heroi;
-        Bitmap heroiImg;
+        protected ObjHeroi heroi;
+        protected Bitmap heroiImg;
 
-        Bitmap fundo;
+        protected Bitmap fundo;
 
-        ObjNpc mestre;
-        Bitmap mestreImg;
+        protected ObjNpc mestre;
+        protected Bitmap mestreImg;
 
-        ObjNpc easterEgg;
-        Bitmap easterEggImg;
+        protected ObjNpc easterEgg;
+        protected Bitmap easterEggImg;
 
-        Game game = new Game();
-        ObjGame[] objsDoGame;
+        protected Game game = new Game();
+        protected ObjGame[] objsDoGame;
 
-        Background background;
+        protected Background background;
+
+        protected String coords = "";
 
         public Mapa1(Background background)
         {
             this.background = background;
+            game.setOcupado(17, 2); game.setOcupado(18, 2); game.setOcupado(19, 2); game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
         }
 
         public void keyUp(object sender, KeyEventArgs e)
@@ -251,7 +265,7 @@ namespace Jogo
             }
         }
 
-        public void keyDown(object sender, KeyEventArgs e)
+        public virtual void keyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
             {
@@ -279,12 +293,12 @@ namespace Jogo
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
-                if (game.perto(heroi, mestre))
+                if (Game.perto(heroi, mestre))
                 {
                     mestre.dialogoAsync(background, true);
                 }
 
-                if (game.perto(heroi, easterEgg))
+                if (Game.perto(heroi, easterEgg))
                 {
                     easterEgg.dialogoAsync(background, false);
                 }
@@ -297,7 +311,7 @@ namespace Jogo
 
             if (e.KeyCode == Keys.Space)
             {
-                //lb.Text += "game.setOcupado(" + heroi.X + ", " + heroi.Y + ");\n";
+                coords += "game.setOcupado(" + heroi.X + ", " + heroi.Y + "); ";
             }
 
         }
@@ -320,23 +334,20 @@ namespace Jogo
             {   //TODO transformar texto p/ classe
                 texto(sender, e, easterEgg);
             }
-
         }
 
         public void tick(object sender, EventArgs e)
         {
             heroi.mover(game);
         }
-
-
+        
         public void carregarGame()
         {
             //texto
             //vc se chama shingetsu kun, um samurai muito respeitado
             //sua vida inteira vc usou a força sobre tudo, até agora.
             //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
-            game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
-
+            
             heroiImg = new Bitmap(@"heroi.png");
             heroi = new ObjHeroi(2, 17, heroiImg);
 
@@ -396,7 +407,7 @@ namespace Jogo
                     largura = larguraTotal;
                     xTxt += largura;
 
-                    String[] linhas = text.Split('\n');
+                    String[] linhas = text.Split(' ');
                     int qtd_linhas = linhas.Length;
                     altura += sizeString.Height * qtd_linhas;
                     yTxt -= altura;
@@ -501,16 +512,20 @@ namespace Jogo
             {
                 heroi.ActiveRight = true;
             }
-            
+
+
+            aldeao.MostrarTexto = false;
+            aldeaoD.MostrarTexto = false;
+
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
-                if (game.perto(heroi, aldeao))
+                if (Game.perto(heroi, aldeao))
                 {
                     aldeao.dialogoAsync(background, true);
                 }
 
-                if (game.perto(heroi, aldeaoD))
+                if (Game.perto(heroi, aldeaoD))
                 {
                     aldeaoD.dialogoAsync(background, false);
                 }
@@ -532,7 +547,6 @@ namespace Jogo
         {
             //TODO loop por todas os objetos de ObjGame
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
-
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
             e.Graphics.DrawImage(aldeao.Img, aldeao.X * Game.Tam, aldeao.Y * Game.Tam, Game.Tam, Game.Tam);
             e.Graphics.DrawImage(aldeaoD.Img, aldeaoD.X * Game.Tam, aldeaoD.Y * Game.Tam, Game.Tam, Game.Tam);
@@ -621,7 +635,7 @@ namespace Jogo
                     largura = larguraTotal;
                     xTxt += largura;
 
-                    String[] linhas = text.Split('\n');
+                    String[] linhas = text.Split(' ');
                     int qtd_linhas = linhas.Length;
                     altura += sizeString.Height * qtd_linhas;
                     yTxt -= altura;
@@ -656,20 +670,32 @@ namespace Jogo
         }
     }
 
-    /*public class Mapa1_pos : Mapa1
+    public class Mapa1_pos : Mapa1
     {
         public Background background;
-        public Mapa1_pos (Background background)
+        public Mapa1_pos (Background background):base(background)
         {
             this.background = background;
+            this.game.setLivre(17, 2);
+            this.game.setLivre(18, 2);
+            this.game.setLivre(19, 2);
         }
 
-
-    }*/
+        public override void keyDown(Object sender, KeyEventArgs e)
+        {
+            base.keyDown(sender, e);
+            if (Game.checarPosicao(heroi, 17, 2) || Game.checarPosicao(heroi, 18, 2) || Game.checarPosicao(heroi, 19, 2))
+            {
+                //background.Estado = 1;
+                //background.
+                //background.carregarEstadoEFase();
+                MessageBox.Show("acabou a fase");
+            }
+        }
+    }
 
     public class Batalha1 : GameClass
     {
-        Batalha batalha;
         Bitmap batalhaImg;
         ProgressBar pbVidaHeroi = new ProgressBar();
         ProgressBar pbVidaVilao = new ProgressBar();
@@ -678,6 +704,7 @@ namespace Jogo
         Label lblResultado = new Label();
         System.Windows.Forms.Timer tmrBatalha;
         Background background;
+        protected bool podeAtacar = true;
 
         public Batalha1 (Background background)
         {
@@ -756,7 +783,7 @@ namespace Jogo
                     lblResultado.Text = "";
                     lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
                 }
-                else if (lblResultado.Text != "")
+                else if (lblResultado.Text != "" && podeAtacar)
                 {
                     causarDano();
                 }
@@ -785,7 +812,6 @@ namespace Jogo
             pbVidaVilao.Height = 40;
             pbVidaVilao.Value = 100;
             
-
             background.Frm.Controls.Add(pbVidaHeroi);
             pbVidaHeroi.Maximum = 100;
             pbVidaHeroi.Minimum = 0;
@@ -795,7 +821,6 @@ namespace Jogo
             pbVidaHeroi.Height = 40;
             pbVidaHeroi.Value = 100;
             
-
             background.Frm.Controls.Add(lblContinha);
             lblContinha.Width = 500;
             lblContinha.Text = "[Enter] para comecar!";
@@ -836,20 +861,26 @@ namespace Jogo
             tmrBatalha.Tick += new EventHandler(batalha_tick);
 
             batalhaImg = new Bitmap(@"batalha.png");
-            batalha = new Batalha(batalhaImg);
         }
         
         public void terminarBatalha()
         {
             //todo relatorio
-
-            background.Estado = 3;
-            background.carregarGame();
+            
+            background.Frm.Controls.Remove(lblContinha);
+            background.Frm.Controls.Remove(lblResultado);
+            background.Frm.Controls.Remove(pbTempo);
+            background.Frm.Controls.Remove(pbVidaHeroi);
+            background.Frm.Controls.Remove(pbVidaVilao);
+            background.transicao(3);
         }
 
         public void receberDano(ProgressBar pb, int dano)
         {
+            podeAtacar = false;
+
             ModifyProgressBarColor.SetState(pb, 2);
+            tmrBatalha.Stop();
             newLabel lblDaninho = new newLabel();
             lblDaninho.Text = "-" + dano.ToString();
             lblDaninho.ForeColor = Color.Red;
@@ -875,8 +906,9 @@ namespace Jogo
 
                 if (pb.Value == 0)
                 {
-                    //terminarBatalha();
-                    return;
+                    background.Frm.Controls.Remove(lblDaninho);
+                    terminarBatalha();
+                    break;
                 }
                 else
                 {
@@ -886,12 +918,15 @@ namespace Jogo
                 }
             }
 
+            podeAtacar = true;
+
             ModifyProgressBarColor.SetState(pb, 1);
-            background.Frm.Controls.Remove(lblDaninho);
 
             lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
             
             lblResultado.Text = "";
+
+            tmrBatalha.Start();
         }
 
         public void causarDano()
@@ -901,7 +936,7 @@ namespace Jogo
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
                 int dano = Convert.ToInt32((10));
-                receberDano(pbVidaVilao, dano);
+                receberDano(pbVidaVilao, 10);
                 //todo tremer tela
             }
             else
@@ -932,7 +967,6 @@ namespace Jogo
 
     public class Batalha2 : GameClass
     {
-        Batalha batalha;
         Bitmap batalhaImg;
         ProgressBar pbVidaHeroi = new ProgressBar();
         ProgressBar pbVidaVilao = new ProgressBar();
@@ -1099,7 +1133,6 @@ namespace Jogo
             tmrBatalha.Tick += new EventHandler(batalha_tick);
 
             batalhaImg = new Bitmap(@"batalha.png");
-            batalha = new Batalha(batalhaImg);
         }
 
         public void terminarBatalha()
@@ -1192,49 +1225,7 @@ namespace Jogo
             //
         }
     }
-
-    public class Batalha
-    {
-        HeroiBatalha heroiBatalha { get; set; }
-        VilaoBatalha vilaoBatalha { get; set; }
-
-        Bitmap img;
-
-        public Batalha(Bitmap img)
-        {
-            this.img = img;
-            heroiBatalha = new HeroiBatalha();
-            vilaoBatalha = new VilaoBatalha();
-
-        }
-
-        public void aguardaKey ()
-        {
-            //TODO
-        }
-    }
-
-    public class HeroiBatalha
-    {
-        protected Bitmap img { get; set; }
-
-        public HeroiBatalha ()
-        {
-            this.img = new Bitmap(@"heroi_batalha.png");
-        }
-    }
-
-    public class VilaoBatalha
-    {
-        protected Bitmap img { get; set; }
-        protected float vida { get; set; }
-
-        public VilaoBatalha()
-        {
-            this.vida = 100;
-        }
-    }
-
+    
     public class ObjNpc : ObjGame
     {
         protected bool mostrarTexto { get; set; }
@@ -1472,12 +1463,22 @@ namespace Jogo
             }
         }
 
-        public bool perto(ObjGame obj1, ObjGame obj2)
+        public static bool perto(ObjGame obj1, ObjGame obj2)
         {
             if ((obj1.X == (obj2.X - 1) && obj1.Y == obj2.Y) || //y igual a esquerda
                 (obj1.X == (obj2.X + 1) && obj1.Y == obj2.Y) || //y igual a direita
                 (obj1.Y == (obj2.Y - 1) && obj1.X == obj2.X) || //x igual a abaixo
                 (obj1.Y == (obj2.Y + 1) && obj1.X == obj2.X))   //x igual acima
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool checarPosicao(ObjGame obj, int x, int y)
+        {
+            if (obj.X == x && obj.Y == y)
             {
                 return true;
             }
