@@ -710,9 +710,9 @@ namespace Jogo
             base.keyDown(sender, e);
             if (Game.checarPosicao(heroi, 17, 2) || Game.checarPosicao(heroi, 18, 2) || Game.checarPosicao(heroi, 19, 2))
             {
-                background.Estado = 1;
                 background.Fase++;
-                background.carregarEstadoEFase();
+
+                background.transicao(1);
             }
         }
     }
