@@ -24,7 +24,7 @@ namespace Jogo
 
         private void Jogo_Load(object sender, EventArgs e)
         {
-            background = new Background(1, this);// TODO pegar do bd a fase do usuario
+            background = new Background(2, this);// TODO pegar do bd a fase do usuario
             background.carregarGame();
         }
 

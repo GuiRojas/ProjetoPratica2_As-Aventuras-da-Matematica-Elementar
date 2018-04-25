@@ -138,6 +138,12 @@ namespace Jogo
                                     this.gameClass = new Mapa1_pos(this);
                                 }
                                 break;
+
+                            case 2:
+                                {
+                                    this.gameClass = new Mapa2_pos(this);
+                                }
+                                break;
                         }
                     }
                     break;
@@ -245,7 +251,7 @@ namespace Jogo
         {
             this.background = background;
 
-            game.setOcupado(17, 2); game.setOcupado(18, 2); game.setOcupado(19, 2); game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
+            game.setOcupado(6, 4); game.setOcupado(17, 2); game.setOcupado(18, 2); game.setOcupado(19, 2); game.setOcupado(10, 15); game.setOcupado(20, 2); game.setOcupado(21, 2); game.setOcupado(3, 4); game.setOcupado(3, 3); game.setOcupado(10, 8); game.setOcupado(15, 14); game.setOcupado(3, 2); game.setOcupado(4, 2); game.setOcupado(5, 2); game.setOcupado(6, 2); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(4, 4); game.setOcupado(7, 15); game.setOcupado(7, 14); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(6, 12); game.setOcupado(6, 11); game.setOcupado(5, 11); game.setOcupado(5, 10); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(8, 9); game.setOcupado(9, 9); game.setOcupado(10, 9); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 8); game.setOcupado(10, 9); game.setOcupado(11, 10); game.setOcupado(11, 11); game.setOcupado(11, 12); game.setOcupado(12, 13); game.setOcupado(12, 14); game.setOcupado(12, 15); game.setOcupado(11, 15); game.setOcupado(9, 15); game.setOcupado(8, 15); game.setOcupado(7, 15); game.setOcupado(14, 17); game.setOcupado(14, 16); game.setOcupado(15, 16); game.setOcupado(15, 15); game.setOcupado(16, 16); game.setOcupado(16, 17); game.setOcupado(15, 17); game.setOcupado(18, 15); game.setOcupado(20, 15); game.setOcupado(19, 15); game.setOcupado(20, 15); game.setOcupado(21, 15); game.setOcupado(21, 15); game.setOcupado(22, 15); game.setOcupado(21, 15); game.setOcupado(23, 15); game.setOcupado(23, 14); game.setOcupado(22, 14); game.setOcupado(21, 14); game.setOcupado(20, 14); game.setOcupado(19, 14); game.setOcupado(18, 14); game.setOcupado(18, 14); game.setOcupado(18, 12); game.setOcupado(18, 13); game.setOcupado(17, 12); game.setOcupado(17, 11); game.setOcupado(17, 10); game.setOcupado(18, 9); game.setOcupado(18, 8); game.setOcupado(19, 8); game.setOcupado(20, 8); game.setOcupado(21, 8); game.setOcupado(22, 8); game.setOcupado(22, 9); game.setOcupado(23, 8); game.setOcupado(23, 9); game.setOcupado(23, 11); game.setOcupado(23, 10); game.setOcupado(23, 11); game.setOcupado(23, 11); game.setOcupado(23, 12); game.setOcupado(23, 13); game.setOcupado(23, 14); game.setOcupado(23, 15); game.setOcupado(15, 11); game.setOcupado(15, 10); game.setOcupado(15, 8); game.setOcupado(15, 9); game.setOcupado(14, 9); game.setOcupado(14, 8); game.setOcupado(21, 3); game.setOcupado(20, 3); game.setOcupado(21, 3); game.setOcupado(23, 2); game.setOcupado(22, 2); game.setOcupado(22, 1); game.setOcupado(23, 1); game.setOcupado(23, 0); game.setOcupado(22, 0); game.setOcupado(17, 1); game.setOcupado(18, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(19, 1); game.setOcupado(20, 1); game.setOcupado(16, 2); game.setOcupado(15, 2); game.setOcupado(15, 1); game.setOcupado(16, 1); game.setOcupado(16, 0); game.setOcupado(15, 0); game.setOcupado(16, 0);
         }
 
         public void keyUp(object sender, KeyEventArgs e)
@@ -322,7 +328,7 @@ namespace Jogo
 
         }
 
-        public virtual void paint(object sender, PaintEventArgs e)
+        public void paint(object sender, PaintEventArgs e)
         {
             //TODO loop por todas os objetos de ObjGame
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
@@ -455,27 +461,29 @@ namespace Jogo
 
     public class Mapa2 : GameClass
     {
-        ObjHeroi heroi;
-        Bitmap heroiImg;
+        protected ObjHeroi heroi;
+        protected Bitmap heroiImg;
 
         Bitmap fundo;
+        protected Bitmap barreira = new Bitmap(@"barreira2.png");
+        protected bool pintarBarreira = true;
 
-        ObjNpc aldeao;
-        Bitmap aldeaoImg;
+        protected ObjNpc aldeao;
+        protected Bitmap aldeaoImg;
 
-        ObjNpc aldeaoD;
-        Bitmap aldeaoDImg;
+        protected ObjNpc aldeaoD;
+        protected Bitmap aldeaoDImg;
 
-        Game game = new Game();
-        ObjGame[] objsDoGame;
+        protected Game game = new Game();
+        protected ObjGame[] objsDoGame;
 
-        Background background;
+        protected Background background;
 
         String coords = "";
 
         public Mapa2(Background background)
         {
-            game.setOcupado(10, 0);game.setOcupado(1, 6); game.setOcupado(1, 5); game.setOcupado(1, 4); game.setOcupado(1, 3); game.setOcupado(3, 3); game.setOcupado(2, 3); game.setOcupado(4, 3); game.setOcupado(5, 3); game.setOcupado(6, 3); game.setOcupado(7, 3); game.setOcupado(0, 19); game.setOcupado(0, 18); game.setOcupado(0, 17); game.setOcupado(0, 16); game.setOcupado(0, 15); game.setOcupado(0, 14); game.setOcupado(0, 13); game.setOcupado(0, 12); game.setOcupado(1, 12); game.setOcupado(1, 11); game.setOcupado(1, 9); game.setOcupado(1, 10); game.setOcupado(2, 10); game.setOcupado(2, 9); game.setOcupado(2, 8); game.setOcupado(2, 7); game.setOcupado(3, 8); game.setOcupado(3, 7); game.setOcupado(8, 4); game.setOcupado(8, 3); game.setOcupado(9, 2); game.setOcupado(9, 1); game.setOcupado(11, 1); game.setOcupado(16, 3); game.setOcupado(14, 4); game.setOcupado(13, 5); game.setOcupado(12, 6); game.setOcupado(10, 6); game.setOcupado(12, 6); game.setOcupado(11, 6); game.setOcupado(10, 7); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 9); game.setOcupado(7, 10); game.setOcupado(8, 10); game.setOcupado(9, 10); game.setOcupado(10, 9); game.setOcupado(11, 9); game.setOcupado(12, 9); game.setOcupado(13, 9); game.setOcupado(13, 7); game.setOcupado(13, 8); game.setOcupado(14, 8); game.setOcupado(15, 8); game.setOcupado(16, 8); game.setOcupado(16, 9); game.setOcupado(17, 9); game.setOcupado(18, 9); game.setOcupado(19, 9); game.setOcupado(20, 9); game.setOcupado(20, 10); game.setOcupado(20, 12); game.setOcupado(20, 11); game.setOcupado(19, 11); game.setOcupado(18, 12); game.setOcupado(17, 12); game.setOcupado(16, 13); game.setOcupado(15, 13); game.setOcupado(13, 13); game.setOcupado(15, 13); game.setOcupado(14, 13); game.setOcupado(12, 13); game.setOcupado(11, 13); game.setOcupado(10, 13); game.setOcupado(9, 13); game.setOcupado(8, 13); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(7, 13); game.setOcupado(5, 13); game.setOcupado(5, 14); game.setOcupado(5, 15); game.setOcupado(5, 17); game.setOcupado(4, 16); game.setOcupado(4, 17); game.setOcupado(5, 18); game.setOcupado(5, 19); game.setOcupado(4, 19); game.setOcupado(5, 19);
+            game.setOcupado(17, 4); game.setOcupado(18, 4); game.setOcupado(19, 3); game.setOcupado(20, 4); game.setOcupado(21, 4); game.setOcupado(22, 4); game.setOcupado(23, 3); game.setOcupado(23, 4); game.setOcupado(24, 3); game.setOcupado(15, 4); game.setOcupado(13, 1); game.setOcupado(14, 1); game.setOcupado(15, 2); game.setOcupado(12, 1); game.setOcupado(10, 0);game.setOcupado(1, 6); game.setOcupado(1, 5); game.setOcupado(1, 4); game.setOcupado(1, 3); game.setOcupado(3, 3); game.setOcupado(2, 3); game.setOcupado(4, 3); game.setOcupado(5, 3); game.setOcupado(6, 3); game.setOcupado(7, 3); game.setOcupado(0, 19); game.setOcupado(0, 18); game.setOcupado(0, 17); game.setOcupado(0, 16); game.setOcupado(0, 15); game.setOcupado(0, 14); game.setOcupado(0, 13); game.setOcupado(0, 12); game.setOcupado(1, 12); game.setOcupado(1, 11); game.setOcupado(1, 9); game.setOcupado(1, 10); game.setOcupado(2, 10); game.setOcupado(2, 9); game.setOcupado(2, 8); game.setOcupado(2, 7); game.setOcupado(3, 8); game.setOcupado(3, 7); game.setOcupado(8, 4); game.setOcupado(8, 3); game.setOcupado(9, 2); game.setOcupado(9, 1); game.setOcupado(11, 1); game.setOcupado(16, 3); game.setOcupado(14, 4); game.setOcupado(13, 5); game.setOcupado(12, 6); game.setOcupado(10, 6); game.setOcupado(12, 6); game.setOcupado(11, 6); game.setOcupado(10, 7); game.setOcupado(9, 8); game.setOcupado(8, 8); game.setOcupado(7, 9); game.setOcupado(7, 10); game.setOcupado(8, 10); game.setOcupado(9, 10); game.setOcupado(10, 9); game.setOcupado(11, 9); game.setOcupado(12, 9); game.setOcupado(13, 9); game.setOcupado(13, 7); game.setOcupado(13, 8); game.setOcupado(14, 8); game.setOcupado(15, 8); game.setOcupado(16, 8); game.setOcupado(16, 9); game.setOcupado(17, 9); game.setOcupado(18, 9); game.setOcupado(19, 9); game.setOcupado(20, 9); game.setOcupado(20, 10); game.setOcupado(20, 12); game.setOcupado(20, 11); game.setOcupado(19, 11); game.setOcupado(18, 12); game.setOcupado(17, 12); game.setOcupado(16, 13); game.setOcupado(15, 13); game.setOcupado(13, 13); game.setOcupado(15, 13); game.setOcupado(14, 13); game.setOcupado(12, 13); game.setOcupado(11, 13); game.setOcupado(10, 13); game.setOcupado(9, 13); game.setOcupado(8, 13); game.setOcupado(7, 13); game.setOcupado(6, 13); game.setOcupado(7, 13); game.setOcupado(5, 13); game.setOcupado(5, 14); game.setOcupado(5, 15); game.setOcupado(5, 17); game.setOcupado(4, 16); game.setOcupado(4, 17); game.setOcupado(5, 18); game.setOcupado(5, 19); game.setOcupado(4, 19); game.setOcupado(5, 19);
             this.background = background;
         }
 
@@ -502,7 +510,7 @@ namespace Jogo
             }
         }
 
-        public void keyDown(object sender, KeyEventArgs e)
+        public virtual void keyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
             {
@@ -560,7 +568,9 @@ namespace Jogo
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
             e.Graphics.DrawImage(aldeao.Img, aldeao.X * Game.Tam, aldeao.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(aldeaoD.Img, aldeaoD.X * Game.Tam, aldeaoD.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(aldeaoD.Img, aldeaoD.X * Game.Tam, aldeaoD.Y * Game.Tam, Game.Tam, Game.Tam); 
+            if (pintarBarreira)
+                e.Graphics.DrawImage(barreira, 13 * Game.Tam, 1 * Game.Tam, 256, 64);
 
             if (aldeao.MostrarTexto)
             {   //TODO transformar texto p/ classe
@@ -578,16 +588,10 @@ namespace Jogo
             heroi.mover(game);
         }
         
-        public void carregarGame()
+        public virtual void carregarGame()
         {
-            //texto
-            //vc se chama shingetsu kun, um samurai muito respeitado
-            //sua vida inteira vc usou a força sobre tudo, até agora.
-            //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
-
-
             heroiImg = new Bitmap(@"heroi.png");
-            heroi = new ObjHeroi(2, 17, heroiImg);
+            heroi = new ObjHeroi(2, 19, heroiImg);
 
             fundo = new Bitmap(@"dark_forest.png");
 
@@ -608,7 +612,7 @@ namespace Jogo
             aldeao = new ObjNpc(16, 10, aldeaoImg, msgs, true);
             game.setOcupado(aldeao.X, aldeao.Y);
 
-            aldeaoDImg = new Bitmap(@"aldeao_abatido.png");
+            aldeaoDImg = new Bitmap(@"aldea_abatida.png");
             aldeaoD = new ObjNpc(4, 4, aldeaoDImg, msgsD, false);
             game.setOcupado(aldeaoD.X, aldeaoD.Y);
         }
@@ -681,6 +685,7 @@ namespace Jogo
         }
     }
 
+
     public class Mapa1_pos : Mapa1
     {
         public Background background;
@@ -690,6 +695,7 @@ namespace Jogo
             this.game.setLivre(17, 2);
             this.game.setLivre(18, 2);
             this.game.setLivre(19, 2);
+            this.game.setLivre(5, 5);
             pintarBarreira = false;
         }
 
@@ -703,6 +709,8 @@ namespace Jogo
             mestreImg = new Bitmap(@"npc.png");
             mestre = new ObjNpc(16, 3, mestreImg, msgs, false);
             game.setOcupado(mestre.X, mestre.Y);
+            
+            heroi = new ObjHeroi(6, 5, heroiImg);
         }
 
         public override void keyDown(Object sender, KeyEventArgs e)
@@ -717,16 +725,62 @@ namespace Jogo
         }
     }
 
+    public class Mapa2_pos : Mapa2
+    {
+        public Background background;
+        public Mapa2_pos(Background background) : base(background)
+        {
+            this.background = background;
+            game.setLivre(15, 4);
+            game.setLivre(13, 1);
+            game.setLivre(14, 1);
+            game.setLivre(15, 2);
+            game.setLivre(12, 1);
+            pintarBarreira = false;
+        }
+
+        public override void carregarGame()
+        {
+            base.carregarGame();
+
+            Queue<String> msgs = new Queue<string>();
+            msgs.Enqueue("Sinto muito, pensei que você era do clã de Glau Xia.");
+            msgs.Enqueue("Pedi para minha amiga retirar o crocodilo para você.");
+            msgs.Enqueue("Siga sua jornada.");
+            aldeaoImg = new Bitmap(@"aldeao_abatido.png"); 
+            aldeao = new ObjNpc(15, 3, aldeaoImg, msgs, false);
+            game.setOcupado(aldeao.X, aldeao.Y);
+
+            msgs = new Queue<string>();
+            msgs.Enqueue("Esse crocodilo é o bixão.");
+            aldeaoDImg = new Bitmap(@"aldea_abatida.png");
+            aldeaoD = new ObjNpc(11, 2, aldeaoDImg, msgs, false);
+            game.setOcupado(aldeaoD.X, aldeaoD.Y);
+        }
+
+        public override void keyDown(Object sender, KeyEventArgs e)
+        {
+            base.keyDown(sender, e);
+            if (Game.checarPosicao(heroi, 17, 0) || Game.checarPosicao(heroi, 18, 0) || Game.checarPosicao(heroi, 19, 1) || Game.checarPosicao(heroi, 20, 1) || Game.checarPosicao(heroi, 21, 1) || Game.checarPosicao(heroi, 24, 2) || Game.checarPosicao(heroi, 23, 2))
+            {
+                MessageBox.Show("aaa");
+                //background.Fase++;
+
+                //background.transicao(1);
+            }
+        }
+    }
+
     public class Batalha1 : GameClass
     {
-        Bitmap batalhaImg;
-        ProgressBar pbVidaHeroi = new ProgressBar();
-        ProgressBar pbVidaVilao = new ProgressBar();
-        ProgressBar pbTempo = new ProgressBar();
-        Label lblContinha = new Label();
-        Label lblResultado = new Label();
-        System.Windows.Forms.Timer tmrBatalha;
-        Background background;
+        protected Bitmap batalhaImg;
+        protected ProgressBar pbVidaHeroi = new ProgressBar();
+        protected ProgressBar pbVidaVilao = new ProgressBar();
+        protected ProgressBar pbTempo = new ProgressBar();
+        protected Label lblContinha = new Label();
+        protected Label lblResultado = new Label();
+        protected System.Windows.Forms.Timer tmrBatalha;
+        protected Background background;
         protected bool podeAtacar = true;
 
         public Batalha1 (Background background)
@@ -739,7 +793,7 @@ namespace Jogo
 
         }
 
-        public void keyDown(Object sender, KeyEventArgs e)
+        public virtual void keyDown(Object sender, KeyEventArgs e)
         {
             Char n = '\0';
 
@@ -811,7 +865,6 @@ namespace Jogo
                     causarDano();
                 }
             }
-
         }
 
         public void paint(Object sender, PaintEventArgs e)
@@ -898,7 +951,7 @@ namespace Jogo
             background.transicao(3);
         }
 
-        public void receberDano(ProgressBar pb, int dano)
+        public virtual void receberDano(ProgressBar pb, int dano)
         {
             podeAtacar = false;
 
@@ -959,7 +1012,7 @@ namespace Jogo
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
                 int dano = Convert.ToInt32((10));
-                receberDano(pbVidaVilao, 100);
+                receberDano(pbVidaVilao, 50);
                 //todo tremer tela
             }
             else
@@ -988,28 +1041,16 @@ namespace Jogo
         }
     }
 
-    public class Batalha2 : GameClass
+    public class Batalha2 : Batalha1
     {
-        Bitmap batalhaImg;
-        ProgressBar pbVidaHeroi = new ProgressBar();
-        ProgressBar pbVidaVilao = new ProgressBar();
-        ProgressBar pbTempo = new ProgressBar();
-        Label lblContinha = new Label();
-        Label lblResultado = new Label();
-        System.Windows.Forms.Timer tmrBatalha;
         Background background;
 
-        public Batalha2(Background background)
+        public Batalha2 (Background background):base(background)
         {
             this.background = background;
         }
 
-        public void keyUp()
-        {
-
-        }
-
-        public void keyDown(Object sender, KeyEventArgs e)
+        public override void keyDown(object sender, KeyEventArgs e)
         {
             Char n = '\0';
 
@@ -1076,176 +1117,17 @@ namespace Jogo
                     lblResultado.Text = "";
                     lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
                 }
-                else if (lblResultado.Text != "")
+                else if (lblResultado.Text != "" && podeAtacar)
                 {
                     causarDano();
                 }
             }
-
         }
 
-        public void paint(Object sender, PaintEventArgs e)
+        public override void receberDano(ProgressBar pb, int dano)
         {
-            e.Graphics.DrawImage(batalhaImg, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
-        }
-
-        public void tick(object sender, EventArgs e)
-        {
-
-        }
-
-        public void carregarGame()
-        {
-            background.Frm.Controls.Add(pbVidaVilao);
-            pbVidaVilao.Maximum = 100;
-            pbVidaVilao.Minimum = 0;
-            pbVidaVilao.Enabled = true;
-            pbVidaVilao.Location = new Point(75, 72);
-            pbVidaVilao.Width = 320;
-            pbVidaVilao.Height = 40;
-            pbVidaVilao.Value = 100;
-
-
-            background.Frm.Controls.Add(pbVidaHeroi);
-            pbVidaHeroi.Maximum = 100;
-            pbVidaHeroi.Minimum = 0;
-            pbVidaHeroi.Enabled = true;
-            pbVidaHeroi.Location = new Point(410, 360);
-            pbVidaHeroi.Width = 320;
-            pbVidaHeroi.Height = 40;
-            pbVidaHeroi.Value = 100;
-
-
-            background.Frm.Controls.Add(lblContinha);
-            lblContinha.Width = 500;
-            lblContinha.Text = "[Enter] para comecar!";
-            lblContinha.Location = new Point((background.Frm.Width - lblContinha.Width) / 2, 470);
-            lblContinha.ForeColor = Color.Black;
-            lblContinha.BackColor = Color.White;
-            lblContinha.TextAlign = ContentAlignment.MiddleCenter;
-            lblContinha.Dock = DockStyle.None;
-            lblContinha.Font = new Font("Segoe UI", 30);
-            lblContinha.Height = 50;
-
-            background.Frm.Controls.Add(lblResultado);
-            lblResultado.Height = 70;
-            lblResultado.Width = 350;
-            lblResultado.Location = new Point((background.Frm.Width - lblResultado.Width) / 2, 530);
-            lblResultado.Text = "inicio";
-            lblResultado.AutoSize = false;
-            lblResultado.TextAlign = ContentAlignment.MiddleCenter;
-            lblResultado.Dock = DockStyle.None;
-            lblResultado.BorderStyle = BorderStyle.FixedSingle;
-            lblResultado.BackColor = Color.White;
-            lblResultado.ForeColor = Color.Black;
-            lblResultado.Font = new Font("Segoe UI", 30);
-            lblResultado.Visible = false;
-
-            background.Frm.Controls.Add(pbTempo);
-            pbTempo.Width = 730;
-            pbTempo.Height = 25;
-            pbTempo.Location = new Point((background.Frm.Width - pbTempo.Width) / 2, 10);
-            pbTempo.Maximum = 100;
-            pbTempo.Minimum = 0;
-            pbTempo.Value = 100;
-            pbTempo.Enabled = true;
-            ModifyProgressBarColor.SetState(pbTempo, 3);
-
-            tmrBatalha = new System.Windows.Forms.Timer();
-            tmrBatalha.Interval = 140 / this.background.Dificuldade;
-            tmrBatalha.Tick += new EventHandler(batalha_tick);
-
-            batalhaImg = new Bitmap(@"batalha.png");
-        }
-
-        public void terminarBatalha()
-        {
-            //todo relatorio
-
-            background.Estado = 3;
-            background.carregarGame();
-        }
-
-        public void receberDano(ProgressBar pb, int dano)
-        {
-            ModifyProgressBarColor.SetState(pb, 2);
-            newLabel lblDaninho = new newLabel();
-            lblDaninho.Text = "-" + dano.ToString();
-            lblDaninho.ForeColor = Color.Red;
-            lblDaninho.BackColor = Color.White;
-            lblDaninho.Font = new Font("Segoe UI", 20);
-            lblDaninho.Height = pb.Height;
-            lblDaninho.RotateAngle = -90;
-            background.Frm.Controls.Add(lblDaninho);
-
-            if (pb.Location.X > Convert.ToInt32(background.Frm.Width / 2))
-            {
-                lblDaninho.Location = new Point(pb.Location.X - lblDaninho.Width, pb.Location.Y);
-            }
-            else
-            {
-                lblDaninho.Location = new Point(pb.Location.X + pb.Width, pb.Location.Y);
-            }
-
-            int i = 0;
-            while (i <= dano)
-            {
-                pb.Value--;
-
-                if (pb.Value == 0)
-                {
-                    //terminarBatalha();
-                    return;
-                }
-                else
-                {
-                    Application.DoEvents();
-                    Thread.Sleep(20);
-                    i++;
-                }
-            }
-
-            ModifyProgressBarColor.SetState(pb, 1);
-            background.Frm.Controls.Remove(lblDaninho);
-
+            base.receberDano(pb, dano);
             lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
-
-            lblResultado.Text = "";
-        }
-
-        public void causarDano()
-        {
-            pbTempo.Value = pbTempo.Maximum;
-
-            if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
-            {
-                int dano = Convert.ToInt32((10));
-                receberDano(pbVidaVilao, dano);
-                //todo tremer tela
-            }
-            else
-            {
-                int dano = 5 * background.Dificuldade + 5;
-                receberDano(pbVidaHeroi, dano);
-            }
-        }
-
-        public void batalha_tick(Object sender, EventArgs e)
-        {
-            if (pbTempo.Value == 0)
-            {
-                receberDano(pbVidaHeroi, background.Dificuldade);
-                pbTempo.Value = pbTempo.Maximum;
-            }
-            else
-            {
-                pbTempo.Value--;
-            }
-        }
-
-        public void keyUp(object sender, KeyEventArgs e)
-        {
-            //
         }
     }
     
