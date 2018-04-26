@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batalhas.cs" />
     <Compile Include="Conta.cs" />
     <Compile Include="frmJogo.cs">
       <SubType>Form</SubType>
@@ -53,6 +54,8 @@
       <DependentUpon>frmJogo.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes.cs" />
+    <Compile Include="Mapas.cs" />
+    <Compile Include="Mapas_pos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmJogo.resx">
