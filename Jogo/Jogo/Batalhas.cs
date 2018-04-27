@@ -28,6 +28,8 @@ namespace Jogo
         protected Background background;
         protected bool podeAtacar = true;
 
+
+
         public Batalha1(Background background)
         {
             this.background = background;
@@ -186,7 +188,11 @@ namespace Jogo
 
         public void terminarBatalha()
         {
-            //todo relatorio
+            gerarRelatorio();
+        }
+
+        public void gerarRelatorio ()
+        {
 
             background.Frm.Controls.Remove(lblContinha);
             background.Frm.Controls.Remove(lblResultado);
@@ -380,7 +386,7 @@ namespace Jogo
     {
         Background background;
 
-        public Batalha2(Background background) : base(background)
+        public Batalha3(Background background) : base(background)
         {
             this.background = background;
         }
@@ -450,7 +456,7 @@ namespace Jogo
                     tmrBatalha.Start();
                     lblResultado.Visible = true;
                     lblResultado.Text = "";
-                    lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
+                    lblContinha.Text = Conta.gerarMultiplicacao(background.Dificuldade);
                 }
                 else if (lblResultado.Text != "" && podeAtacar)
                 {
@@ -462,8 +468,97 @@ namespace Jogo
         public override void receberDano(ProgressBar pb, int dano)
         {
             base.receberDano(pb, dano);
-            lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
+            lblContinha.Text = Conta.gerarMultiplicacao(background.Dificuldade);
         }
     }
 
+    public class Batalha4 : Batalha1
+    {
+        Background background;
+
+        public Batalha4(Background background) : base(background)
+        {
+            this.background = background;
+        }
+
+        public override void keyDown(object sender, KeyEventArgs e)
+        {
+            Char n = '\0';
+
+            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            {
+                n = '1';
+            }
+            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            {
+                n = '2';
+            }
+            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            {
+                n = '3';
+            }
+            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            {
+                n = '4';
+            }
+            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            {
+                n = '5';
+            }
+            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            {
+                n = '6';
+            }
+            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            {
+                n = '7';
+            }
+            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            {
+                n = '8';
+            }
+            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            {
+                n = '9';
+            }
+            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
+            {
+                n = '0';
+            }
+
+            lblResultado.Text += n;
+
+            if (e.KeyCode == Keys.Back)
+            {
+                if (lblResultado.Text != "")
+                {
+                    String str = lblResultado.Text;
+                    str = str.Remove(str.Length - 1);
+                    lblResultado.Text = str;
+                }
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (lblResultado.Text == "inicio")
+                {
+                    tmrBatalha.Enabled = true;
+                    tmrBatalha.Start();
+                    lblResultado.Visible = true;
+                    lblResultado.Text = "";
+                    lblContinha.Text = Conta.gerarDivisao(background.Dificuldade);
+                }
+                else if (lblResultado.Text != "" && podeAtacar)
+                {
+                    causarDano();
+                }
+            }
+        }
+
+        public override void receberDano(ProgressBar pb, int dano)
+        {
+            base.receberDano(pb, dano);
+            lblContinha.Text = Conta.gerarDivisao(background.Dificuldade);
+        }
+    }
 }

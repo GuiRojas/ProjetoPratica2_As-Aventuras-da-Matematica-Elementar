@@ -112,6 +112,12 @@ namespace Jogo
                                     this.gameClass = new Mapa3(this);
                                 }
                                 break;
+
+                            case 4:
+                                {
+                                    this.gameClass = new Mapa4(this);
+                                }
+                                break;
                         }
                     }
                     break;
@@ -137,6 +143,12 @@ namespace Jogo
                                     this.gameClass = new Batalha3(this);
                                 }
                                 break;
+
+                            case 4:
+                                {
+                                    this.gameClass = new Batalha4(this);
+                                }
+                                break;
                         }
                     }
                     break;
@@ -157,14 +169,29 @@ namespace Jogo
                                 }
                                 break;
 
-
                             case 3:
                                 {
                                     this.gameClass = new Mapa3_pos(this);
                                 }
                                 break;
+
+                            case 4:
+                                {
+                                    this.gameClass = new Mapa4_pos(this);
+                                }
+                                break;
+
+                            case 5:
+                                {
+                                    //fim do game
+                                }
+                                break;
                         }
                     }
+                    break;
+
+                default:
+                        MessageBox.Show("O jogo não pôde ser iniciado :(");
                     break;
             }
 
@@ -221,8 +248,6 @@ namespace Jogo
                 frm.Close();
             }
         }
-
-        
 
         public void keyUp (object sender, KeyEventArgs e)
         {
