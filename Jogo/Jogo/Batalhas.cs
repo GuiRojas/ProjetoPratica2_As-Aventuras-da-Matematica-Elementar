@@ -27,8 +27,8 @@ namespace Jogo
         protected System.Windows.Forms.Timer tmrBatalha;
         protected Background background;
         protected bool podeAtacar = true;
-
-
+        protected ListBox lbContasRelatorio;
+        protected Queue<string> contas;
 
         public Batalha1(Background background)
         {
@@ -193,6 +193,11 @@ namespace Jogo
 
         public void gerarRelatorio ()
         {
+            background.Frm.Controls.Add(lbContasRelatorio);
+
+            foreach (string conta in contas){
+                lbContasRelatorio.Items.Add(conta);
+            }
 
             background.Frm.Controls.Remove(lblContinha);
             background.Frm.Controls.Remove(lblResultado);
@@ -204,6 +209,7 @@ namespace Jogo
 
         public virtual void receberDano(ProgressBar pb, int dano)
         {
+            contas.Enqueue(lblContinha.Text);
             podeAtacar = false;
 
             ModifyProgressBarColor.SetState(pb, 2);
@@ -379,6 +385,7 @@ namespace Jogo
         {
             base.receberDano(pb, dano);
             lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
+            contas.Enqueue(lblContinha.Text);
         }
     }
 
