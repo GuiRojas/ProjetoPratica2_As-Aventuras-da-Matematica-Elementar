@@ -106,6 +106,7 @@ namespace Jogo
                     lblResultado.Visible = true;
                     lblResultado.Text = "";
                     lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
+                    contas.Enqueue(lblContinha.Text);
                 }
                 else if (lblResultado.Text != "" && podeAtacar)
                 {
@@ -184,6 +185,8 @@ namespace Jogo
             tmrBatalha.Tick += new EventHandler(batalha_tick);
 
             batalhaImg = new Bitmap(@"batalha.png");
+
+            contas = new Queue<string>();
         }
 
         public void terminarBatalha()
@@ -209,7 +212,6 @@ namespace Jogo
 
         public virtual void receberDano(ProgressBar pb, int dano)
         {
-            contas.Enqueue(lblContinha.Text);
             podeAtacar = false;
 
             ModifyProgressBarColor.SetState(pb, 2);
@@ -264,6 +266,8 @@ namespace Jogo
 
         public void causarDano()
         {
+            contas.Enqueue(lblContinha.Text);
+
             pbTempo.Value = pbTempo.Maximum;
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
@@ -385,7 +389,6 @@ namespace Jogo
         {
             base.receberDano(pb, dano);
             lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
-            contas.Enqueue(lblContinha.Text);
         }
     }
 
