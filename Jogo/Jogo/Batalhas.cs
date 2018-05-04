@@ -27,8 +27,11 @@ namespace Jogo
         protected System.Windows.Forms.Timer tmrBatalha;
         protected Background background;
         protected bool podeAtacar = true;
-        protected ListBox lbContasRelatorio;
+        protected ListBox lbContasRelatorio = new ListBox();
         protected Queue<string> contas;
+        protected int ganhou = 0;
+        protected Label lblContinuar;
+        protected Label lblResultadoFinal;
 
         public Batalha1(Background background)
         {
@@ -112,6 +115,18 @@ namespace Jogo
                 {
                     causarDano();
                 }
+                else if (ganhou > 0)
+                {
+                    background.Frm.Controls.Remove(lblResultadoFinal);
+                    background.Frm.Controls.Remove(lblContinuar);
+                    background.Frm.Controls.Remove(lbContasRelatorio);
+
+                    if (ganhou == 1)
+                        background.transicao(3);
+
+                    if (ganhou == 2)
+                        background.transicao(1);
+                }
             }
         }
 
@@ -191,23 +206,67 @@ namespace Jogo
 
         public void terminarBatalha()
         {
-            gerarRelatorio();
-        }
-
-        public void gerarRelatorio ()
-        {
-            background.Frm.Controls.Add(lbContasRelatorio);
-
-            foreach (string conta in contas){
-                lbContasRelatorio.Items.Add(conta);
-            }
 
             background.Frm.Controls.Remove(lblContinha);
             background.Frm.Controls.Remove(lblResultado);
             background.Frm.Controls.Remove(pbTempo);
             background.Frm.Controls.Remove(pbVidaHeroi);
             background.Frm.Controls.Remove(pbVidaVilao);
-            background.transicao(3);
+
+            gerarRelatorio();
+
+        }
+
+        public void gerarRelatorio ()
+        {
+            background.Frm.Controls.Add(lbContasRelatorio);
+            lbContasRelatorio.Location = new Point(140, 100);
+            lbContasRelatorio.Width = 520;
+            lbContasRelatorio.Height = 400;
+            lbContasRelatorio.BackColor = Color.FromArgb(255, 224, 192);
+            Font font = new Font("lucida console", 40);
+            lbContasRelatorio.Font = font;
+            this.batalhaImg = new Bitmap(@"relatorio.png");
+
+            foreach (string conta in contas){
+                lbContasRelatorio.Items.Add(conta + " = " + Conta.resolver(conta).ToString());
+            }
+
+            Font font2 = new Font("lucida console", 35);
+
+            lblResultadoFinal = new Label ();
+            lblResultadoFinal.Location = new Point (0, 20);
+            lblResultadoFinal.Font = font2;
+            lblResultadoFinal.Height = 50;
+            lblResultadoFinal.Width = 800;
+            lblResultadoFinal.AutoSize = false;
+            lblResultadoFinal.TextAlign = ContentAlignment.MiddleCenter;
+            lblResultadoFinal.Dock = DockStyle.None;
+            lblResultadoFinal.BackColor = Color.FromArgb(83, 51, 34);
+            lblResultadoFinal.ForeColor = Color.FromArgb(255, 255, 255);
+            background.Frm.Controls.Add(lblResultadoFinal);
+
+            if (ganhou == 1)
+            {
+                lblResultadoFinal.Text = "Você ganhou!";
+            } 
+            else
+            {
+                lblResultadoFinal.Text = "Você perdeu.";
+            }
+
+            lblContinuar = new Label();
+            lblContinuar.BackColor = Color.FromArgb(83, 51, 34);
+            lblContinuar.ForeColor = Color.FromArgb(255, 255, 255);
+            lblContinuar.Location = new Point(0, 550);
+            lblContinuar.Height = 50;
+            lblContinuar.Font = font2;
+            lblContinuar.Text = "[Enter] para continuar";
+            lblContinuar.Width = 800;
+            lblContinuar.AutoSize =  false;
+            lblContinuar.TextAlign = ContentAlignment.MiddleCenter;
+            lblContinuar.Dock = DockStyle.None;
+            background.Frm.Controls.Add(lblContinuar);
         }
 
         public virtual void receberDano(ProgressBar pb, int dano)
@@ -241,6 +300,14 @@ namespace Jogo
 
                 if (pb.Value == 0)
                 {
+                    if (pb.Equals(pbVidaHeroi))
+                    {
+                        ganhou = 2;
+                    }
+                    else
+                    {
+                        ganhou = 1;
+                    }
                     background.Frm.Controls.Remove(lblDaninho);
                     terminarBatalha();
                     return;
@@ -382,6 +449,18 @@ namespace Jogo
                 {
                     causarDano();
                 }
+                else if (ganhou > 0)
+                {
+                    background.Frm.Controls.Remove(lblResultadoFinal);
+                    background.Frm.Controls.Remove(lblContinuar);
+                    background.Frm.Controls.Remove(lbContasRelatorio);
+
+                    if (ganhou == 1)
+                        background.transicao(3);
+
+                    if (ganhou == 2)
+                        background.transicao(1);
+                }
             }
         }
 
@@ -472,6 +551,18 @@ namespace Jogo
                 {
                     causarDano();
                 }
+                else if (ganhou > 0)
+                {
+                    background.Frm.Controls.Remove(lblResultadoFinal);
+                    background.Frm.Controls.Remove(lblContinuar);
+                    background.Frm.Controls.Remove(lbContasRelatorio);
+
+                    if (ganhou == 1)
+                        background.transicao(3);
+
+                    if (ganhou == 2)
+                        background.transicao(1);
+                }
             }
         }
 
@@ -561,6 +652,18 @@ namespace Jogo
                 else if (lblResultado.Text != "" && podeAtacar)
                 {
                     causarDano();
+                }
+                else if (ganhou > 0)
+                {
+                    background.Frm.Controls.Remove(lblResultadoFinal);
+                    background.Frm.Controls.Remove(lblContinuar);
+                    background.Frm.Controls.Remove(lbContasRelatorio);
+
+                    if (ganhou == 1)
+                        background.transicao(3);
+
+                    if (ganhou == 2)
+                        background.transicao(1);
                 }
             }
         }

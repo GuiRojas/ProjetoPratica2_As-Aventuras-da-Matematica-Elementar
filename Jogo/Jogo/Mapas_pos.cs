@@ -93,10 +93,8 @@ namespace Jogo
             base.keyDown(sender, e);
             if (Game.checarPosicao(heroi, 17, 0) || Game.checarPosicao(heroi, 18, 0) || Game.checarPosicao(heroi, 19, 1) || Game.checarPosicao(heroi, 20, 1) || Game.checarPosicao(heroi, 21, 1) || Game.checarPosicao(heroi, 24, 2) || Game.checarPosicao(heroi, 23, 2))
             {
-                MessageBox.Show("aaa");
-                //background.Fase++;
-
-                //background.transicao(1);
+                background.Fase++;
+                background.transicao(1);
             }
         }
     }

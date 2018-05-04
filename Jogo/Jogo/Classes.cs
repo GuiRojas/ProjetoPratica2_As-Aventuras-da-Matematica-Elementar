@@ -91,6 +91,12 @@ namespace Jogo
 
             switch (estado)
             {
+                case 0:
+                    {
+
+                    }
+                    break;
+
                 case 1:
                     {
                         switch (fase)
