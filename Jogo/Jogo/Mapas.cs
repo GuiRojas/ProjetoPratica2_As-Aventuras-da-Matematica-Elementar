@@ -124,7 +124,7 @@ namespace Jogo
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
 
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(mestre.Img, mestre.X * Game.Tam, mestre.Y * Game.Tam, 30, Game.Tam);
             e.Graphics.DrawImage(easterEgg.Img, easterEgg.X * Game.Tam, easterEgg.Y * Game.Tam, 0, 0);
 
             if (pintarBarreira)
@@ -162,11 +162,13 @@ namespace Jogo
 
             Queue<String> msgs = new Queue<string>();
             msgs.Enqueue("Oh, nobre guerreiro samurai Shingetsu Kun.");
-            msgs.Enqueue("O clan de Glau Xia destruiu tudo nosso.");
-            msgs.Enqueue("Logo antes, antes de sua chegada, eles queimaram toda a vila...");
+            msgs.Enqueue("O clan de Glau Xia veio aqui e destruiu tudo nosso.");
+            msgs.Enqueue("Logo antes de sua chegada, eles queimaram toda a vila...");
             msgs.Enqueue("e... roubaram a sua namorada, a Minna Chan.");
-            msgs.Enqueue("A Glau Xia adora física, logo, só pode ser derrotada por um meio.");
-            msgs.Enqueue("Sei que você quer vingança, mas para recuperar tudo isso, não será necessária a força de um samurai.");
+            msgs.Enqueue("Só há um meio de derrotar Glau Xia, ela adora física.");
+            msgs.Enqueue("Portanto precisamos combatê - la com matemática.");
+            msgs.Enqueue("Você quer vingança? Entendo...");
+            msgs.Enqueue("Mas para recuperar sua namorada, não será necessária a força de um samurai.");
             msgs.Enqueue("Mas a sabedoria de um matemático.");
             msgs.Enqueue("...");
             msgs.Enqueue("Entre no dojo, vamos conseguir sua vingança.");
@@ -357,8 +359,8 @@ namespace Jogo
             //TODO loop por todas os objetos de ObjGame
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(aldeao.Img, aldeao.X * Game.Tam, aldeao.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(aldeaoD.Img, aldeaoD.X * Game.Tam, aldeaoD.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(aldeao.Img, aldeao.X * Game.Tam, aldeao.Y * Game.Tam, 30, Game.Tam);
+            e.Graphics.DrawImage(aldeaoD.Img, aldeaoD.X * Game.Tam, aldeaoD.Y * Game.Tam, 30, Game.Tam);
             if (pintarBarreira)
                 e.Graphics.DrawImage(barreira, 13 * Game.Tam, 1 * Game.Tam, 256, 64);
 
@@ -589,7 +591,7 @@ namespace Jogo
             }
 
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(npc.Img, npc.X * Game.Tam, npc.Y * Game.Tam, Game.Tam, Game.Tam);
+            e.Graphics.DrawImage(npc.Img, npc.X * Game.Tam, npc.Y * Game.Tam, 30, Game.Tam);
             e.Graphics.DrawImage(ovelha1.Img, ovelha1.X * Game.Tam, ovelha1.Y * Game.Tam, 64, 32);
             e.Graphics.DrawImage(ovelha2.Img, ovelha2.X * Game.Tam, ovelha2.Y * Game.Tam, 64, 32);
             e.Graphics.DrawImage(ovelha3.Img, ovelha3.X * Game.Tam, ovelha3.Y * Game.Tam, 64, 32);
@@ -716,22 +718,19 @@ namespace Jogo
 
         protected Bitmap fundo;
 
-        protected ObjNpc npc;
-        protected Bitmap npcImg;
+        protected ObjNpc glauxia;
+        protected Bitmap glauxiaImg;
 
-        protected ObjEstatico ovelha1;
-        protected Bitmap ovelhaImg;
-
-        protected ObjEstatico ovelha2;
-
-        protected ObjEstatico ovelha3;
+        protected ObjNpc minna;
+        protected Bitmap minnaImg;
 
         protected Game game = new Game();
         protected List<ObjGame> objsDoGame;
 
         protected Background background;
+        protected Bitmap nuvem = new Bitmap(@"nuvem.png");
 
-        protected bool pintarBarreira = false;
+        protected bool pintarBarreira = true;
 
         protected String coords = "";
 
@@ -739,7 +738,7 @@ namespace Jogo
         {
             this.background = background;
 
-            game.setOcupado(24, 16); game.setOcupado(23, 16); game.setOcupado(22, 16); game.setOcupado(21, 17); game.setOcupado(21, 18); game.setOcupado(21, 19); game.setOcupado(20, 19); game.setOcupado(19, 19); game.setOcupado(18, 19); game.setOcupado(17, 19); game.setOcupado(16, 19); game.setOcupado(15, 19); game.setOcupado(14, 19); game.setOcupado(13, 19); game.setOcupado(12, 19); game.setOcupado(11, 19); game.setOcupado(11, 19); game.setOcupado(10, 19); game.setOcupado(9, 19); game.setOcupado(9, 19); game.setOcupado(8, 19); game.setOcupado(7, 19); game.setOcupado(6, 19); game.setOcupado(5, 19); game.setOcupado(4, 19); game.setOcupado(3, 19); game.setOcupado(2, 19); game.setOcupado(2, 19); game.setOcupado(1, 19); game.setOcupado(0, 19); game.setOcupado(0, 18); game.setOcupado(0, 17); game.setOcupado(1, 18); game.setOcupado(23, 10); game.setOcupado(23, 9); game.setOcupado(24, 9); game.setOcupado(24, 10); game.setOcupado(20, 11); game.setOcupado(20, 10); game.setOcupado(18, 17); game.setOcupado(18, 16); game.setOcupado(7, 16); game.setOcupado(7, 17); game.setOcupado(2, 15); game.setOcupado(3, 15); game.setOcupado(3, 14); game.setOcupado(2, 14); game.setOcupado(8, 9); game.setOcupado(24, 7); game.setOcupado(23, 7); game.setOcupado(22, 7); game.setOcupado(21, 7); game.setOcupado(20, 7); game.setOcupado(19, 6); game.setOcupado(18, 6); game.setOcupado(17, 5); game.setOcupado(17, 4); game.setOcupado(16, 3); game.setOcupado(15, 3); game.setOcupado(14, 3); game.setOcupado(14, 3); game.setOcupado(13, 3); game.setOcupado(11, 3); game.setOcupado(11, 3); game.setOcupado(13, 3); game.setOcupado(13, 3); game.setOcupado(12, 3); game.setOcupado(11, 3); game.setOcupado(10, 3); game.setOcupado(9, 3); game.setOcupado(8, 3); game.setOcupado(8, 3); game.setOcupado(7, 3); game.setOcupado(6, 3); game.setOcupado(5, 3); game.setOcupado(4, 3); game.setOcupado(3, 3); game.setOcupado(2, 3); game.setOcupado(1, 2); game.setOcupado(0, 1); game.setOcupado(2, 9); game.setOcupado(3, 9); game.setOcupado(4, 9); game.setOcupado(5, 9); game.setOcupado(6, 9); game.setOcupado(7, 9); game.setOcupado(7, 7); game.setOcupado(7, 8); game.setOcupado(6, 7); game.setOcupado(5, 7); game.setOcupado(4, 7); game.setOcupado(3, 7); game.setOcupado(3, 7); game.setOcupado(2, 7); game.setOcupado(2, 8); game.setOcupado(11, 7); game.setOcupado(12, 7); game.setOcupado(13, 7); game.setOcupado(14, 7); game.setOcupado(14, 8); game.setOcupado(15, 8); game.setOcupado(16, 8); game.setOcupado(16, 9); game.setOcupado(16, 10); game.setOcupado(15, 10); game.setOcupado(15, 11); game.setOcupado(15, 12); game.setOcupado(14, 12); game.setOcupado(13, 11); game.setOcupado(12, 11); game.setOcupado(11, 11); game.setOcupado(11, 10); game.setOcupado(11, 9); game.setOcupado(11, 9); game.setOcupado(11, 8); game.setOcupado(12, 8);
+            game.setOcupado(20, 13); game.setOcupado(19, 14); game.setOcupado(19, 16); game.setOcupado(19, 15); game.setOcupado(19, 17); game.setOcupado(19, 19); game.setOcupado(19, 18); game.setOcupado(19, 12); game.setOcupado(18, 12); game.setOcupado(17, 12); game.setOcupado(16, 12); game.setOcupado(16, 11); game.setOcupado(16, 10); game.setOcupado(16, 9); game.setOcupado(16, 8); game.setOcupado(16, 7); game.setOcupado(15, 6); game.setOcupado(13, 6); game.setOcupado(14, 6); game.setOcupado(12, 6); game.setOcupado(11, 7); game.setOcupado(11, 8); game.setOcupado(11, 9); game.setOcupado(12, 10); game.setOcupado(11, 9); game.setOcupado(12, 11); game.setOcupado(12, 10); game.setOcupado(12, 11); game.setOcupado(12, 12); game.setOcupado(12, 13); game.setOcupado(11, 13); game.setOcupado(10, 13); game.setOcupado(9, 12); game.setOcupado(8, 11); game.setOcupado(8, 11); game.setOcupado(8, 10); game.setOcupado(8, 9); game.setOcupado(8, 8); game.setOcupado(7, 8); game.setOcupado(6, 7); game.setOcupado(5, 7); game.setOcupado(4, 7); game.setOcupado(3, 7); game.setOcupado(2, 7); game.setOcupado(1, 7); game.setOcupado(0, 7); game.setOcupado(5, 7);
         }
 
         public void keyUp(object sender, KeyEventArgs e)
@@ -787,14 +786,14 @@ namespace Jogo
                 heroi.ActiveRight = true;
             }
 
-            npc.MostrarTexto = false;
+            glauxia.MostrarTexto = false;
 
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
-                if (Game.perto(heroi, npc))
+                if (Game.perto(heroi, glauxia))
                 {
-                    npc.dialogoAsync(background, npc.IniciaBatalha);
+                    glauxia.dialogoAsync(background, glauxia.IniciaBatalha);
                 }
             }
 
@@ -818,19 +817,17 @@ namespace Jogo
             e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
             if (pintarBarreira)
             {
-                //e.Graphics.DrawImage(nuvem, 6 * Game.Tam, 11 * Game.Tam, 64, 64);
+                e.Graphics.DrawImage(nuvem, 2 * Game.Tam, 17 * Game.Tam, 64, 64);
             }
 
             e.Graphics.DrawImage(heroi.Img, heroi.X * Game.Tam, heroi.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(npc.Img, npc.X * Game.Tam, npc.Y * Game.Tam, Game.Tam, Game.Tam);
-            e.Graphics.DrawImage(ovelha1.Img, ovelha1.X * Game.Tam, ovelha1.Y * Game.Tam, 64, 32);
-            e.Graphics.DrawImage(ovelha2.Img, ovelha2.X * Game.Tam, ovelha2.Y * Game.Tam, 64, 32);
-            e.Graphics.DrawImage(ovelha3.Img, ovelha3.X * Game.Tam, ovelha3.Y * Game.Tam, 64, 32);
+            e.Graphics.DrawImage(glauxia.Img, glauxia.X * Game.Tam, glauxia.Y * Game.Tam, 30, Game.Tam);
+            e.Graphics.DrawImage(minna.Img, minna.X * Game.Tam, minna.Y * Game.Tam, 30, 32);
 
 
-            if (npc.MostrarTexto)
+            if (glauxia.MostrarTexto)
             {   //TODO transformar texto p/ classe
-                texto(sender, e, npc);
+                texto(sender, e, glauxia);
             }
         }
 
@@ -841,37 +838,27 @@ namespace Jogo
 
         public virtual void carregarGame()
         {
-            //texto
-            //vc se chama shingetsu kun, um samurai muito respeitado
-            //sua vida inteira vc usou a força sobre tudo, até agora.
-            //vc chega na vila e ta tudo difrerente, vazia, e vc encontra o Senpaio, o mestre em matematica
-
             heroiImg = new Bitmap(@"heroi.png");
-            heroi = new ObjHeroi(24, 13, heroiImg);
+            heroi = new ObjHeroi(2, 17, heroiImg);
 
-            ovelhaImg = new Bitmap(@"barreira3.png");
-
-            ovelha1 = new ObjEstatico(15, 6, ovelhaImg);
-            game.setOcupado(ovelha1.X, ovelha1.Y);
-            ovelha2 = new ObjEstatico(9, 15, ovelhaImg);
-            game.setOcupado(ovelha2.X, ovelha2.Y);
-            ovelha3 = new ObjEstatico(2, 5, ovelhaImg);
-            game.setOcupado(ovelha3.X, ovelha3.Y);
-
-            fundo = new Bitmap(@"sand_desert.png");
+            fundo = new Bitmap(@"vulcao.png");
 
             Queue<String> msgs = new Queue<string>();
-            msgs.Enqueue("HMMMMM... bem vindo viajante, meu nome é Mohammed!");
-            msgs.Enqueue("O que deseja? Podes encontrar de tudo aqui na minha loja de conveniência.");
-            msgs.Enqueue("Vingança contra Glau Xia? Certo...");
-            msgs.Enqueue("Os rastros de seu terrível clã levam até o topo do vulcão.");
-            msgs.Enqueue("Eu posso te dar uma carona até lá em cima, mas...");
-            msgs.Enqueue("... você precisa batalhar comigo, antes.");
-            msgs.Enqueue("... fico tão sozinho aqui com minhas ovelhas...");
-            msgs.Enqueue("Vamos batalhar!");
-            npcImg = new Bitmap(@"muslim.png");
-            npc = new ObjNpc(3, 10, npcImg, msgs, true);
-            game.setOcupado(npc.X, npc.Y);
+            msgs.Enqueue("Shingetsu Chan, olá!");
+            msgs.Enqueue("Minna Chan está ali naquela ilha, consegue ver?");
+            msgs.Enqueue("Você deve estar imaginando como eu coloquei ela lá, certo?");
+            msgs.Enqueue("Eu usei um bloco de peso P = 1000N e uma roldana...");
+            msgs.Enqueue("Ah, não liga? Ok... Vejo que não está pra conversa...");
+            msgs.Enqueue("Vai tentar me derrotar?");
+            msgs.Enqueue("Vamos lá!");
+
+            minnaImg = new Bitmap(@"minna.png");
+            minna = new ObjNpc(17, 2, minnaImg, msgs, true);
+            game.setOcupado(minna.X, minna.Y);
+
+            glauxiaImg = new Bitmap(@"glauxia.png");
+            glauxia = new ObjNpc(13, 8, glauxiaImg, msgs, true);
+            game.setOcupado(glauxia.X, glauxia.Y);
         }
 
         public void texto(object sender, PaintEventArgs e, ObjNpc obj)

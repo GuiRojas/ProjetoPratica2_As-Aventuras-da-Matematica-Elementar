@@ -80,13 +80,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\fonte.TTF" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fonte.TTF" />
-    <None Include="Resources\fundo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

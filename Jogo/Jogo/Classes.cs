@@ -21,7 +21,7 @@ namespace Jogo
             this.fase = fase;
             this.estado = 1;
             this.frm = frm;
-            this.dificuldade = 2;//todo pegar do bd os bagulho
+            this.dificuldade = 1;//todo pegar do bd os bagulho
 
             carregarEstadoEFase();
         }

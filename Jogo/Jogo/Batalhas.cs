@@ -108,8 +108,7 @@ namespace Jogo
                     tmrBatalha.Start();
                     lblResultado.Visible = true;
                     lblResultado.Text = "";
-                    lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
-                    contas.Enqueue(lblContinha.Text);
+                    lblContinha.Text = this.gerarConta();
                 }
                 else if (lblResultado.Text != "" && podeAtacar)
                 {
@@ -128,6 +127,11 @@ namespace Jogo
                         background.transicao(1);
                 }
             }
+        }
+
+        public virtual String gerarConta()
+        {
+            return Conta.gerarSoma(background.Dificuldade);
         }
 
         public void paint(Object sender, PaintEventArgs e)
@@ -168,7 +172,7 @@ namespace Jogo
             lblContinha.BackColor = Color.White;
             lblContinha.TextAlign = ContentAlignment.MiddleCenter;
             lblContinha.Dock = DockStyle.None;
-            lblContinha.Font = new Font("Segoe UI", 30);
+            lblContinha.Font = new Font(frmJogo.FONTE, 18);
             lblContinha.Height = 50;
 
             background.Frm.Controls.Add(lblResultado);
@@ -182,7 +186,7 @@ namespace Jogo
             lblResultado.BorderStyle = BorderStyle.FixedSingle;
             lblResultado.BackColor = Color.White;
             lblResultado.ForeColor = Color.Black;
-            lblResultado.Font = new Font("Segoe UI", 30);
+            lblResultado.Font = new Font(frmJogo.FONTE, 18);
             lblResultado.Visible = false;
 
             background.Frm.Controls.Add(pbTempo);
@@ -199,9 +203,14 @@ namespace Jogo
             tmrBatalha.Interval = 140 / this.background.Dificuldade;
             tmrBatalha.Tick += new EventHandler(batalha_tick);
 
-            batalhaImg = new Bitmap(@"batalha.png");
+            carregarImg(@"batalha1.png");
 
             contas = new Queue<string>();
+        }
+
+        protected virtual void carregarImg(string str)
+        {
+            batalhaImg = new Bitmap(@"batalha_1.png");
         }
 
         public void terminarBatalha()
@@ -217,25 +226,26 @@ namespace Jogo
 
         }
 
-        public void gerarRelatorio ()
+        public void gerarRelatorio()
         {
             background.Frm.Controls.Add(lbContasRelatorio);
             lbContasRelatorio.Location = new Point(140, 100);
             lbContasRelatorio.Width = 520;
             lbContasRelatorio.Height = 400;
             lbContasRelatorio.BackColor = Color.FromArgb(255, 224, 192);
-            Font font = new Font("lucida console", 40);
+            Font font = new Font(frmJogo.FONTE, 24);
             lbContasRelatorio.Font = font;
             this.batalhaImg = new Bitmap(@"relatorio.png");
 
-            foreach (string conta in contas){
+            foreach (string conta in contas)
+            {
                 lbContasRelatorio.Items.Add(conta + " = " + Conta.resolver(conta).ToString());
             }
 
-            Font font2 = new Font("lucida console", 35);
+            Font font2 = new Font(frmJogo.FONTE, 18);
 
-            lblResultadoFinal = new Label ();
-            lblResultadoFinal.Location = new Point (0, 20);
+            lblResultadoFinal = new Label();
+            lblResultadoFinal.Location = new Point(0, 20);
             lblResultadoFinal.Font = font2;
             lblResultadoFinal.Height = 50;
             lblResultadoFinal.Width = 800;
@@ -249,7 +259,7 @@ namespace Jogo
             if (ganhou == 1)
             {
                 lblResultadoFinal.Text = "Você ganhou!";
-            } 
+            }
             else
             {
                 lblResultadoFinal.Text = "Você perdeu.";
@@ -263,7 +273,7 @@ namespace Jogo
             lblContinuar.Font = font2;
             lblContinuar.Text = "[Enter] para continuar";
             lblContinuar.Width = 800;
-            lblContinuar.AutoSize =  false;
+            lblContinuar.AutoSize = false;
             lblContinuar.TextAlign = ContentAlignment.MiddleCenter;
             lblContinuar.Dock = DockStyle.None;
             background.Frm.Controls.Add(lblContinuar);
@@ -279,7 +289,7 @@ namespace Jogo
             lblDaninho.Text = "-" + dano.ToString();
             lblDaninho.ForeColor = Color.Red;
             lblDaninho.BackColor = Color.White;
-            lblDaninho.Font = new Font("Segoe UI", 20);
+            lblDaninho.Font = new Font(frmJogo.FONTE, 20);
             lblDaninho.Height = pb.Height;
             lblDaninho.RotateAngle = -90;
             background.Frm.Controls.Add(lblDaninho);
@@ -324,7 +334,7 @@ namespace Jogo
 
             ModifyProgressBarColor.SetState(pb, 1);
 
-            lblContinha.Text = Conta.gerarSoma(background.Dificuldade);
+            lblContinha.Text = this.gerarConta();
             lblResultado.Text = "";
             background.Frm.Controls.Remove(lblDaninho);
 
@@ -339,13 +349,12 @@ namespace Jogo
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
-                int dano = Convert.ToInt32((10));
-                receberDano(pbVidaVilao, 50);
+                receberDano(pbVidaVilao, 10);
                 //todo tremer tela
             }
             else
             {
-                int dano = 5 * background.Dificuldade + 5;
+                int dano = 10 * background.Dificuldade + 10;
                 receberDano(pbVidaHeroi, dano);
             }
         }
@@ -354,7 +363,9 @@ namespace Jogo
         {
             if (pbTempo.Value == 0)
             {
-                receberDano(pbVidaHeroi, background.Dificuldade);
+                int dano = 10 * background.Dificuldade + 10;
+                receberDano(pbVidaHeroi, dano);
+
                 pbTempo.Value = pbTempo.Maximum;
             }
             else
@@ -378,96 +389,14 @@ namespace Jogo
             this.background = background;
         }
 
-        public override void keyDown(object sender, KeyEventArgs e)
+        public override String gerarConta()
         {
-            Char n = '\0';
-
-            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-            {
-                n = '1';
-            }
-            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-            {
-                n = '2';
-            }
-            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-            {
-                n = '3';
-            }
-            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-            {
-                n = '4';
-            }
-            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-            {
-                n = '5';
-            }
-            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-            {
-                n = '6';
-            }
-            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-            {
-                n = '7';
-            }
-            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-            {
-                n = '8';
-            }
-            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-            {
-                n = '9';
-            }
-            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-            {
-                n = '0';
-            }
-
-            lblResultado.Text += n;
-
-            if (e.KeyCode == Keys.Back)
-            {
-                if (lblResultado.Text != "")
-                {
-                    String str = lblResultado.Text;
-                    str = str.Remove(str.Length - 1);
-                    lblResultado.Text = str;
-                }
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (lblResultado.Text == "inicio")
-                {
-                    tmrBatalha.Enabled = true;
-                    tmrBatalha.Start();
-                    lblResultado.Visible = true;
-                    lblResultado.Text = "";
-                    lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
-                }
-                else if (lblResultado.Text != "" && podeAtacar)
-                {
-                    causarDano();
-                }
-                else if (ganhou > 0)
-                {
-                    background.Frm.Controls.Remove(lblResultadoFinal);
-                    background.Frm.Controls.Remove(lblContinuar);
-                    background.Frm.Controls.Remove(lbContasRelatorio);
-
-                    if (ganhou == 1)
-                        background.transicao(3);
-
-                    if (ganhou == 2)
-                        background.transicao(1);
-                }
-            }
+            return Conta.gerarSubtracao(background.Dificuldade);
         }
 
-        public override void receberDano(ProgressBar pb, int dano)
+        protected override void carregarImg(string str)
         {
-            base.receberDano(pb, dano);
-            lblContinha.Text = Conta.gerarSubtracao(background.Dificuldade);
+            batalhaImg = new Bitmap(@"batalha_2.png");
         }
     }
 
@@ -480,101 +409,20 @@ namespace Jogo
             this.background = background;
         }
 
-        public override void keyDown(object sender, KeyEventArgs e)
+        public override String gerarConta()
         {
-            Char n = '\0';
-
-            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-            {
-                n = '1';
-            }
-            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-            {
-                n = '2';
-            }
-            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-            {
-                n = '3';
-            }
-            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-            {
-                n = '4';
-            }
-            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-            {
-                n = '5';
-            }
-            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-            {
-                n = '6';
-            }
-            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-            {
-                n = '7';
-            }
-            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-            {
-                n = '8';
-            }
-            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-            {
-                n = '9';
-            }
-            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-            {
-                n = '0';
-            }
-
-            lblResultado.Text += n;
-
-            if (e.KeyCode == Keys.Back)
-            {
-                if (lblResultado.Text != "")
-                {
-                    String str = lblResultado.Text;
-                    str = str.Remove(str.Length - 1);
-                    lblResultado.Text = str;
-                }
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (lblResultado.Text == "inicio")
-                {
-                    tmrBatalha.Enabled = true;
-                    tmrBatalha.Start();
-                    lblResultado.Visible = true;
-                    lblResultado.Text = "";
-                    lblContinha.Text = Conta.gerarMultiplicacao(background.Dificuldade);
-                }
-                else if (lblResultado.Text != "" && podeAtacar)
-                {
-                    causarDano();
-                }
-                else if (ganhou > 0)
-                {
-                    background.Frm.Controls.Remove(lblResultadoFinal);
-                    background.Frm.Controls.Remove(lblContinuar);
-                    background.Frm.Controls.Remove(lbContasRelatorio);
-
-                    if (ganhou == 1)
-                        background.transicao(3);
-
-                    if (ganhou == 2)
-                        background.transicao(1);
-                }
-            }
+            return Conta.gerarMultiplicacao(background.Dificuldade);
         }
 
-        public override void receberDano(ProgressBar pb, int dano)
+        protected override void carregarImg(string str)
         {
-            base.receberDano(pb, dano);
-            lblContinha.Text = Conta.gerarMultiplicacao(background.Dificuldade);
+            batalhaImg = new Bitmap(@"batalha_3.png");
         }
     }
 
     public class Batalha4 : Batalha1
     {
+
         Background background;
 
         public Batalha4(Background background) : base(background)
@@ -582,96 +430,9 @@ namespace Jogo
             this.background = background;
         }
 
-        public override void keyDown(object sender, KeyEventArgs e)
+        public override String gerarConta()
         {
-            Char n = '\0';
-
-            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
-            {
-                n = '1';
-            }
-            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
-            {
-                n = '2';
-            }
-            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
-            {
-                n = '3';
-            }
-            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
-            {
-                n = '4';
-            }
-            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
-            {
-                n = '5';
-            }
-            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
-            {
-                n = '6';
-            }
-            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
-            {
-                n = '7';
-            }
-            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
-            {
-                n = '8';
-            }
-            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
-            {
-                n = '9';
-            }
-            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0)
-            {
-                n = '0';
-            }
-
-            lblResultado.Text += n;
-
-            if (e.KeyCode == Keys.Back)
-            {
-                if (lblResultado.Text != "")
-                {
-                    String str = lblResultado.Text;
-                    str = str.Remove(str.Length - 1);
-                    lblResultado.Text = str;
-                }
-            }
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (lblResultado.Text == "inicio")
-                {
-                    tmrBatalha.Enabled = true;
-                    tmrBatalha.Start();
-                    lblResultado.Visible = true;
-                    lblResultado.Text = "";
-                    lblContinha.Text = Conta.gerarDivisao(background.Dificuldade);
-                }
-                else if (lblResultado.Text != "" && podeAtacar)
-                {
-                    causarDano();
-                }
-                else if (ganhou > 0)
-                {
-                    background.Frm.Controls.Remove(lblResultadoFinal);
-                    background.Frm.Controls.Remove(lblContinuar);
-                    background.Frm.Controls.Remove(lbContasRelatorio);
-
-                    if (ganhou == 1)
-                        background.transicao(3);
-
-                    if (ganhou == 2)
-                        background.transicao(1);
-                }
-            }
-        }
-
-        public override void receberDano(ProgressBar pb, int dano)
-        {
-            base.receberDano(pb, dano);
-            lblContinha.Text = Conta.gerarDivisao(background.Dificuldade);
+            return Conta.gerarDivisao(background.Dificuldade);
         }
     }
 }

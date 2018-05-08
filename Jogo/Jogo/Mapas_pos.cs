@@ -91,7 +91,7 @@ namespace Jogo
         public override void keyDown(Object sender, KeyEventArgs e)
         {
             base.keyDown(sender, e);
-            if (Game.checarPosicao(heroi, 17, 0) || Game.checarPosicao(heroi, 18, 0) || Game.checarPosicao(heroi, 19, 1) || Game.checarPosicao(heroi, 20, 1) || Game.checarPosicao(heroi, 21, 1) || Game.checarPosicao(heroi, 24, 2) || Game.checarPosicao(heroi, 23, 2))
+            if (Game.checarPosicao(heroi, 17, 0) || Game.checarPosicao(heroi, 18, 0) || Game.checarPosicao(heroi, 19, 1) || Game.checarPosicao(heroi, 20, 1) || Game.checarPosicao(heroi, 21, 1) || Game.checarPosicao(heroi, 24, 2) || Game.checarPosicao(heroi, 23, 2) || Game.checarPosicao(heroi, 20, 0) || Game.checarPosicao(heroi, 22, 1) || Game.checarPosicao(heroi, 21, 1) || Game.checarPosicao(heroi, 23, 1))
             {
                 background.Fase++;
                 background.transicao(1);
@@ -135,7 +135,7 @@ namespace Jogo
         }
     }
 
-    public class Mapa4_pos : Mapa3
+    public class Mapa4_pos : Mapa4
     {
         public Background background;
 
@@ -150,13 +150,14 @@ namespace Jogo
             base.carregarGame();
 
             heroi = new ObjHeroi(3, 11, heroiImg);
-
+            /*
             Queue<String> msgs = new Queue<string>();
             msgs.Enqueue("Isso, agora pegue carona na minha nuvem mágica.");
             msgs.Enqueue("Acabe com Glau Xia!");
             npcImg = new Bitmap(@"muslim.png");
             npc = new ObjNpc(3, 10, npcImg, msgs, false);
             game.setOcupado(npc.X, npc.Y);
+            */
         }
 
         public override void keyDown(Object sender, KeyEventArgs e)
