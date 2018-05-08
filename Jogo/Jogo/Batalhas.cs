@@ -232,6 +232,7 @@ namespace Jogo
             lbContasRelatorio.Location = new Point(140, 100);
             lbContasRelatorio.Width = 520;
             lbContasRelatorio.Height = 400;
+            lbContasRelatorio.Enabled = false;
             lbContasRelatorio.BackColor = Color.FromArgb(255, 224, 192);
             Font font = new Font(frmJogo.FONTE, 24);
             lbContasRelatorio.Font = font;
@@ -349,7 +350,7 @@ namespace Jogo
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
-                receberDano(pbVidaVilao, 10);
+                receberDano(pbVidaVilao, 100);
                 //todo tremer tela
             }
             else

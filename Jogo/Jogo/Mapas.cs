@@ -795,6 +795,11 @@ namespace Jogo
                 {
                     glauxia.dialogoAsync(background, glauxia.IniciaBatalha);
                 }
+
+                if (Game.perto(heroi, minna))
+                {
+                    minna.dialogoAsync(background, minna.IniciaBatalha);
+                }
             }
 
             if (e.KeyCode == Keys.Escape)
@@ -824,10 +829,14 @@ namespace Jogo
             e.Graphics.DrawImage(glauxia.Img, glauxia.X * Game.Tam, glauxia.Y * Game.Tam, 30, Game.Tam);
             e.Graphics.DrawImage(minna.Img, minna.X * Game.Tam, minna.Y * Game.Tam, 30, 32);
 
-
             if (glauxia.MostrarTexto)
             {   //TODO transformar texto p/ classe
                 texto(sender, e, glauxia);
+            }
+
+            if (minna.MostrarTexto)
+            {   //TODO transformar texto p/ classe
+                texto(sender, e, minna);
             }
         }
 
@@ -840,7 +849,7 @@ namespace Jogo
         {
             heroiImg = new Bitmap(@"heroi.png");
             heroi = new ObjHeroi(2, 17, heroiImg);
-
+            
             fundo = new Bitmap(@"vulcao.png");
 
             Queue<String> msgs = new Queue<string>();
@@ -850,7 +859,7 @@ namespace Jogo
             msgs.Enqueue("Eu usei um bloco de peso P = 1000N e uma roldana...");
             msgs.Enqueue("Ah, não liga? Ok... Vejo que não está pra conversa...");
             msgs.Enqueue("Vai tentar me derrotar?");
-            msgs.Enqueue("Vamos lá!");
+            msgs.Enqueue("Lá vamos nós!");
 
             minnaImg = new Bitmap(@"minna.png");
             minna = new ObjNpc(17, 2, minnaImg, msgs, true);

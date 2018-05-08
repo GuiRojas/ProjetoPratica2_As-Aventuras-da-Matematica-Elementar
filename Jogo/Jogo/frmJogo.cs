@@ -140,5 +140,10 @@ namespace Jogo
 
             carregar(4);
         }
+
+        public void setTimerState (bool bol)
+        {
+            tmrPintar.Enabled = bol;
+        }
     }
 }

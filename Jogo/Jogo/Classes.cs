@@ -16,7 +16,7 @@ namespace Jogo
 {
     public class Background
     {
-        public Background(int fase, Form frm)
+        public Background(int fase, frmJogo frm)
         {
             this.fase = fase;
             this.estado = 1;
@@ -28,7 +28,7 @@ namespace Jogo
 
         protected int fase { get; set; }
         protected int estado { get; set; }
-        protected Form frm { get; set; }
+        protected frmJogo frm { get; set; }
         protected int dificuldade { get; set; }
         protected bool heroiGanhou;
 
@@ -61,7 +61,7 @@ namespace Jogo
             }
         }
 
-        public Form Frm
+        public frmJogo Frm
         {
             get
             {
@@ -87,13 +87,16 @@ namespace Jogo
 
         public void carregarEstadoEFase()
         {
+            frm.setTimerState(false);
+
             this.gameClass = null;
 
             switch (estado)
             {
                 case 0:
                     {
-
+                        MessageBox.Show("fim");
+                        //this.gameClass = fim;
                     }
                     break;
 
@@ -186,12 +189,6 @@ namespace Jogo
                                     this.gameClass = new Mapa4_pos(this);
                                 }
                                 break;
-
-                            case 5:
-                                {
-                                    //fim do game
-                                }
-                                break;
                         }
                     }
                     break;
@@ -202,6 +199,7 @@ namespace Jogo
             }
 
             gameClass.carregarGame();
+            frm.setTimerState(true);
         }
 
         public async Task transicao (int est)
@@ -222,6 +220,11 @@ namespace Jogo
         public void iniciarBatalha()
         {
             transicao(2);
+        }
+
+        public void terminarGame ()
+        {
+            transicao(0);
         }
         
         public void carregarGame ()
@@ -279,6 +282,7 @@ namespace Jogo
         protected bool mostrarTexto { get; set; }
         protected bool iniciaBataha { get; set; }
         protected string msg { get; set; }
+        protected bool terminaBatalha { get; set; } = false;
 
         protected Queue<String> mensagens;
 
@@ -288,12 +292,21 @@ namespace Jogo
             this.iniciaBataha = iniciaBataha;
         }
 
+        public ObjNpc(int xN, int yN, Bitmap imgN, Queue<String> mensagensN, bool iniciaBataha, bool terminaGame) : base(xN, yN, imgN)
+        {
+            mensagens = mensagensN;
+            this.terminaBatalha = terminaBatalha;
+        }
+
         public async Task dialogoAsync(Background b, Boolean bol)
         {
             mostrarTexto = true;
             if (mensagens.Count == 0 && bol)
             {
-               b.iniciarBatalha();
+                if (this.terminaBatalha)
+                    b.terminarGame();
+                else
+                    b.iniciarBatalha();
             }
             else
             {

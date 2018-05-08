@@ -149,15 +149,20 @@ namespace Jogo
         {
             base.carregarGame();
 
-            heroi = new ObjHeroi(3, 11, heroiImg);
-            /*
+            heroi = new ObjHeroi(14, 9, heroiImg);
+            
             Queue<String> msgs = new Queue<string>();
-            msgs.Enqueue("Isso, agora pegue carona na minha nuvem mágica.");
-            msgs.Enqueue("Acabe com Glau Xia!");
-            npcImg = new Bitmap(@"muslim.png");
-            npc = new ObjNpc(3, 10, npcImg, msgs, false);
-            game.setOcupado(npc.X, npc.Y);
-            */
+            msgs.Enqueue("Obrigado, Shingetsu!");
+            msgs.Enqueue("Vamos voltar à vila e repovoá-la.");
+            msgs.Enqueue(";)");
+
+            minnaImg = new Bitmap(@"minna.png");
+            minna = new ObjNpc(13, 8, minnaImg, msgs, true, true);
+            game.setOcupado(minna.X, minna.Y);
+
+            glauxiaImg = new Bitmap(@"glauxia.png");
+            glauxia = new ObjNpc(17, 2, glauxiaImg, msgs, false);
+            game.setOcupado(glauxia.X, glauxia.Y);
         }
 
         public override void keyDown(Object sender, KeyEventArgs e)

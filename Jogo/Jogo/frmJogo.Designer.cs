@@ -106,6 +106,7 @@
             // 
             // btnOnline
             // 
+            this.btnOnline.Enabled = false;
             this.btnOnline.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOnline.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.btnOnline.Location = new System.Drawing.Point(225, 386);
