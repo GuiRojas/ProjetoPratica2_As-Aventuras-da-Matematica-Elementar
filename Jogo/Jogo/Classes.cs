@@ -95,8 +95,7 @@ namespace Jogo
             {
                 case 0:
                     {
-                        MessageBox.Show("fim");
-                        //this.gameClass = fim;
+                        this.gameClass = new Fim (this);
                     }
                     break;
 
@@ -262,8 +261,18 @@ namespace Jogo
         {
             gameClass.keyUp(sender, e);
         }
-    }
 
+        public void playSound(string src)
+        {
+            new System.Threading.Thread(() => {
+                var c = new System.Windows.Media.MediaPlayer();
+                c.Open(new System.Uri(src, UriKind.RelativeOrAbsolute));
+                Thread.Sleep(10);
+                c.Play();
+            }).Start();
+        }
+    }
+    
     public interface GameClass
     {
         void keyUp(object sender, KeyEventArgs e);
@@ -277,12 +286,91 @@ namespace Jogo
         void carregarGame();
     }
 
+    public class Fim : GameClass
+    {
+        protected Background background;
+        protected Label lbl;
+        protected Label lbl2;
+        protected Label lbl3;
+
+        void GameClass.keyUp(object sender, KeyEventArgs e)
+        {
+            
+        }
+
+        void GameClass.keyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                System.Diagnostics.Process.Start(Application.ExecutablePath);
+                background.Frm.Close();
+
+                //todo recomecar os niveis do bd
+            }
+        }
+
+        void GameClass.paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        void GameClass.tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        void GameClass.carregarGame()
+        {
+            background.playSound(@"sound.wav");
+            background.Frm.BackColor = Color.Black;
+            Thread.Sleep(1000);
+            Label lbl = new Label();
+            background.Frm.Controls.Add(lbl);
+            lbl.Width = 500;
+            lbl.Text = "Fim!";
+            lbl.Location = new Point((background.Frm.Width - lbl.Width) / 2, 280);
+            lbl.ForeColor = Color.White;
+            lbl.BackColor = Color.Black;
+            lbl.TextAlign = ContentAlignment.MiddleCenter;
+            lbl.Dock = DockStyle.None;
+            lbl.Font = new Font(frmJogo.FONTE, 24);
+            lbl.Height = 50;
+            Label lbl2 = new Label();
+            background.Frm.Controls.Add(lbl2);
+            lbl2.Width = 500;
+            lbl2.Text = "Jogo por João Lucas Alvarez e Guilherme Rojas";
+            lbl2.Location = new Point((background.Frm.Width - lbl2.Width) / 2, 340);
+            lbl2.ForeColor = Color.White;
+            lbl2.BackColor = Color.Black;
+            lbl2.TextAlign = ContentAlignment.MiddleCenter;
+            lbl2.Dock = DockStyle.None;
+            lbl2.Font = new Font(frmJogo.FONTE, 18);
+            lbl2.Height = 50;
+            Label lbl3 = new Label();
+            background.Frm.Controls.Add(lbl3);
+            lbl3.Width = 500;
+            lbl3.Text = "[Enter] para voltar ao menu.";
+            lbl3.Location = new Point((background.Frm.Width - lbl3.Width) / 2, 445);
+            lbl3.ForeColor = Color.White;
+            lbl3.BackColor = Color.Black;
+            lbl3.TextAlign = ContentAlignment.MiddleCenter;
+            lbl3.Dock = DockStyle.None;
+            lbl3.Font = new Font(frmJogo.FONTE, 18);
+            lbl3.Height = 50;
+        }
+
+        public Fim(Background background)
+        {
+            this.background = background;
+        }
+    }
+
     public class ObjNpc : ObjGame
     {
         protected bool mostrarTexto { get; set; }
         protected bool iniciaBataha { get; set; }
         protected string msg { get; set; }
-        protected bool terminaBatalha { get; set; } = false;
+        protected bool terminaGame { get; set; } = false;
 
         protected Queue<String> mensagens;
 
@@ -295,23 +383,23 @@ namespace Jogo
         public ObjNpc(int xN, int yN, Bitmap imgN, Queue<String> mensagensN, bool iniciaBataha, bool terminaGame) : base(xN, yN, imgN)
         {
             mensagens = mensagensN;
-            this.terminaBatalha = terminaBatalha;
+            this.terminaGame = terminaGame;
         }
 
         public async Task dialogoAsync(Background b, Boolean bol)
         {
             mostrarTexto = true;
-            if (mensagens.Count == 0 && bol)
+            if (mensagens.Count == 0)
             {
-                if (this.terminaBatalha)
-                    b.terminarGame();
-                else
+                if (bol)
                     b.iniciarBatalha();
+
+                if (terminaGame)
+                    b.terminarGame();
             }
             else
             {
                 msg = mensagens.Dequeue();
-                
             }
         }
 
@@ -423,10 +511,8 @@ namespace Jogo
 
         }
 
-        public void mover(Game game)
+        public void mover(Game game, Background b)
         {
-            Thread.Sleep(100);
-
             if (this.activeUp && game.checkup(this))
             {
                 goup();
@@ -445,6 +531,12 @@ namespace Jogo
             if (this.activeRight && game.checkright(this))
             {
                 goright();
+            }
+
+            if (this.activeRight || this.activeLeft || this.activeDown || this.activeUp)
+            {
+                b.playSound(@"passo.wav");
+                Thread.Sleep(200);
             }
         }
 

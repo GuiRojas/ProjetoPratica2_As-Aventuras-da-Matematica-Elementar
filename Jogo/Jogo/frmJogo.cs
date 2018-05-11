@@ -104,8 +104,7 @@ namespace Jogo
             this.Controls.Remove(btnSair);
             this.Controls.Remove(btnContinuar);
             this.Controls.Remove(btnOnline);
-
-
+            
             lbl1.Width = 600;
             lbl1.Height = 800;
             lbl1.Dock = DockStyle.None;

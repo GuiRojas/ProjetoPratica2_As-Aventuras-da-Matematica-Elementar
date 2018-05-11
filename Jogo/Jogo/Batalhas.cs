@@ -121,7 +121,9 @@ namespace Jogo
                     background.Frm.Controls.Remove(lbContasRelatorio);
 
                     if (ganhou == 1)
+                    {
                         background.transicao(3);
+                    }
 
                     if (ganhou == 2)
                         background.transicao(1);
@@ -278,6 +280,15 @@ namespace Jogo
             lblContinuar.TextAlign = ContentAlignment.MiddleCenter;
             lblContinuar.Dock = DockStyle.None;
             background.Frm.Controls.Add(lblContinuar);
+
+            if (ganhou == 1)
+            {
+                background.playSound(@"win.wav");
+            }
+            else
+            {
+                background.playSound(@"lose.wav");
+            }
         }
 
         public virtual void receberDano(ProgressBar pb, int dano)
@@ -344,19 +355,19 @@ namespace Jogo
 
         public void causarDano()
         {
+            background.playSound(@"soco.wav");
             contas.Enqueue(lblContinha.Text);
 
             pbTempo.Value = pbTempo.Maximum;
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
-                receberDano(pbVidaVilao, 100);
-                //todo tremer tela
+                receberDano(pbVidaVilao, 100);//mudar daninho aqui
             }
             else
             {
                 int dano = 10 * background.Dificuldade + 10;
-                receberDano(pbVidaHeroi, dano);
+                receberDano(pbVidaHeroi, 100);//mudar daninho aqui
             }
         }
 

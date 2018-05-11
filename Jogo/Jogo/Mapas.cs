@@ -145,7 +145,7 @@ namespace Jogo
 
         public void tick(object sender, EventArgs e)
         {
-            heroi.mover(game);
+            heroi.mover(game, background);
         }
 
         public virtual void carregarGame()
@@ -377,7 +377,7 @@ namespace Jogo
 
         public void tick(object sender, EventArgs e)
         {
-            heroi.mover(game);
+            heroi.mover(game, background);
         }
 
         public virtual void carregarGame()
@@ -605,7 +605,7 @@ namespace Jogo
 
         public void tick(object sender, EventArgs e)
         {
-            heroi.mover(game);
+            heroi.mover(game, background);
         }
 
         public virtual void carregarGame()
@@ -842,7 +842,7 @@ namespace Jogo
 
         public void tick(object sender, EventArgs e)
         {
-            heroi.mover(game);
+            heroi.mover(game, background);
         }
 
         public virtual void carregarGame()
