@@ -18,6 +18,7 @@ namespace Jogo
         bool esperando = false;
         System.Drawing.Text.PrivateFontCollection privateFonts = new System.Drawing.Text.PrivateFontCollection();
         public static FontFamily FONTE;
+        protected System.Media.SoundPlayer sound { get; set; }
 
         public frmJogo()
         {
@@ -25,6 +26,18 @@ namespace Jogo
             privateFonts.AddFontFile(@"PressStart2P.ttf");
             FONTE = privateFonts.Families[0];
 
+        }
+
+        public System.Media.SoundPlayer Sound
+        {
+            get
+            {
+                return this.sound;
+            }
+            set
+            {
+                this.sound = value;
+            }
         }
 
         private void Jogo_Load(object sender, EventArgs e)
@@ -47,6 +60,28 @@ namespace Jogo
             btnContinuar.Font = font2;
             btnSair.Font = font2;
             btnOnline.Font = font2;
+            sound = new System.Media.SoundPlayer();
+        }
+
+        public void setSoundLoop (string str)
+        {
+            sound = new System.Media.SoundPlayer(str);
+            sound.PlayLooping();
+        }
+
+        public void playSound (string src)
+        {
+            new System.Threading.Thread(() => {
+                var c = new System.Windows.Media.MediaPlayer();
+                c.Open(new System.Uri(src, UriKind.RelativeOrAbsolute));
+                Thread.Sleep(50);
+                c.Play();
+            }).Start();
+        }
+
+        public void stopSound ()
+        {
+            sound.Stop();
         }
 
         private void carregar (int fase)
@@ -94,11 +129,13 @@ namespace Jogo
 
         private void btnSair_Click(object sender, EventArgs e)
         {
+            playSound("beep.wav");
             this.Close();
         }
 
         private void btnComecar_Click(object sender, EventArgs e)
         {
+            playSound("beep.wav");
             this.Controls.Remove(lbl2);
             this.Controls.Remove(btnComecar);
             this.Controls.Remove(btnSair);
@@ -122,7 +159,8 @@ namespace Jogo
             for (int i =0; i < a.Length; i++)
             {
                 lbl1.Text += a.ElementAt(i);
-                Thread.Sleep(10);
+                //playSound("click.wav");
+                Thread.Sleep(15);
                 this.Refresh();
             }
             esperando = true;
@@ -130,6 +168,7 @@ namespace Jogo
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
+            playSound("beep.wav");
             this.Controls.Remove(lbl2);
             this.Controls.Remove(lbl1);
             this.Controls.Remove(btnComecar);
@@ -143,6 +182,11 @@ namespace Jogo
         public void setTimerState (bool bol)
         {
             tmrPintar.Enabled = bol;
+        }
+
+        private void btnOnline_Click(object sender, EventArgs e)
+        {
+            playSound("beep.wav");
         }
     }
 }

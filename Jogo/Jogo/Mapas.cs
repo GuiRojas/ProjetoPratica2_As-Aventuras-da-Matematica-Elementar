@@ -95,6 +95,7 @@ namespace Jogo
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
+                background.playSound("beep.wav");
                 if (Game.perto(heroi, mestre))
                 {
                     mestre.dialogoAsync(background, mestre.IniciaBatalha);
@@ -331,6 +332,7 @@ namespace Jogo
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
+                background.playSound("beep.wav");
                 if (Game.perto(heroi, aldeao))
                 {
                     aldeao.dialogoAsync(background, aldeao.IniciaBatalha);
@@ -561,6 +563,7 @@ namespace Jogo
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
+                background.playSound("beep.wav");
                 if (Game.perto(heroi, npc))
                 {
                     npc.dialogoAsync(background, npc.IniciaBatalha);
@@ -791,6 +794,7 @@ namespace Jogo
             if (e.KeyCode == Keys.E)
             {
                 //TODO loop pelos npc
+                background.playSound("beep.wav");
                 if (Game.perto(heroi, glauxia))
                 {
                     glauxia.dialogoAsync(background, glauxia.IniciaBatalha);

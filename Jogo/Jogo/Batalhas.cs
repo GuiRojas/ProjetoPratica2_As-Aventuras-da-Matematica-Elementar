@@ -104,6 +104,7 @@ namespace Jogo
             {
                 if (lblResultado.Text == "inicio")
                 {
+                    background.playSound("beep.wav");
                     tmrBatalha.Enabled = true;
                     tmrBatalha.Start();
                     lblResultado.Visible = true;
@@ -119,7 +120,7 @@ namespace Jogo
                     background.Frm.Controls.Remove(lblResultadoFinal);
                     background.Frm.Controls.Remove(lblContinuar);
                     background.Frm.Controls.Remove(lbContasRelatorio);
-
+                    background.playSound("beep.wav");
                     if (ganhou == 1)
                     {
                         background.transicao(3);
@@ -259,12 +260,16 @@ namespace Jogo
             lblResultadoFinal.ForeColor = Color.FromArgb(255, 255, 255);
             background.Frm.Controls.Add(lblResultadoFinal);
 
+            background.Frm.stopSound();
+
             if (ganhou == 1)
             {
+                background.playSound("win.wav");
                 lblResultadoFinal.Text = "Você ganhou!";
             }
             else
             {
+                background.playSound("lose.wav");
                 lblResultadoFinal.Text = "Você perdeu.";
             }
 
@@ -280,15 +285,6 @@ namespace Jogo
             lblContinuar.TextAlign = ContentAlignment.MiddleCenter;
             lblContinuar.Dock = DockStyle.None;
             background.Frm.Controls.Add(lblContinuar);
-
-            if (ganhou == 1)
-            {
-                background.playSound(@"win.wav");
-            }
-            else
-            {
-                background.playSound(@"lose.wav");
-            }
         }
 
         public virtual void receberDano(ProgressBar pb, int dano)
@@ -362,12 +358,12 @@ namespace Jogo
 
             if (Conta.resolver(lblContinha.Text).ToString() == lblResultado.Text)
             {
-                receberDano(pbVidaVilao, 100);//mudar daninho aqui
+                receberDano(pbVidaVilao, 10);//mudar daninho aqui
             }
             else
             {
                 int dano = 10 * background.Dificuldade + 10;
-                receberDano(pbVidaHeroi, 100);//mudar daninho aqui
+                receberDano(pbVidaHeroi, dano);//mudar daninho aqui
             }
         }
 

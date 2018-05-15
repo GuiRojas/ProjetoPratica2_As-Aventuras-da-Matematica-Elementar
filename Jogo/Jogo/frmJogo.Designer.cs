@@ -115,6 +115,7 @@
             this.btnOnline.TabIndex = 5;
             this.btnOnline.Text = "Modo online";
             this.btnOnline.UseVisualStyleBackColor = true;
+            this.btnOnline.Click += new System.EventHandler(this.btnOnline_Click);
             // 
             // frmJogo
             // 

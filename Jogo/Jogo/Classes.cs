@@ -85,10 +85,15 @@ namespace Jogo
             }
         }
 
+        public void setSoundLoop (string str)
+        {
+            this.frm.setSoundLoop(str);
+        }
+
         public void carregarEstadoEFase()
         {
             frm.setTimerState(false);
-
+            frm.stopSound();
             this.gameClass = null;
 
             switch (estado)
@@ -101,6 +106,8 @@ namespace Jogo
 
                 case 1:
                     {
+                        setSoundLoop(@"templo.wav");
+
                         switch (fase)
                         {
                             case 1:
@@ -132,6 +139,8 @@ namespace Jogo
                     
                 case 2:
                     {
+                        setSoundLoop(@"batalha.wav");
+
                         switch (fase)
                         {
                             case 1:
@@ -163,6 +172,7 @@ namespace Jogo
                     
                 case 3:
                     {
+                        setSoundLoop(@"templo2.wav");
                         switch (fase)
                         {
                             case 1:
@@ -196,7 +206,7 @@ namespace Jogo
                         MessageBox.Show("O jogo não pôde ser iniciado :(");
                     break;
             }
-
+            
             gameClass.carregarGame();
             frm.setTimerState(true);
         }
@@ -264,12 +274,7 @@ namespace Jogo
 
         public void playSound(string src)
         {
-            new System.Threading.Thread(() => {
-                var c = new System.Windows.Media.MediaPlayer();
-                c.Open(new System.Uri(src, UriKind.RelativeOrAbsolute));
-                Thread.Sleep(10);
-                c.Play();
-            }).Start();
+            frm.playSound(src);
         }
     }
     
@@ -345,7 +350,7 @@ namespace Jogo
             lbl2.TextAlign = ContentAlignment.MiddleCenter;
             lbl2.Dock = DockStyle.None;
             lbl2.Font = new Font(frmJogo.FONTE, 18);
-            lbl2.Height = 50;
+            lbl2.Height = 100;
             Label lbl3 = new Label();
             background.Frm.Controls.Add(lbl3);
             lbl3.Width = 500;
