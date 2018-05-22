@@ -19,13 +19,17 @@ namespace Jogo
         System.Drawing.Text.PrivateFontCollection privateFonts = new System.Drawing.Text.PrivateFontCollection();
         public static FontFamily FONTE;
         protected System.Media.SoundPlayer sound { get; set; }
+        bool esc = false;
+        Button btnResumir;
+        Button btnMenu;
+        Bitmap fundo = new Bitmap(@"relatorio.png");
 
         public frmJogo()
         {
             InitializeComponent();
             privateFonts.AddFontFile(@"PressStart2P.ttf");
             FONTE = privateFonts.Families[0];
-
+            this.CenterToScreen();
         }
 
         public System.Media.SoundPlayer Sound
@@ -42,6 +46,7 @@ namespace Jogo
 
         private void Jogo_Load(object sender, EventArgs e)
         {
+            btnContinuar.Enabled = true;
             /*
             if (faseDoBD == 0)
                 continuar.enabled = false;
@@ -49,7 +54,6 @@ namespace Jogo
             //this.carregar();
 
             /////provisorio
-            btnContinuar.Enabled = true;
             /////
 
             System.Drawing.Font font = new Font(privateFonts.Families[0], 24);
@@ -61,6 +65,39 @@ namespace Jogo
             btnSair.Font = font2;
             btnOnline.Font = font2;
             sound = new System.Media.SoundPlayer();
+
+            btnMenu = new Button();
+            btnMenu.Font = btnComecar.Font;
+            btnMenu.Size = btnComecar.Size;
+            btnMenu.Location = btnComecar.Location;
+            btnMenu.FlatStyle = FlatStyle.Flat;
+            btnMenu.Click += voltarAoMenu;
+            btnMenu.Text = "Voltar ao menu";
+            btnMenu.ForeColor = btnComecar.ForeColor;
+            btnMenu.BackColor = btnComecar.BackColor;
+
+            btnResumir = new Button();
+            btnResumir.Font = btnComecar.Font;
+            btnResumir.Size = btnComecar.Size;
+            btnResumir.Location = btnContinuar.Location;
+            btnResumir.FlatStyle = FlatStyle.Flat;
+            btnResumir.Click += nSei;
+            btnResumir.Text = "Resumir";
+            btnResumir.ForeColor = btnComecar.ForeColor;
+            btnResumir.BackColor = btnComecar.BackColor;
+        }
+
+        public void voltarAoMenu (object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.ExecutablePath);
+            this.Close();
+        }
+
+        public void nSei (object sender, EventArgs e)
+        {
+            esc = false;
+            this.Controls.Remove(btnResumir);
+            this.Controls.Remove(btnMenu);
         }
 
         public void setSoundLoop (string str)
@@ -101,6 +138,12 @@ namespace Jogo
         {
             if (background != null)
                 background.paint(sender, e);
+
+            if (esc)
+            {
+                e.Graphics.DrawImage(fundo, 0, 0, Game.Largura * Game.Tam, Game.Altura * Game.Tam);
+            }
+                
         }
 
         private void frmJogo_KeyDown(object sender, KeyEventArgs e)
@@ -113,6 +156,13 @@ namespace Jogo
                 this.Controls.Remove(lbl1);
                 esperando = false;
                 carregar(1);
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Controls.Add(btnResumir);
+                this.Controls.Add(btnMenu);
+                esc = true;
             }
         }
 
@@ -160,7 +210,7 @@ namespace Jogo
             {
                 lbl1.Text += a.ElementAt(i);
                 //playSound("click.wav");
-                Thread.Sleep(15);
+                Thread.Sleep(10);
                 this.Refresh();
             }
             esperando = true;

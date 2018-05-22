@@ -94,7 +94,6 @@ namespace Jogo
 
             if (e.KeyCode == Keys.E)
             {
-                //TODO loop pelos npc
                 background.playSound("beep.wav");
                 if (Game.perto(heroi, mestre))
                 {

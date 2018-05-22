@@ -49,6 +49,11 @@
   <ItemGroup>
     <Compile Include="Batalhas.cs" />
     <Compile Include="Conta.cs" />
+    <Compile Include="DataSetCasa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frmJogo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +63,7 @@
     <Compile Include="Classes.cs" />
     <Compile Include="Mapas.cs" />
     <Compile Include="Mapas_pos.cs" />
+    <Compile Include="ModoOnline.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmJogo.resx">
@@ -73,6 +79,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="DataSetCasa.xsc">
+      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetCasa.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetCasa.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetCasa.xss">
+      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
