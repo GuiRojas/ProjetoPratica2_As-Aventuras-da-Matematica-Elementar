@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Jogo.Properties {
+namespace login.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -27,7 +27,7 @@ namespace Jogo.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=regulus;Initial Catalog=BDPRII17182;Persist Security Info=True;User I" +
-            "D=bdprii17182;Password=minnachan")]
+            "D=BDPRII17182;Password=minnachan")]
         public string BDPRII17182ConnectionString {
             get {
                 return ((string)(this["BDPRII17182ConnectionString"]));

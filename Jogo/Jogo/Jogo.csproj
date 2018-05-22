@@ -48,12 +48,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batalhas.cs" />
-    <Compile Include="Conta.cs" />
-    <Compile Include="DataSetCasa.Designer.cs">
+    <Compile Include="BDPRII17182DataSet.Designer.cs" />
+    <Compile Include="BDPRII17182DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="BDPRII17182DataSet11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Conta.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs" />
     <Compile Include="frmJogo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +76,7 @@
     <Compile Include="ModoOnline.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.Designer.cs" />
     <EmbeddedResource Include="frmJogo.resx">
       <DependentUpon>frmJogo.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,16 +90,27 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="DataSetCasa.xsc">
-      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+    <None Include="BDPRII17182DataSet.xsc">
+      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
     </None>
-    <None Include="DataSetCasa.xsd">
-      <SubType>Designer</SubType>
+    <None Include="BDPRII17182DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetCasa.Designer.cs</LastGenOutput>
+      <LastGenOutput>BDPRII17182DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="DataSetCasa.xss">
-      <DependentUpon>DataSetCasa.xsd</DependentUpon>
+    <None Include="BDPRII17182DataSet.xss">
+      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BDPRII17182DataSet1.xsc">
+      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="BDPRII17182DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDPRII17182DataSet11.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDPRII17182DataSet1.xss">
+      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -24,12 +24,13 @@ namespace Jogo
         Button btnMenu;
         Bitmap fundo = new Bitmap(@"relatorio.png");
 
-        public frmJogo()
+        public frmJogo(string str)
         {
             InitializeComponent();
             privateFonts.AddFontFile(@"PressStart2P.ttf");
             FONTE = privateFonts.Families[0];
             this.CenterToScreen();
+            btnContinuar.Enabled = false;
         }
 
         public System.Media.SoundPlayer Sound
