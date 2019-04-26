@@ -48,22 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batalhas.cs" />
-    <Compile Include="BDPRII17182DataSet.Designer.cs" />
-    <Compile Include="BDPRII17182DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="BDPRII17182DataSet11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Conta.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs" />
     <Compile Include="frmJogo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,28 +75,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="BDPRII17182DataSet.xsc">
-      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="BDPRII17182DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>BDPRII17182DataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="BDPRII17182DataSet.xss">
-      <DependentUpon>BDPRII17182DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="BDPRII17182DataSet1.xsc">
-      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="BDPRII17182DataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>BDPRII17182DataSet11.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="BDPRII17182DataSet1.xss">
-      <DependentUpon>BDPRII17182DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -9,11 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
+using System.Data.SqlClient;
 
 namespace Jogo
-{   //TODO pegar os niveis do bd
+{ 
     public partial class frmJogo : Form
     {
+    
+
         Background background;
         bool esperando = false;
         System.Drawing.Text.PrivateFontCollection privateFonts = new System.Drawing.Text.PrivateFontCollection();
@@ -23,9 +26,21 @@ namespace Jogo
         Button btnResumir;
         Button btnMenu;
         Bitmap fundo = new Bitmap(@"relatorio.png");
+        private int progresso;
 
-        public frmJogo(string str)
+        private string nome { get; }
+
+        public string Nome
         {
+            get
+            {
+                return this.nome;
+            }
+        }
+
+        public frmJogo(int prog)
+        {
+            progresso = prog;
             InitializeComponent();
             privateFonts.AddFontFile(@"PressStart2P.ttf");
             FONTE = privateFonts.Families[0];
@@ -47,15 +62,10 @@ namespace Jogo
 
         private void Jogo_Load(object sender, EventArgs e)
         {
-            btnContinuar.Enabled = true;
-            /*
-            if (faseDoBD == 0)
-                continuar.enabled = false;
-            */
-            //this.carregar();
-
-            /////provisorio
-            /////
+            if (progresso == 1)
+                btnContinuar.Enabled = false;
+            else
+                btnContinuar.Enabled = true;
 
             System.Drawing.Font font = new Font(privateFonts.Families[0], 24);
             System.Drawing.Font font2 = new Font(privateFonts.Families[0], 18);
@@ -64,7 +74,6 @@ namespace Jogo
             btnComecar.Font = font2;
             btnContinuar.Font = font2;
             btnSair.Font = font2;
-            btnOnline.Font = font2;
             sound = new System.Media.SoundPlayer();
 
             btnMenu = new Button();
@@ -124,7 +133,7 @@ namespace Jogo
 
         private void carregar (int fase)
         {
-            background = new Background(fase, this);// TODO pegar do bd a fase do usuario
+            background = new Background(fase, this);
             background.carregarEstadoEFase();
         }
 
@@ -191,7 +200,6 @@ namespace Jogo
             this.Controls.Remove(btnComecar);
             this.Controls.Remove(btnSair);
             this.Controls.Remove(btnContinuar);
-            this.Controls.Remove(btnOnline);
             
             lbl1.Width = 600;
             lbl1.Height = 800;
@@ -225,9 +233,8 @@ namespace Jogo
             this.Controls.Remove(btnComecar);
             this.Controls.Remove(btnSair);
             this.Controls.Remove(btnContinuar);
-            this.Controls.Remove(btnOnline);
 
-            carregar(4);
+            carregar(progresso);
         }
 
         public void setTimerState (bool bol)

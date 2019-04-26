@@ -11,17 +11,20 @@ using System.Windows.Forms;
 using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Data.SqlClient;
 
 namespace Jogo
 {
     public class Background
     {
+
+        private String email;
         public Background(int fase, frmJogo frm)
         {
             this.fase = fase;
             this.estado = 1;
             this.frm = frm;
-            this.dificuldade = 1;//todo pegar do bd os bagulho
+            this.dificuldade = 1;
 
             carregarEstadoEFase();
         }
@@ -209,6 +212,9 @@ namespace Jogo
             
             gameClass.carregarGame();
             frm.setTimerState(true);
+
+            
+
         }
 
         public async Task transicao (int est)
@@ -309,8 +315,7 @@ namespace Jogo
             {
                 System.Diagnostics.Process.Start(Application.ExecutablePath);
                 background.Frm.Close();
-
-                //todo recomecar os niveis do bd
+                
             }
         }
 
@@ -354,7 +359,7 @@ namespace Jogo
             Label lbl3 = new Label();
             background.Frm.Controls.Add(lbl3);
             lbl3.Width = 500;
-            lbl3.Text = "[Enter] para voltar ao menu.";
+            lbl3.Text = "[Enter] para voltar ao menu. Seu progresso será reiniciado";
             lbl3.Location = new Point((background.Frm.Width - lbl3.Width) / 2, 445);
             lbl3.ForeColor = Color.White;
             lbl3.BackColor = Color.Black;

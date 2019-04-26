@@ -36,7 +36,6 @@
             this.btnSair = new System.Windows.Forms.Button();
             this.lbl1 = new System.Windows.Forms.Label();
             this.lbl2 = new System.Windows.Forms.Label();
-            this.btnOnline = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tmrPintar
@@ -104,25 +103,11 @@
             this.lbl2.TabIndex = 4;
             this.lbl2.Text = "Matemática Elementar";
             // 
-            // btnOnline
-            // 
-            this.btnOnline.Enabled = false;
-            this.btnOnline.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOnline.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.btnOnline.Location = new System.Drawing.Point(225, 386);
-            this.btnOnline.Name = "btnOnline";
-            this.btnOnline.Size = new System.Drawing.Size(350, 64);
-            this.btnOnline.TabIndex = 5;
-            this.btnOnline.Text = "Modo online";
-            this.btnOnline.UseVisualStyleBackColor = true;
-            this.btnOnline.Click += new System.EventHandler(this.btnOnline_Click);
-            // 
             // frmJogo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 640);
-            this.Controls.Add(this.btnOnline);
             this.Controls.Add(this.lbl2);
             this.Controls.Add(this.lbl1);
             this.Controls.Add(this.btnSair);
@@ -152,7 +137,6 @@
         private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.Label lbl2;
-        private System.Windows.Forms.Button btnOnline;
         //   private System.Windows.Forms.Label label1;
     }
 }

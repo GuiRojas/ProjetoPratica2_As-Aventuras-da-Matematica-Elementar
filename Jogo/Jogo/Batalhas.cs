@@ -442,5 +442,10 @@ namespace Jogo
         {
             return Conta.gerarDivisao(background.Dificuldade);
         }
+
+        protected override void carregarImg(string str)
+        {
+            batalhaImg = new Bitmap(@"batalha_4.png");
+        }
     }
 }
