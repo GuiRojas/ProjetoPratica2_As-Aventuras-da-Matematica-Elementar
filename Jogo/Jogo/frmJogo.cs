@@ -15,8 +15,6 @@ namespace Jogo
 { 
     public partial class frmJogo : Form
     {
-    
-
         Background background;
         bool esperando = false;
         System.Drawing.Text.PrivateFontCollection privateFonts = new System.Drawing.Text.PrivateFontCollection();
